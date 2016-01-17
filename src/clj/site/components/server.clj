@@ -4,7 +4,7 @@
             [ring.server.standalone :refer [serve]]
             ;[org.httpkit.server :refer [run-server]]
             [immutant.web :as web]
-            [environ.core :refer (env)]
+            [environ.core :refer [env]]
             [cronj.core :as cronj]
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
