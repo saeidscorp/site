@@ -4,10 +4,11 @@
 pom.xml
 pom.xml.asc
 *.jar
-*.class
 /.lein-*
 /.nrepl-port
 /resources/public/js
+/resources/public/assets/images
+/resources/public/assets/videos
 /out
 /.repl
 .idea
