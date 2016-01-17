@@ -50,6 +50,7 @@
                  [de.sveri/clojure-commons "0.2.0"]
 
                  [clojure-miniprofiler "0.4.0" :exclusions [fipp]]
+                 [fipp "0.6.2"]
 
                  [org.danielsz/system "0.1.8"]
 

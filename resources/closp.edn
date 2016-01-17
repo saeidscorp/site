@@ -1,0 +1,23 @@
+{:hostname                "http://localhost/"
+ :mail-from               "info@localhost.de"
+ :mail-type               :sendmail
+ ;:smtp-data               {:host "smtp.mail.yahoo.com"
+ ;                          :user "***REMOVED***"
+ ;                          :pass "*****"}
+ :activation-mail-subject "Please activate your account."
+ :activation-mail-body    "Please click on this link to activate your account: {{activationlink}}
+Best Regards,
+
+Your Team"
+ :activation-placeholder  "{{activationlink}}"
+ :jdbc-url                "jdbc:sqlite:./db/site.sqlite"
+ :env                     :dev                              ; set this to :prod for production mode
+ :under-construction      false
+ ; set this to true to enable self registration
+ :registration-allowed?   true
+ :captcha-enabled?        false
+ :captcha-public-key      "your public captcha key"
+ :private-recaptcha-key   "your private captcha key"
+ :recaptcha-domain        "yourdomain"
+ :port                    8080
+ :closp-definitions       "env/dev/entities"}
