@@ -20,6 +20,8 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
 
                  [ring "1.4.0"]
+                 [ring/ring-ssl "0.2.1"]
+
                  [lib-noir "0.9.9"]
                  [ring-server "0.4.0"]
                  [ring/ring-anti-forgery "1.0.0"]

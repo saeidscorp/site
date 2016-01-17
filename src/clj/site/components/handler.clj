@@ -1,6 +1,7 @@
 (ns site.components.handler
   (:require [taoensso.timbre :as timbre]
             [compojure.core :refer [defroutes]]
+            [ring.middleware.ssl :as ssl]
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
             [ring.middleware.defaults :refer [site-defaults]]
@@ -34,6 +35,9 @@
            (update-in [:session] merge session-defaults)
            (assoc-in [:security :anti-forgery] xss-protection?)))
 
+(defmacro wrap-if [handler condition & args]
+  `(if ~condition (-> ~handler ~@args) ~handler))
+
 (defn get-handler [config locale]
   (timbre/info (str "USING CONSTRUCTION PROFILE: " (:under-construction config)))
   (-> (app-handler
@@ -55,7 +59,11 @@
       (wrap-resource "public")
       (wrap-file (str (env :openshift-data-dir "resources/") "public"))
       ; Content-Type, Content-Length, and Last Modified headers for files in body
-      (wrap-file-info)))
+      (wrap-file-info)
+      (wrap-if (= (:env config) :prod)
+               ssl/wrap-forwarded-scheme
+               ssl/wrap-hsts
+               ssl/wrap-ssl-redirect)))
 
 (defrecord Handler [config locale]
   comp/Lifecycle
