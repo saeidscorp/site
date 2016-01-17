@@ -1,0 +1,38 @@
+.sitemap {
+
+    h4 {
+        color: #3A3A3A;
+        border-bottom: 1px solid #ececec;
+        margin-top: 70px;
+        line-height: 1.5;
+        font-weight: 200;
+        text-transform: uppercase;
+        padding-bottom: 8px;
+        margin-bottom: 40px;
+    }
+
+    h5 {
+        margin-bottom: 25px;
+        font-size: 15px;
+        text-transform: uppercase;
+        color: #1f1f1f;
+        letter-spacing: 2px;
+    }
+    ul {
+        padding-left: 0px;
+        margin-bottom: 85px;
+
+        li {
+            list-style: none;
+            margin: 10px 0px;
+
+            a {
+                color: #333;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.funfacts {
+    text-align: center;
+    color: #fff;
+
+    .fact {
+        margin-bottom: 40px;
+
+        .fact-icon {
+            font-size: $fs3;
+        }
+
+        .fact-number {
+            font-weight: 300;
+            margin-top: 0;
+            font-size: $fs3;
+        }
+
+        .fact-text {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    }
+}
+
+.funfacts-bg {
+    background-image: url(../images/backgrounds/1.jpg);
+    background-size: cover;
+}
+
+@media (min-width: 768px)  {
+    .funfacts {
+        .fact {
+            margin-bottom: 0;
+        }
+    }
+}

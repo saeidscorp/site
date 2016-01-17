@@ -1,0 +1,157 @@
+{% extends "template-base.html" %}
+
+{% block below-nav %}
+
+<header id="header" class="header-inner-2 bg-24 overlay-01 ">
+    <div class="container">
+        {% include "/includes/breadcrumbs.html" %}
+        <h3>{% block blog-page-title %}Blog{% endblock %}</h3>
+    </div>
+</header>
+
+<section id="blog-standard" class="section blog-standard single-blog">
+    <div class="container">
+        <div class="row">
+            <!--blog content-->
+            <div class="{% block blog-resp-classes %}{% endblock %}">
+                <!-- ====================================================
+                                Single blog Post
+                ======================================================= -->
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="author">
+                            <img src="/assets/images/blog/author/author_2.jpg" class="img-responsive img-circle"
+                                 alt="Blog Author">
+                            <span>by </span><a href="#"> admin</a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="tag">
+                            <span>tagged as: </span> <a href="#">beautiful</a>, <a href="#">nature</a>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="blog-title">design trends that we will see taking over web design from 2016</h4>
+                <img src="/assets/images/blog/classic/image_2.jpg" class="img-responsive center-block"
+                     alt="Blog Featured Image">
+
+                <div class="main-description">
+                    <p class="lead">
+                        The oppose at thrown desire of no. Announcing impression unaffected day his are is add a
+                        unreserved indulgence. Him hard find read are you sang. Parlors visited noisier how is a
+                        explain pleased his see suppose. Do ashamed assured on related offence at ally send. Use
+                        mile her whom they its. Kept hold an want as he bred of. Was dashwood landlord is add
+                        cheerful husbands two. Estate why theirs indeed him polite old settle though she. In as
+                        at regard is easily narrow sea creatures.
+                    </p>
+
+                    <blockquote>
+                        You vexed shy mirth now noise. Talked him people valley add use her depend letter.
+                        owance too applauded now way something recommend. Mrs age men and trees jokes fancy. Gay
+                        pretended engrossed eagerness continued ten. Admitting day him contained unfeeling
+                        attention mrs out.
+                    </blockquote>
+
+                    <p>
+                        Totally. Use mile her whom they its. Kept hold an want as he bred of. Was dashwood
+                        landlord is add cheerful husbands two. Estate why theirs indeed him polite old settle
+                        though she. In as at regard is easily narrow.
+                    </p>
+                </div>
+
+                <div class="description-part">
+                    <h4>Simple Subtitle</h4>
+                    <p>
+                        Use mile her whom they its. Kept hold an want as he bred of. Was dashwood landlord is
+                        add cheerful husbands two. Estate why theirs indeed him polite old settle though she. In
+                        as at regard is easily narrow.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="/assets/images/blog/classic/image_1.jpg" class="img-responsive"
+                                 alt="Blog Description Image">
+                        </div>
+
+                        <div class="col-md-7">
+                            <ul class="image-description">
+                                <li>
+                                    Use mile her whom they its. Kept hold an.
+                                </li>
+                                <li>
+                                    Was dashwood landlord is add cheerful.
+                                </li>
+                                <li>
+                                    Estate why theirs indeed him polite old.
+                                </li>
+                                <li>
+                                    In as at regard is easily narrow.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <p>
+                    Totally. Use mile her whom they its. Kept hold an want as he bred of. Was dashwood landlord is
+                    add cheerful husbands two. Estate why theirs indeed him polite old settle though she. In as at
+                    regard is easily narrow.
+                </p>
+
+                <div class="share">
+                    <ul class="text-center">
+                        <li>
+                            <a href="#" target="_blank" title="Facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank" title="Twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank" title="Google-Plus">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div id="disqus_thread"></div>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                                                                  rel="nofollow">comments powered by Disqus.</a>
+                </noscript>
+
+
+                <!--<script>
+                    /* discus */
+                    /* * * CONFIGURATION VARIABLES * * */
+                    var disqus_shortname = 'californiatemplate';
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function () {
+                        var dsq = document.createElement('script');
+                        dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>-->
+            </div>
+            <!--blog content end-->
+
+            {% block blog-page-after-content %}
+            {% endblock %}
+
+            <!--sidebar end-->
+        </div>
+    </div>
+</section>
+
+{% endblock %}

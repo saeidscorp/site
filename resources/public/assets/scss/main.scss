@@ -1,0 +1,79 @@
+/*===================================
+    Table of content
+
+    01. General Styles
+    	+Common
+    	+Buttons
+    	+Linearicons
+
+    02. Typography
+    03. Navigations
+    04. Headers
+    05. Call to actions
+    05. Block's Style
+    06. Portfolio
+    07. Gallery
+    08. Shop
+    09. Blog
+    10. Other Pages
+
+====================================*/
+
+
+@import 'typography';
+
+@import 'common';
+@import 'buttons';
+@import 'linearicons';
+
+
+
+@import 'navigations';
+@import "dot_nav";
+
+@import "header";
+@import 'intro';
+@import 'slider_flex';
+@import 'text_rotator';
+@import "mask_text_rotator";
+@import "minimal_header";
+@import "exclusive_slider_header";
+@import "intro_inner";
+
+@import 'cta';
+
+@import 'about_us';
+@import 'responsive_design';
+@import 'love_us';
+@import 'services';
+@import 'pricing';
+@import 'promo_boxes';
+@import 'funfacts';
+@import "faq";
+@import "client";
+@import "contact";
+@import "level";
+@import "subscribe";
+@import "testimonials";
+@import "team";
+@import "footer_widgets";
+@import "footer";
+
+@import "portfolio";
+
+@import "gallery";
+
+@import "intro_shop";
+@import "single_product";
+@import "cart";
+@import "checkout";
+
+@import 'blog';
+
+@import "coming-soon";
+@import "process";
+@import "under_construction";
+@import "404";
+@import "sitemap";
+
+@import "showcase";

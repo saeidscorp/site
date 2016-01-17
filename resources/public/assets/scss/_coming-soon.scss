@@ -1,0 +1,89 @@
+.coming-soon {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    height: 100vh;
+}
+
+.intro {
+    color: #fff;
+
+    .logo {
+        margin-bottom: 50px;
+    }
+
+    .container-countdown {
+        margin: 60px 0;
+    }
+
+    .countdown-box {
+        display: inline-block;
+        margin: 0 20px;
+        position: relative;
+
+        &::after {
+            content: ':';
+            position: absolute;
+            font-size: $fs3;
+            top: calc(50% - 50px);
+            right: -25px;
+        }
+
+        &:last-child::after {
+            content: '';
+        }
+
+        &:nth-child(2)::after {
+            content: '';
+        }
+
+        .counter {
+            display: block;
+            border: 2px solid #fff;
+            font-size: $fs3;
+            width: 100px;
+            height: 100px;
+            line-height: 2.2;
+        }
+    }
+
+    .subscribe {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+
+        .form-control {
+            border: 0;
+            background-color: rgba(255, 255, 255, 0.45);
+            min-height: 35px;
+            color: #fff;
+
+            &::-webkit-input-placeholder {
+                color: #fff;
+            }
+
+            &::-moz-placeholder {  /* Firefox 19+ */
+                color: #fff;
+            }
+
+            &:-ms-input-placeholder {
+                color: #fff;
+            }
+        }
+
+        .input-group-btn {
+            font-size: inherit;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .intro {
+        .countdown-box {
+            &:nth-child(2)::after {
+                content: ':';
+            }
+        }
+    }
+}

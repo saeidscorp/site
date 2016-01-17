@@ -1,0 +1,27 @@
+.client {
+
+	.client-img {
+		height: 200px;
+		padding: 55px 0px;
+		border: 1px solid #E0E0E0;
+    	margin-top: -1px;
+    	margin-right: -1px;
+
+		@media (max-width: 767px) {
+			
+			
+		}
+
+
+		img {
+		    opacity : 0.5;
+		    transition: all 0.25s ease-in-out;
+		}
+
+		&:hover {
+			img {
+			    opacity : 1;
+			}
+		}
+	}
+}

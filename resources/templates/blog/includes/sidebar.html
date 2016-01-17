@@ -1,0 +1,146 @@
+<!--sidebar-->
+<div class="col-md-4 col-md-pull-8">
+    <!-- ==============================================
+                        Left Sidebar
+    ===================================================-->
+
+    <div class="sidebar left-sidebar">
+
+        <div class="widget author-widget">
+            <h5>About me</h5>
+            <img src="/assets/images/blog/author/author_1.jpg" class="img-responsive"
+                 alt="Author Iamge">
+            <p>
+                Use mile her whom they its. Kept hold an want as he bred of. Was dashwood landlord is
+                add cheerful husbands two. Estate why theirs indeed him polite old settle though she. In
+                as at regard is easily narrow sea creatures.
+            </p>
+        </div>
+
+        <div class="widget subscribe-widget">
+            <h5>Subscribe</h5>
+            <form id="subscription-form">
+                <div class="form-group">
+                    <input name="email" type="email" id="subscriber-email" class="form-control"
+                           placeholder="Enter your email address">
+                </div>
+                <span>* We will never spam you</span>
+                <button type="submit" id="subscribe-button" type="submit" class="btn btn-cal-dark">
+                    Submit
+                </button>
+            </form>
+
+            <div id="subscription-response"></div>
+        </div>
+
+        <div class="widget search-widget">
+            <form action="">
+                <input type="text" placeholder="Search" class="form-control empty iconified">
+                <button><i class="ion-ios-search-strong"></i></button>
+            </form>
+        </div>
+
+        <div class="widget archive-widget">
+            <h5>Archives</h5>
+
+            <div class="dropdown">
+                <button class="btn btn-cal-dropdown dropdown-toggle" data-toggle="dropdown">
+                    All posts from 2015<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">January</a></li>
+                    <li><a href="#">April</a></li>
+                    <li><a href="#">July</a></li>
+                    <li><a href="#">October</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-cal-dropdown dropdown-toggle" data-toggle="dropdown">
+                    All posts from 2014<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">March</a></li>
+                    <li><a href="#">June</a></li>
+                    <li><a href="#">September</a></li>
+                    <li><a href="#">December</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-cal-dropdown dropdown-toggle" data-toggle="dropdown">
+                    All posts from 2013<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">February</a></li>
+                    <li><a href="#">May</a></li>
+                    <li><a href="#">August</a></li>
+                    <li><a href="#">November</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="widget catagory-widget">
+            <h5>Catagories</h5>
+            <ul>
+                {% for c in categories %}
+                <li>
+                    <a href="{{c.href}}" title="View all posts from {{c.name}}">{{c.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="widget tag-widget">
+            <h5>Popular Tags</h5>
+            <div class="tags">
+                {% for t in popular-tags %}
+                <a href="{{t.href}}">{{t.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="widget recent-post-widget">
+            <h5>Recent Post</h5>
+
+            <ul>
+                <li>
+                    <img class="img-responsive" src="/assets/images/blog/r_sidebar/recent_1.jpg"
+                         alt="Recent Post Image Thumbnail">
+                    <div class="post-summary">
+                        <span class="post-catagory">Gaming</span>
+                        <a href="#">firewatch: they don't come</a>
+                        <span>July 10, 2015</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="/assets/images/blog/r_sidebar/recent_2.jpg"
+                         alt="Recent Post Image Thumbnail">
+                    <div class="post-summary">
+                        <span class="post-catagory">News</span>
+                        <a href="#">first look at a story</a>
+                        <span>July 10, 2015</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="/assets/images/blog/r_sidebar/recent_3.jpg"
+                         alt="Recent Post Image Thumbnail">
+                    <div class="post-summary">
+                        <span class="post-catagory">Gaming</span>
+                        <a href="#">firewatch: they don't come</a>
+                        <span>July 10, 2015</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="/assets/images/blog/r_sidebar/recent_4.jpg"
+                         alt="Recent Post Image Thumbnail">
+                    <div class="post-summary">
+                        <span class="post-catagory">News</span>
+                        <a href="#">first look at a story</a>
+                        <span>July 10, 2015</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

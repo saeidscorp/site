@@ -1,0 +1,64 @@
+.love-us {
+
+	header {
+		margin-bottom: 0px;
+	}
+
+	.section-content {
+		position: relative;
+    	padding: 120px 0px 60px 0px;
+
+    	@media only screen and (max-width: 767px) {
+            padding: 10px 0 0 0;
+	    }
+
+    	img {
+			margin-top: -28%;
+			@media only screen and (max-width: 991px) {
+	            margin-bottom: 60px;
+	            width: 80%;
+	        }
+			@media only screen and (max-width: 767px) {
+	            margin-top: 0;
+	        }
+		}
+
+		.cause-point {
+			padding: 20px 0px 0 76px;
+    		position: relative;
+
+    		@media only screen and (max-width: 991px) {
+    			padding: 0 30px;
+    			margin-top: 30px;    		}
+
+			@media only screen and (max-width: 767px) {
+	            text-align: center;
+
+	            &:last-child {
+	            	border-bottom: none;
+	            }
+	        }
+		}
+
+		h5 {
+			text-transform: uppercase;
+			position: relative;
+
+			.hang {
+			    color: red;
+			    font-size: 44px;
+			    position: absolute;
+			    top: -6px;
+			    left: -62px;
+			    @media only screen and (max-width: 991px) {
+    				display: none;
+    			}
+			}
+
+		}
+		p{
+			color: #A2A2A2;
+			line-height: 1.6;
+		}
+	}
+}

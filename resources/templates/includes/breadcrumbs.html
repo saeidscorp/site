@@ -1,0 +1,6 @@
+<div class="breadcrumb">
+    {% for b in breadcrumb-path %}
+    <a href="{% if forloop.last %}#{% else %}{{b.href}}{% endif %}">{{b.name}}</a>
+    {% if not forloop.last %}<i class="fa fa-angle-double-right"></i>{% endif %}
+    {% endfor %}
+</div>

@@ -1,0 +1,26 @@
+.service-item {
+    position: relative;
+
+    .icon {
+        position: absolute;
+
+        i {
+            font-size: $fs4;
+        }
+    }
+
+    .service-desc {
+        padding: 0px 20px 0px 65px;
+        margin: 45px 0px;
+
+        h5 {
+            font-weight: 400;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: #444;
+        }
+        p{
+            color: #808080;
+        }
+    }
+}

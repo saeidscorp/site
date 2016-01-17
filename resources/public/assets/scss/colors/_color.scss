@@ -1,0 +1,288 @@
+$baseColor : #ff205a !default;
+
+//buttons
+.btn-cal-default{
+	background: $baseColor;
+	color: #ffffff;
+	&:hover, &:focus, &:active {
+		background-color: rgba($baseColor, 0.7);
+		color: #ffffff;
+        border-color: $baseColor;
+    }
+}
+
+.btn-cal-default-o-color {
+    color: $baseColor;
+    border-color: $baseColor;
+    background: transparent;
+    &:hover{
+        background-color: rgba($baseColor, 0.7);
+        color: #ffffff;
+        border-color: $baseColor;
+    }
+}
+
+.btn-hover-base{
+    &:hover{
+        background-color: $baseColor;
+        color: #ffffff;
+    }
+}
+
+//navigation menu
+.menuzord-menu > li > .megamenu{
+	border-color: $baseColor;
+}
+
+.top-cart-item-desc a:hover { color: $baseColor; }
+.top-cart-item-image:hover { border-color: $baseColor; }
+
+.menuzord-brand {
+    &:hover, &:focus, &:active{
+      color: $baseColor;
+    }
+}
+
+.menuzord.red .menuzord-menu > li:hover > a, 
+.menuzord.red .menuzord-menu ul.dropdown li:hover > a{ 
+  color: $baseColor; 
+}
+
+.menuzord-menu > li.item-icon > a .badge {
+	background: $baseColor;
+}
+
+.menuzord-menu > li .navbar-form .input-group {
+    > input {
+ 		&:focus, &:active{
+ 			border: none;
+ 			outline: none;
+ 			border-bottom: 1px solid $baseColor;
+ 		}
+    }
+}
+.mega-sub-menu > li > a:hover{
+	color: $baseColor;
+}
+
+
+.service-item .icon{
+	color: $baseColor;
+}
+
+.base-bg{
+	background-color: $baseColor;
+}
+
+
+
+.team-social li a:hover {
+    background: $baseColor;
+}
+
+.card-process{
+	&:hover {
+        header {
+            span {
+                color: $baseColor;
+                border-color: $baseColor;
+            }
+            &::before, &::after{
+                background-color: $baseColor;
+            }
+        }
+    }
+}
+
+
+
+
+.progress-bar{
+    background-color: $baseColor;
+}
+.level .video-info .video-icon{
+    &:hover, &:active, &:focus {
+        color: $baseColor;
+    }
+}
+
+
+
+.price-box{
+    border: 1px solid $baseColor;
+    &.featured{
+        border-bottom: 1px solid $baseColor;
+    }
+}
+
+
+
+.blog .blog-post {
+    .blog-content {
+        h5 {
+            a {
+                &:hover {
+                    color: $baseColor;
+                }
+            }
+        }
+    }
+
+    .post-meta {
+        span {
+           &.blog-catagory {
+        
+               a {
+                   &:hover {
+                       color: $baseColor;
+                   }
+               }
+           }
+        }
+    }
+}
+
+
+
+
+.client-info {
+    p{
+        a{
+            color: $baseColor;
+        }
+    }
+}
+
+
+.social-icon {
+    li {
+       a:hover, a:focus, a:active {
+            color: $baseColor;
+      }
+   }
+}
+
+.widget-contact {
+    a{
+        &:hover, &:focus, &:active{
+            color: $baseColor;
+        }
+    }
+}
+
+
+
+
+
+.portfolio-filter li.active a{
+    color: $baseColor;
+}
+
+.portfolio-hover{
+    background-color: rgba($baseColor, 0.9);
+}
+
+
+
+.cta6 > a:hover{
+    background-color: $baseColor;
+}
+
+
+.team-profile {
+    &.hiring:hover{
+        a{
+            color: $baseColor;
+        }
+    }
+}
+
+
+
+.cta7 h5 span {
+    color: $baseColor;
+}
+
+
+
+
+.breadcrumb {
+    a {
+        &:hover, &:active, &:focus{
+            color: $baseColor;
+        }
+    }
+}
+
+
+.cart-table{
+    a:hover{
+        color: $baseColor;
+    }
+}
+
+
+
+
+.panel-title:hover{
+    a{
+        color: $baseColor;
+    }
+}
+
+.sitemap ul li a:hover {
+    color: $baseColor;
+}
+
+.subscribe-form {
+    input {
+        &:focus {
+            border-color: $baseColor;
+        }
+    }
+}
+
+.card-product {
+    .product-badge {
+        background-color: $baseColor;
+    }
+
+    .product-price {
+        color: $baseColor;
+    }
+}
+
+.single-product {
+    .breadcrumb {
+        a {
+            &:hover {
+                color: $baseColor;
+            }
+        }
+    }
+
+    .product-price {
+        color: $baseColor;
+    }
+}
+
+
+.cd-nav h5{
+    color: $baseColor;
+}
+
+.search-widget {
+    form {
+        input {
+            &:focus {
+                border-color: $baseColor;
+            }
+        }
+
+        button {
+            &:hover {
+                color: $baseColor;
+            }
+        }
+    }
+}

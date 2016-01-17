@@ -1,0 +1,26 @@
+.subscribe-image {
+    width: 100%;
+    padding: 60px;
+}
+
+.subscribe-box {
+    padding: 150px 0 0;
+    @media only screen and (max-width: 991px) {
+        padding-top: 60px;
+    }
+    @media only screen and (max-width: 767px) {
+        padding: 0;
+        margin-bottom: 60px;
+        text-align: center;
+    }
+}
+
+.subscribe-form {
+    input {
+        border-radius: 0;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}

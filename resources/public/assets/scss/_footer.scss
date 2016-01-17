@@ -1,0 +1,23 @@
+.footer {
+    background-color: #0f0f0f;
+    padding: 20px 0 10px;
+    color: #eeeeee;
+
+    .footer-menu {
+        text-align: right;
+
+        a {
+            color: #eee;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .copyright, .footer-menu{
+            text-align: center;
+        }
+    }
+}

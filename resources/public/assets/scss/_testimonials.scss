@@ -1,0 +1,131 @@
+/*
+ *  Reset
+*/
+
+.carousel-control {
+    text-shadow: none;
+    background-image: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/*
+ *  Reset End
+*/
+
+.client-info {
+    h5 {
+        margin-bottom: 0;
+    }
+
+    p {
+        margin-bottom: 0;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+.testimonial-content {
+    padding-bottom: 40px;
+    font-style: italic;
+    font-size: ($fs6 + $fs5)/2;
+    color: rgba(255, 255, 255, 0.75);   
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 400;
+
+    @media (max-width: 991px) {
+        padding-bottom: 20px;
+        padding-top: 30px;            
+    }
+}
+
+.glyphicon-chevron-left:before {
+    content: "\e684";
+    font-family: 'icomoon';
+    border: 1px solid #fff;
+}
+
+.glyphicon-chevron-right:before {
+    content: "\e61a";
+    font-family: 'icomoon';
+    border: 1px solid #fff;
+}
+
+.carousel-control{
+    transition: all 0.25s ease-in-out;
+    &.left {
+        top: 0;
+        right: 0;
+        left: auto;
+        width: 31px;
+        height: 31px;
+    }
+    &.right {
+        top: 36px;
+        right: 0;
+        left: auto;
+        width: 31px;
+        height: 31px;
+    }
+}
+
+/*
+*/
+
+.carousel-vertical .carousel-inner {
+    height: 100%;
+    width: auto;
+    > .item {
+        width: auto;
+        padding-right: 50px;
+        transition: 0.6s ease-in-out top;
+        @media all and (transform-3d), (-webkit-transform-3d) {
+            transition: 0.6s ease-in-out;
+            &.next,
+            &.active.right {
+                transform: translate3d(0, 100%, 0);
+                top: 0;
+            }
+            &.prev,
+            &.active.left {
+                transform: translate3d(0, -100%, 0);
+                top: 0;
+            }
+            &.next.left,
+            &.prev.right,
+            &.active {
+                transform: translate3d(0, 0, 0);
+                top: 0;
+            }
+        }
+    }
+    > .active,
+    > .next,
+    > .prev {
+        display: block;
+    }
+    > .active {
+        top: 0;
+    }
+    > .next,
+    > .prev {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    > .next {
+        top: 100%;
+    }
+    > .prev {
+        top: -100%;
+    }
+    > .next.left,
+    > .prev.right {
+        top: 0;
+    }
+    > .active.left {
+        top: -100%;
+    }
+    > .active.right {
+        top: 100%;
+    }
+}
