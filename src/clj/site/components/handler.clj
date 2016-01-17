@@ -52,7 +52,7 @@
         ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
         :formats [:json-kw :edn :transit-json])
       ; Makes static assets in $PROJECT_DIR/resources/public/ available.
-      (wrap-file (str (env :openshift-data-dir "resources") "/public"))
+      (wrap-file (str (env :openshift-data-dir "resources/") "public"))
       (wrap-resource "public")
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)))
