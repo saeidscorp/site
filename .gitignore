@@ -18,3 +18,4 @@ pom.xml.asc
 profiles.clj
 Procfile
 /db
+/site
