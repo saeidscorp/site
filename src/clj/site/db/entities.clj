@@ -18,7 +18,7 @@
 
 (defentity post
            (has-one author)
-           (entity-fields :title :date :content)
+           (entity-fields :title :date_time :content)
            (many-to-many tag :post_tags))
 
 (defentity media
