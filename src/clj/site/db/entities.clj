@@ -35,17 +35,17 @@
           (order :email :asc)))
 
 (defn get-user-by-email [email] (first (select user (where {:email email}) (limit 1))))
-(defn get-user-by-act-id [id] (first (select user (where {:activationid id}) (limit 1))))
+(defn get-user-by-act-id [id] (first (select user (where {:activation_id id}) (limit 1))))
 (defn get-user-by-uuid [uuid] (first (select user (where {:uuid uuid}) (limit 1))))
 
 (defn username-exists? [email] (some? (get-user-by-email email)))
 
 (defn create-user [email pw_crypted activationid & [is-active?]]
-  (insert user (values {:email email :pass pw_crypted :activationid activationid :is_active (or is-active? false)
+  (insert user (values {:email email :pass pw_crypted :activation_id activationid :is_active (or is-active? false)
                         :uuid  (str (UUID/randomUUID))})))
 
 (defn set-user-active [activationid & [active]]
-  (update user (set-fields {:is_active (or active true)}) (where {:activationid activationid})))
+  (update user (set-fields {:is_active (or active true)}) (where {:activation_id activationid})))
 
 (defn update-user [uuid fields] (update user (set-fields fields) (where {:uuid uuid})))
 (defn delete-user [uuid] (delete user (where {:uuid uuid})))
