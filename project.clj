@@ -7,7 +7,7 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
   ; TODO: remove java bullshits
-  :java-source-paths ["src/java"]
+  ; :java-source-paths ["src/java"]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ;[org.clojure/clojurescript "0.0-3308"]

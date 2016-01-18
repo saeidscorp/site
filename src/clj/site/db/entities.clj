@@ -2,24 +2,31 @@
   (:use [korma.core])
   (:import (java.util UUID)))
 
-(declare user author tag post category comment)
+(declare user author tag post media comment)
 
-(defentity user)
+(defentity user
+           (entity-fields :first_name :last_name :email)
+           (has-many comment))
 
 (defentity author
            (belongs-to user)
            (has-many post))
 
-(defentity tag)
-(defentity category
-           (has-many post))
+(defentity tag
+           (many-to-many post :post_tag)
+           (entity-fields :name :desc))
 
 (defentity post
            (has-one author)
            (entity-fields :title :date :content)
            (many-to-many tag :post_tags))
 
+(defentity media
+           (entity-fields :path :mime))
 
+(defentity comment
+           (belongs-to user)
+           (entity-fields :writer :date_time :text))
 
 ;; user functions:
 
