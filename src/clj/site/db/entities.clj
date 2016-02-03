@@ -61,6 +61,4 @@
 (defn get-latest-post []
   (first (select post (order :date :DESC) (limit 1))))
 
-
-
 ;;

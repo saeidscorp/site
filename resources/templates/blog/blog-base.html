@@ -2,7 +2,7 @@
 
 {% block below-nav %}
 
-<header id="header" class="header-inner-2 bg-24 overlay-01 ">
+<header id="header" class="{% block header-resp-classes %}header-inner-2 bg-24 overlay-01{% endblock %}">
     <div class="container">
         {% include "/includes/breadcrumbs.html" %}
         <h3>{% block blog-page-title %}Blog{% endblock %}</h3>
@@ -15,7 +15,7 @@
             <!--blog content-->
             <div class="{% block blog-resp-classes %}{% endblock %}">
                 <!-- ====================================================
-                                Single blog Post
+                                    Single blog Post
                 ======================================================= -->
 
                 <div class="row">
