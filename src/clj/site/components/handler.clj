@@ -14,6 +14,7 @@
             [site.routes.home :refer [home-routes]]
             [site.routes.cc :refer [cc-routes]]
             [site.routes.user :refer [user-routes registration-routes]]
+            [site.routes.blog :refer [blog-routes]]
             [site.middleware :refer [load-middleware]]))
 
 (defroutes base-routes
@@ -43,9 +44,9 @@
   (-> (app-handler
         (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
                          ;; add your application routes here
-                         (let [rts [(cc-routes config) home-routes (user-routes config) base-routes]]
+                         (let [rts [(cc-routes config) home-routes blog-routes (user-routes config) base-routes]]
                            (if (:under-construction config) (vec (cons construction-routes rts))
-                                                                         rts))))
+                                                            rts))))
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
         :ring-defaults (mk-defaults false)

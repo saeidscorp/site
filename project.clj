@@ -9,7 +9,7 @@
   ; TODO: remove java bullshits
   ; :java-source-paths ["src/java"]
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  ;[org.clojure/clojurescript "0.0-3308"]
                  [org.clojure/clojurescript "1.7.170"]
 
