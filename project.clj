@@ -116,6 +116,7 @@
   :profiles {:dev     {:repl-options {:init-ns site.user}
 
                        :plugins      [[lein-ring "0.9.0"]
+                                      [lein-expectations "0.0.7"]
                                       [lein-figwheel "0.3.3"]
                                       [joplin.lein "0.2.17"]
                                       [test2junit "1.1.1"]
@@ -133,6 +134,8 @@
                                       ; [org.seleniumhq.selenium/selenium-server
                                       ;  org.seleniumhq.selenium/selenium-java
                                       ;  org.seleniumhq.selenium/selenium-remote-driver]]
+
+                                      [expectations "2.0.9"]
 
                                       [org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [ring-mock "0.1.5"]
