@@ -1,0 +1,15 @@
+<!-- ====================================================
+                    Single blog Post
+    ======================================================= -->
+
+{% include "includes/author-row.html" %}
+
+<h4 class="blog-title">{{post.title}}</h4>
+
+{% include "includes/post-media.html" %}
+
+{{post.content}}
+
+{% include "includes/sharing.html" %}
+
+{% include "includes/disqus.html" %}
