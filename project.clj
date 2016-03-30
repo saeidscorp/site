@@ -113,6 +113,10 @@
                                  :optimizations :advanced
                                  :pretty-print  false}}}}
 
+  :sass {:src "resources/styles"
+         :dst "resources/public/assets/css/"
+         :style :expanded}
+
   :profiles {:dev     {:repl-options {:init-ns site.user}
 
                        :plugins      [[lein-ring "0.9.0"]
@@ -120,7 +124,8 @@
                                       [lein-figwheel "0.3.3"]
                                       [joplin.lein "0.2.17"]
                                       [test2junit "1.1.1"]
-                                      [lein-immutant "2.1.0"]]
+                                      [lein-immutant "2.1.0"]
+                                      [lein-sassy "1.0.7"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
 
