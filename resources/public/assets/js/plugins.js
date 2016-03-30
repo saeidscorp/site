@@ -27,7 +27,7 @@ jQuery(document).ready(function($) {
     var animationDelay = 3000,
         //loading bar effect
         barAnimationDelay = 3800,
-        barWaiting = barAnimationDelay - 3000, //3000 is the duration of the transition on the loading bar - set in the scss/css file
+        barWaiting = barAnimationDelay - 3000, //3000 is the duration of the transition on the loading bar - set in the styles/css file
         //letters effect
         lettersDelay = 70,
         //type effect
