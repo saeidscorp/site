@@ -1,4 +1,4 @@
-{% extends "blog-base.html" %}
+{% extends "/blog/blog-base.html" %}
 
 {% block header-resp-classes %}{{block.super}} header-inner-2 text-center bg-24 overlay-01{% endblock %}
 {% block blog-section-styles %}{{block.super}} blog-card-fullwidth blog mild-bg{% endblock %}
@@ -10,13 +10,13 @@
     {% for post in row %}
     <div class="col-md-4 col-sm-4">
         <div class="blog-post ">
-            {% include "includes/post-card.html" with post=post %} {#<!-- TODO: try without "with" -->#}
+            {% include "/blog/includes/post-card.html" with post=post %} {#<!-- TODO: try without "with" -->#}
         </div>
     </div>
     {% endfor %}
 </div>
 {% endfor %}
 
-{% include "includes/pagination.html" %}
+{% include "/blog/includes/pagination.html" %}
 
 {% endblock blog-in-container %}

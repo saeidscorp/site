@@ -1,4 +1,4 @@
-{% extends "blog-base.html" %}
+{% extends "/blog/blog-base.html" %}
 
 {% block header-resp-classes %}{{block.super}} header-inner-2 text-center bg-24 overlay-01{% endblock %}
 {% block blog-section-styles %}{{block.super}} section blog blog-card-fullwidth mild-bg{% endblock %}
@@ -11,18 +11,18 @@
         {% for post in row %}
         <div class="col-md-6">
             <div class="blog-post ">
-                {% include "includes/post-card.html" %}
+                {% include "/blog/includes/post-card.html" %}
             </div>
         </div>
         {% endfor %}
     </div>
     {% endfor %}
 
-    {% include "includes/pagination.html" %}
+    {% include "/blog/includes/pagination.html" %}
 </div>
 <!--blog content end-->
 
 
-{% include "includes/sidebar.html" %}
+{% include "/blog/includes/sidebar.html" %}
 
 {% endblock blog-in-row %}

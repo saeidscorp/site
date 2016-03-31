@@ -1,10 +1,10 @@
-{% include "includes/author-row.html" with date=post.date %}
+{% include "/blog/includes/includes/author-row.html" with date=post.date %}
 
 <div class="row">
     <div class="col-md-12">
-        {% include "includes/post-title.html" %}
+        {% include "/blog/includes/includes/post-title.html" %}
         <div class="blog-media">
-            {% include "includes/post-media.html" %}
+            {% include "/blog/includes/includes/post-media.html" %}
         </div>
 
         <div class="main-description">
@@ -14,7 +14,7 @@
 </div>
 
 <div class="blog-footer">
-    <span><i class="icon-chat"></i> {{post.comments-count}} Comments</span> {#<!-- TODO: make "No Comments" possible -->#}
+    <span><i class="icon-chat"></i> {{post.comments-count}} Comments</span> {% comment %} <!-- TODO: make "No Comments" possible --> {% endcomment %}
     <a href="{{post.url}}" class="btn btn-read-more">
         Read more
         <span><i class="fa fa-angle-double-right"></i></span>

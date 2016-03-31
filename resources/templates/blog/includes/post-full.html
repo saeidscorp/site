@@ -2,14 +2,14 @@
                     Single blog Post
     ======================================================= -->
 
-{% include "includes/author-row.html" %}
+{% include "/blog/includes/includes/author-row.html" %}
 
 <h4 class="blog-title">{{post.title}}</h4>
 
-{% include "includes/post-media.html" %}
+{% include "/blog/includes/includes/post-media.html" %}
 
 {{post.content}}
 
-{% include "includes/sharing.html" %}
+{% include "/blog/includes/includes/share.html" %}
 
-{% include "includes/disqus.html" %}
+{% include "/blog/includes/includes/disqus.html" %}

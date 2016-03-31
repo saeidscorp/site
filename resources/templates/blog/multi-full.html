@@ -1,4 +1,4 @@
-{% extends "blog-base.html" %}
+{% extends "/blog/blog-base.html" %}
 
 {% block header-resp-classes %}{{block.super}} header-inner-2 text-center bg-24 overlay-01{% endblock %}
 {% block blog-section-styles %}{{block.super}} section blog-standard multiple-blog{% endblock %}
@@ -8,11 +8,11 @@
 <div class="col-md-8 col-md-offset-2">
     {% for post in posts %}
     <div class="different-blog">
-        {% include "includes/post-short.html" %}
+        {% include "/blog/includes/post-short.html" %}
     </div>
     {% endfor %}
 
-    {% include "includes/pagination.html" %}
+    {% include "/blog/includes/pagination.html" %}
 </div>
 <!--blog content end-->
 
