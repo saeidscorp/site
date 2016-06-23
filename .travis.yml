@@ -3,4 +3,4 @@ language: clojure
 jdk:
   - oraclejdk8
 
-script: "lein expectations"
+script: lein expectations
