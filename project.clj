@@ -113,7 +113,7 @@
                                  :optimizations :advanced
                                  :pretty-print  false}}}}
 
-  :sass {:src "resources/styles"
+  :sass {:src "resources\\styles"
          :dst "resources/public/assets/css/"
          :style :expanded}
 
