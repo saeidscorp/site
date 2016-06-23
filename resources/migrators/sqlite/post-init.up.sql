@@ -1,6 +1,7 @@
 CREATE TABLE post (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title VARCHAR(60),
+  featured_image REFERENCES media(id),
   short TEXT(200),
   date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   author_id REFERENCES author(user_id),

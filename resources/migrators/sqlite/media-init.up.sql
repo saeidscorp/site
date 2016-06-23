@@ -5,4 +5,4 @@ CREATE TABLE media (
   mime VARCHAR(30)
 );
 
-INSERT INTO media (path, MIME) VALUES ('/srv/uploads/data/profile.png', 'image/png');
+INSERT INTO media (id, path, MIME) VALUES (1, '/media/uploads/screenshot.png', 'image/png');

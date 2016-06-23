@@ -5,7 +5,9 @@
 (declare user author tag post media comment)
 
 (defentity user
-           (entity-fields :first_name :last_name :email)
+           (entity-fields :first_name :last_name :email
+                          :role :last_login :is_active
+                          :pass :activationid :uuid)
            (has-many comment))
 
 (defentity author
@@ -56,7 +58,7 @@
 ;; post functions:
 
 (defn get-latest-posts [n]
-  (select post (limit (if (zero? n) 10 n))))
+  (select post (order :date :DESC) (limit (if (zero? n) 10 n))))
 
 (defn get-latest-post []
   (first (select post (order :date :DESC) (limit 1))))

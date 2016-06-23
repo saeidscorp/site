@@ -4,13 +4,14 @@
 {% block blog-section-styles %}{{block.super}} blog-card-fullwidth blog mild-bg{% endblock %}
 
 {% block blog-in-container %}
-
+<!-- label: {{label}} --> {{label}}
+<!-- blog content -->
 {% for row in blog-box-rows %}
 <div class="row">
     {% for post in row %}
     <div class="col-md-4 col-sm-4">
         <div class="blog-post ">
-            {% include "/blog/includes/post-card.html" with post=post %} {#<!-- TODO: try without "with" -->#}
+            {% include "/blog/includes/post-card.html" with post=post %} <!--{# TODO: try without "with" #}-->
         </div>
     </div>
     {% endfor %}
@@ -18,5 +19,5 @@
 {% endfor %}
 
 {% include "/blog/includes/pagination.html" %}
-
+<!-- end block content -->
 {% endblock blog-in-container %}

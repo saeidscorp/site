@@ -7,7 +7,7 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
   ; TODO: remove java bullshits
-  ; :java-source-paths ["src/java"]
+  :java-source-paths ["src/java"]
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  ;[org.clojure/clojurescript "0.0-3308"]
@@ -30,7 +30,7 @@
                  [environ "1.0.0"]
                  [leiningen "2.5.1"]
                  [selmer "0.8.5"]
-                 [prone "0.8.2"]
+                 [prone "1.1.1"]
                  [im.chit/cronj "1.4.3"]
                  [com.taoensso/timbre "3.2.1"]
                  [noir-exception "0.2.5"]
