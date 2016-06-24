@@ -1,7 +1,7 @@
 (ns site.core
   (:require [reagent.core :as reagent :refer [atom]]
-            [datascript :as d]
-            [cljs-uuid-utils :as uuid]
+            [datascript.core :as d]
+            [cljs-uuid-utils.core :as uuid]
             [site.helper :as h]))
 
 (defn bind

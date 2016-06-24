@@ -6,7 +6,7 @@
             [immutant.web :as web]
             [environ.core :refer [env]]
             [cronj.core :as cronj]
-            [taoensso.timbre.appenders.rotor :as rotor]
+            [taoensso.timbre.appenders.3rd-party.rotor :as rotor]
             [selmer.parser :as parser]
             [site.session :as session]))
 
@@ -24,17 +24,16 @@
    an app server such as Tomcat
    put any initialization code here"
   [config]
-  (timbre/set-config!
-    [:appenders :rotor]
-    {:min-level :info
-     :enabled? true
-     :async? false ; should be always false for rotor
-     :max-message-per-msecs nil
-     :fn rotor/appender-fn})
+  (timbre/set-config! {})
+  (timbre/merge-config!
+    {:appenders {:rotor {:min-level             :info
+                         :enabled?              true
+                         :async?                false       ; should be always false for rotor
+                         :max-message-per-msecs nil
+                         :fn                    rotor/rotor-appender}}})
 
-  (timbre/set-config!
-    [:shared-appender-config :rotor]
-    {:path "site" :max-size (* 512 1024) :backlog 10})
+  (timbre/merge-config!
+    {:shared-appender-config {:rotor {:path "site" :max-size (* 512 1024) :backlog 10}}})
 
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
@@ -46,14 +45,14 @@
   component/Lifecycle
   (start [component]
     (let [handler (:handler handler)
-          config (:config config)
-          server (serve handler
-                        {:port         (:port config)
-                         :init         (partial init config)
-                         :auto-reload? true
-                         :destroy      destroy
-                         :join?        false
-                         :open-browser? false})]
+          config  (:config config)
+          server  (serve handler
+                         {:port          (:port config)
+                          :init          (partial init config)
+                          :auto-reload?  true
+                          :destroy       destroy
+                          :join?         false
+                          :open-browser? false})]
       (assoc component :server server)))
   (stop [component]
     (let [server (:server component)]
@@ -67,7 +66,7 @@
   component/Lifecycle
   (start [component]
     (let [handler (:handler handler)
-          server (web/run handler {:port (env :openshift-dip-port (get-in config [:config :port] 8080)) :host (env :openshift-diy-ip "127.0.0.1")})]
+          server  (web/run handler {:port (env :openshift-dip-port (get-in config [:config :port] 8080)) :host (env :openshift-diy-ip "127.0.0.1")})]
       (assoc component :server server)))
   (stop [component]
     (let [server (:server component)]

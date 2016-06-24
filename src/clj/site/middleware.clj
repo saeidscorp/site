@@ -36,7 +36,8 @@
   [#(add-req-properties % config)
    #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-backend)
-   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+   ;#(wrap-internal-error % :log (fn [e] (timbre/error e)))
+   wrap-exceptions
    #(wrap-tower % tconfig)
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
