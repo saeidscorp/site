@@ -1,5 +1,5 @@
 (ns site.web.setup
-  (:require [reloaded.repl :refer [go stop]]
+  (:require [system.repl :refer [go stop]]
             [clj-webdriver.taxi :as w]
             [com.stuartsierra.component :as component]
             [joplin.core :as j]
@@ -57,7 +57,7 @@ Your Team"
   (w/quit))
 
 (defn start-server []
-  (reloaded.repl/set-init! test-system)
+  (system.repl/set-init! test-system)
   (go))
 
 (defn stop-server []
