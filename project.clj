@@ -124,7 +124,7 @@
                   :figwheel     {:websocket-host "localhost"
                                  :on-jsload "site.dev/main"}
                   :compiler     {:main                 "site.dev"
-                                 :asset-path           "resources/public/js/compiled/out"
+                                 :asset-path           "/js/compiled/out"
                                  :output-to            "resources/public/js/compiled/app.js"
                                  :output-dir           "resources/public/js/compiled/out"
                                  ;:source-map           "resources/public/js/compiled/out.js.map"
@@ -148,11 +148,13 @@
 
   :profiles {:dev     {:repl-options {:init-ns site.user}
 
+                       :source-paths ["env/dev/script"]
+
                        :plugins      [[lein-ring "0.9.0"]
                                       ;[lein-expectations "0.0.7"]
                                       [lein-expectations "0.0.8"]
                                       ;[lein-figwheel "0.3.3"]
-                                      [lein-figwheel "0.5.4-4"]
+                                      ;[lein-figwheel "0.5.4-4"]
                                       ;[joplin.lein "0.2.17"]
                                       [joplin.lein "0.2.18"]
                                       ;[test2junit "1.1.1"]
@@ -161,6 +163,8 @@
                                       [lein-sassy "1.0.7"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
+
+                                      [figwheel-sidecar "0.5.4-4"]
 
                                       ; use this for htmlunit or an older firefox version
                                       ;[clj-webdriver "0.6.1"]
@@ -179,6 +183,7 @@
 
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [org.seleniumhq.selenium/selenium-server "2.53.0"]
+                                      [org.seleniumhq.selenium/selenium-htmlunit-driver "2.9.0"]
                                       ;[ring-mock "0.1.5"]
                                       [ring/ring-mock "0.3.0"]
                                       ;[ring/ring-devel "1.4.0"]
