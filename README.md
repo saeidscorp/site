@@ -1,36 +1,46 @@
-# site
+# Site (My personal site/blog system written in Clojure) [![Build Status](https://travis-ci.org/saeidscorp/site.svg?branch=master)](https://travis-ci.org/saeidscorp/site)
 
-FIXME: description
+
 
 ## Installation
 
-Download from http://example.com/FIXME.
+You have to clone the github repository (since it doesn't make sense to
+put it on clojars)
 
 ## Usage
 
-FIXME: explanation
+### Migrate the database
 
-    $ java -jar site-0.1.0-standalone.jar [args]
+You have to run database migrations first:
 
-## Options
+    lein migrate
 
-FIXME: listing of options this app accepts.
+### Running
 
-## Examples
+Just run it:
 
-...
+    lein run
 
-### Bugs
+Or start the repl and start the system:
 
-...
+    lein repl
+    
+    site.user => (go)
 
-### Any Other Sections
-### That You Think
-### Might be Useful
+
+## Notes
+
+I have used Sass preprocessor to generate css files.
+You can compile the scss files in one shot using:
+
+    lein sass once
+
+Or watch the directories and auto build them:
+
+    lein sass watch
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Saeid Akbari (scorp.one)
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the GNU GENERAL PUBLIC LICENSE Version 3
