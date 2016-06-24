@@ -45,6 +45,7 @@
                                                  :tags        [{:name "Welcome" :url "#"}]
                                                  :categories [{:title "Welcome"}]
                                                  :has-image true
+                                                 :image-src "/assets/images/blog/card/blog_1.jpg"
                                                  :date "02 Sep"}
                                                 {:title       "Clojure for Summer!"
                                                  :description "A short outline of plans to do in summer."

@@ -13,8 +13,8 @@
 
 (defn init-state []
   (GET "/ajax/page/init" {:handler       #(do
-                                          (println "succ: " %)
-                                          (reset! state %))
+                                           (println "succ: " %)
+                                           (reset! state %))
                           :error-handler #(println "some error occured: " %)}))
 
 (defn ^:export main []

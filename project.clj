@@ -184,6 +184,8 @@
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [org.seleniumhq.selenium/selenium-server "2.53.0"]
                                       [org.seleniumhq.selenium/selenium-htmlunit-driver "2.9.0"]
+                                      [org.seleniumhq.selenium/selenium-remote-driver "2.9.0"]
+                                      [org.seleniumhq.selenium/selenium-java "2.9.0"]
                                       ;[ring-mock "0.1.5"]
                                       [ring/ring-mock "0.3.0"]
                                       ;[ring/ring-devel "1.4.0"]
