@@ -140,7 +140,10 @@
                                  :optimizations :advanced
                                  :pretty-print  false}}}}
 
-  :figwheel {:css-dirs   ["resources/public/css"]} ;; watch and update CSS}
+  :figwheel {:css-dirs   ["resources/public/css"]
+             :repl false
+             :nrepl-port 3450
+             :server-logfile "logs/figwheel.log"} ;; watch and update CSS}
 
   :sass {:src   "resources\\styles"
          :dst   "resources/public/assets/css/"
@@ -154,7 +157,7 @@
                                       ;[lein-expectations "0.0.7"]
                                       [lein-expectations "0.0.8"]
                                       ;[lein-figwheel "0.3.3"]
-                                      ;[lein-figwheel "0.5.4-4"]
+                                      [lein-figwheel "0.5.4-4"]
                                       ;[joplin.lein "0.2.17"]
                                       [joplin.lein "0.2.18"]
                                       ;[test2junit "1.1.1"]
@@ -165,6 +168,7 @@
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
 
                                       [figwheel-sidecar "0.5.4-4"]
+                                      [com.cemerick/piggieback "0.2.1"]
 
                                       ; use this for htmlunit or an older firefox version
                                       ;[clj-webdriver "0.6.1"]
@@ -183,9 +187,9 @@
 
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [org.seleniumhq.selenium/selenium-server "2.53.0"]
-                                      [org.seleniumhq.selenium/selenium-htmlunit-driver "2.9.0"]
-                                      [org.seleniumhq.selenium/selenium-remote-driver "2.9.0"]
-                                      [org.seleniumhq.selenium/selenium-java "2.9.0"]
+                                      [org.seleniumhq.selenium/selenium-htmlunit-driver "2.9.0" :exclusions [org.apache.httpcomponents/httpclient]]
+                                      [org.seleniumhq.selenium/selenium-remote-driver "2.9.0" :exclusions [org.apache.httpcomponents/httpclient]]
+                                      [org.seleniumhq.selenium/selenium-java "2.9.0" :exclusions [org.apache.httpcomponents/httpclient]]
                                       ;[ring-mock "0.1.5"]
                                       [ring/ring-mock "0.3.0"]
                                       ;[ring/ring-devel "1.4.0"]
