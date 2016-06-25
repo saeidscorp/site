@@ -33,7 +33,7 @@
                          :fn                    rotor/rotor-appender}}})
 
   (timbre/merge-config!
-    {:shared-appender-config {:rotor {:path "site" :max-size (* 512 1024) :backlog 10}}})
+    {:shared-appender-config {:rotor {:path "logs/site.log" :max-size (* 512 1024) :backlog 10}}})
 
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
