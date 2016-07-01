@@ -66,7 +66,7 @@
   component/Lifecycle
   (start [component]
     (let [handler (:handler handler)
-          server  (web/run handler {:port (env :openshift-dip-port (get-in config [:config :port] 8081)) :host (env :openshift-diy-ip "127.0.0.1")})]
+          server  (web/run handler {:port (env :openshift-diy-port (get-in config [:config :port] 8081)) :host (env :openshift-diy-ip "127.0.0.1")})]
       (assoc component :server server)))
   (stop [component]
     (let [server (:server component)]

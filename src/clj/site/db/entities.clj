@@ -12,7 +12,8 @@
 
 (defentity author
            (belongs-to user)
-           (has-many post))
+           (has-many post)
+           (has-many media))
 
 (defentity tag
            (many-to-many post :post_tag)
