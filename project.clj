@@ -140,7 +140,7 @@
                                  :optimizations :advanced
                                  :pretty-print  false}}}}
 
-  :figwheel {:css-dirs   ["resources/public/css"]
+  :figwheel {:css-dirs   ["resources/public/css" "resources/public/assets/css"]
              :repl false
              :nrepl-port 3450
              :server-logfile "logs/figwheel.log"} ;; watch and update CSS}
@@ -156,10 +156,12 @@
                        :plugins      [[lein-ring "0.9.0"]
                                       ;[lein-expectations "0.0.7"]
                                       [lein-expectations "0.0.8"]
+                                      [lein-autoexpect "1.9.0"]
                                       ;[lein-figwheel "0.3.3"]
                                       [lein-figwheel "0.5.4-4"]
                                       ;[joplin.lein "0.2.17"]
                                       [joplin.lein "0.2.18"]
+                                      ;[lein-cooper "1.2.2"]
                                       ;[test2junit "1.1.1"]
                                       ;[test2junit "1.2.2"] ;; we don't use clojure.test at all
                                       [lein-immutant "2.1.0"]
@@ -232,6 +234,6 @@
   :uberjar-name "site.jar"
 
   :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "sass" "once," "uberjar"]
-            "repl"    ["pdo" "clean," "figwheel," "sass" "watch," "repl" ":headless"]
+            "devrepl" ["pdo" "clean," "figwheel," "sass" "watch," #_("autoexpect" ":growl,") "repl" ":headless"]
             "unit"    ["do" "test" ":unit"]
             "integ"   ["do" "test" ":integration"]})
