@@ -7,5 +7,5 @@
 source ${OPENSHIFT_REPO_DIR}/.openshift/.leinrc
 
 cd ${OPENSHIFT_REPO_DIR}
-nohup ${OPENSHIFT_DATA_DIR}/lein with-profile +dev pdo sass once, cljsbuild once adv >${OPENSHIFT_LOG_DIR}/server.log 2>&1 &
+nohup ${OPENSHIFT_DATA_DIR}/lein with-profile +dev pdo sass once, cljsbuild once adv >${OPENSHIFT_LOG_DIR}/build.log 2>&1 &
 nohup ${OPENSHIFT_DATA_DIR}/lein trampoline run >>${OPENSHIFT_LOG_DIR}/server.log 2>&1 &
