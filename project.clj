@@ -212,7 +212,8 @@
 
              :uberjar {:auto-clean  false                   ; not sure about this one
                        :omit-source true
-                       :aot         :all}}
+                       :aot         :all}
+             :default [:base :system :provided]}
 
   :test-paths ["test/clj" "integtest/clj"]
 

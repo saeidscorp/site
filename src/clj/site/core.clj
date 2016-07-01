@@ -6,7 +6,7 @@
   (:gen-class))
 
 (defn -main [& args]
-  (system.repl/set-init! prod-system)
+  (system.repl/set-init! #'prod-system)
   (go)
   (cljc/foo-cljc "hello from cljx")
   (timbre/info "server started."))
