@@ -36,13 +36,13 @@
   [#(add-req-properties % config)
    #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-backend)
-   ;#(wrap-internal-error % :log (fn [e] (timbre/error e)))
-   wrap-exceptions
+   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
    #(wrap-tower % tconfig)
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
    wrap-trimmings])
 
 (defn load-middleware [config tconfig]
+  (timbre/info (:env config))
   (concat (production-middleware config tconfig)
           (when (= (:env config) :dev) development-middleware)))

@@ -82,8 +82,8 @@
     (if-let [user (db/get-user-by-email username)]
       (try
         (cond
-          (= false (:is_active user)) (login-page {:error :user/activate_account})
-          (= false (hashers/check password (get user :pass ""))) (login-page
+          (false? (:is_active user)) (login-page {:error :user/activate_account})
+          (false? (hashers/check password (get user :pass ""))) (login-page
                                                                    {:error (t locale tconfig :user/pass_correct)})
           :else (do (sess/put! :role (:role user)) (sess/put! :identity username)
                     (resp/redirect (or nexturl "/"))))
@@ -94,7 +94,7 @@
 (defn changepassword [oldpassword password confirm locale tconfig]
   (let [user (db/get-user-by-email (uservice/get-logged-in-username))]
     (vali-password? password confirm locale tconfig oldpassword (:pass user))
-    (if (not (vali/errors? :oldpass :pass :confirm))
+    (if-not (vali/errors? :oldpass :pass :confirm)
       (do (db/change-password (:email user) (hashers/encrypt password))
           (changepassword-page (layout/flash-result (t locale tconfig :user/pass_changed) "alert-success")))
       (let [old-error (vali/on-error :oldpass first)

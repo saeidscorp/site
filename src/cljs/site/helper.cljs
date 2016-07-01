@@ -5,9 +5,9 @@
             [goog.fx.dom :as fx-dom]
             [goog.dom :as gdom]
             [goog.dom.forms :as gforms]
-            [goog.net.XhrIo :as xhr]
+            [goog.net.XhrIo :as xhr])
             ;[ajax.core :as ajax]
-            )
+
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
 (defn timeout [ms]
@@ -54,18 +54,18 @@
       ([] (fade-out 1000 nil))
       ([tm] (fade-out tm nil))
       ([tm callback]
-        (fn [node]
-            (let [anim (fx-dom/FadeOut. node tm)]
-                 (when callback
-                       (events/listen anim js/goog.fx.Animation.EventType.END callback))
-                 (. anim (play))))))
+       (fn [node]
+         (let [anim (fx-dom/FadeOut. node tm)]
+           (when callback
+             (events/listen anim js/goog.fx.Animation.EventType.END callback))
+           (. anim (play))))))
 
 (defn fade-in
       ([] (fade-in 1000 nil))
       ([tm] (fade-in tm nil))
       ([tm callback]
-        (fn [node]
-            (let [anim (fx-dom/FadeIn. node tm)]
-                 (when callback
-                       (events/listen anim js/goog.fx.Animation.EventType.END callback))
-                 (. anim (play))))))
+       (fn [node]
+         (let [anim (fx-dom/FadeIn. node tm)]
+           (when callback
+             (events/listen anim js/goog.fx.Animation.EventType.END callback))
+           (. anim (play))))))

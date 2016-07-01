@@ -76,7 +76,7 @@
                                                                        (-> % .-target .-value))
                                                   :value       (get-in @state [:new-entity :name])}])
             [:hr]
-            (for [field-nr (range 1 (+ 1 fields-count))]
+            (for [field-nr (range 1 (inc fields-count))]
                  ^{:key field-nr}
                  [->field-description field-nr])
             [:hr]
