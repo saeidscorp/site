@@ -165,7 +165,8 @@
                                       ;[test2junit "1.1.1"]
                                       ;[test2junit "1.2.2"] ;; we don't use clojure.test at all
                                       [lein-immutant "2.1.0"]
-                                      [lein-sassy "1.0.7"]]
+                                      [lein-sassy "1.0.7"]
+                                      [lein-pdo "0.1.1"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
 
