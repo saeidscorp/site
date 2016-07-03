@@ -5,7 +5,7 @@
 (declare user author tag post media comment)
 
 (defentity user
-           (entity-fields :first_name :last_name :email
+           (entity-fields :id :first_name :last_name :email
                           :last_login :is_active :role
                           :pass :activation_id :uuid)
            (has-many comment {:fk :writer})
@@ -19,14 +19,14 @@
 
 (defentity tag
            (many-to-many post :post_tag)
-           (entity-fields :name :desc))
+           (entity-fields :id :name :desc))
 
 (defentity post
            (belongs-to author {:fk :author})
            (belongs-to media {:fk :featured_image})
-           (entity-fields :title :date_time :short :featured_image :content)
+           (entity-fields :id :title :date_time :short :featured_image :content)
            (has-many comment {:fk :writer})
-           (many-to-many tag :post_tags))
+           (many-to-many tag :post_tag))
 
 (defentity media
            (has-one author {:fk :owner})
@@ -72,5 +72,12 @@
 (defn get-latest-post []
   (first (get-latest-posts 1)))
 
+(defn post-to-map [post]
+  (assoc post :author
+    (let [a (into {} (filter #((set (:fields user)) (first %)) post))]
+      (assoc a :name (:first_name a)))))
+
+(defn get-post-by-id [id]
+  (first (select post (with author (with user)) (where {:id id}))))
 
 ;;

@@ -64,13 +64,11 @@
                                                  :tags        [{:name "Clojure" :url "#"}
                                                                {:name "Cloud" :url "#"}]}]]})
 
-(defn latest-posts
-  ([n] (e/get-latest-posts n)))
-
 (defroutes blog-routes
            (GET "/blog/multi-card-boxed" [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map)) ;; check
            (GET "/blog/multi-card-side" [] (layout/render "blog/multi-card-side.html" multi-context-map)) ;; check
            (GET "/blog/multi-full" [] (layout/render "blog/multi-full.html" multi-context-map))
            (GET "/blog/multi-side" [] (layout/render "blog/multi-side.html" multi-context-map))
            (GET "/blog/single-full" [] (layout/render "blog/single-full.html" single-context-map)) ;; check
-           (GET "/blog/single-side" [] (layout/render "blog/single-side.html" single-context-map)))
+           (GET "/blog/single-side/:id" [id] (layout/render "blog/single-side.html"
+                                                            (assoc single-context-map :post (e/post-to-map (e/get-post-by-id id))))))
