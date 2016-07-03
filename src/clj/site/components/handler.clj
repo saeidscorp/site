@@ -1,9 +1,10 @@
 (ns site.components.handler
   (:require [taoensso.timbre :as timbre]
             [compojure.core :refer [defroutes]]
+            [bidi.ring :refer [make-handler]]
             [ring.middleware.ssl :as ssl]
             [noir.response :refer [redirect]]
-            [noir.util.middleware :refer [app-handler]]
+            ;[noir.util.middleware :refer [app-handler]]
             [ring.middleware.defaults :refer [site-defaults]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.file :refer [wrap-file]]
@@ -38,6 +39,25 @@
 
 (defmacro wrap-if [handler condition & args]
   `(if ~condition (-> ~handler ~@args) ~handler))
+
+(defn app-handler
+  [app-routes & {:keys [base-url session-options middleware access-rules formats ring-defaults]}]
+  (letfn [(wrap-middleware-format [handler]
+            (if formats (ring.middleware.format/wrap-restful-format handler :formats formats) handler))]
+    (-> (make-handler app-routes)
+        (noir.util.middleware/wrap-middleware middleware)
+        (noir.util.middleware/wrap-request-map)
+        (ring.middleware.defaults/wrap-defaults (dissoc (or ring-defaults site-defaults) :session))
+        (hiccup.middleware/wrap-base-url base-url)
+        (wrap-middleware-format)
+        (noir.util.middleware/wrap-access-rules access-rules)
+        (noir.validation/wrap-noir-validation)
+        (noir.cookies/wrap-noir-cookies)
+        (noir.session/wrap-noir-flash)
+        (noir.session/wrap-noir-session
+          (update-in
+            (or session-options (:session ring-defaults) (:session site-defaults))
+            [:store] #(or % (ring.middleware.session.memory/memory-store noir.session/mem)))))))
 
 (defn get-handler [config locale]
   (timbre/info (str "USING CONSTRUCTION PROFILE: " (:under-construction config)))

@@ -32,6 +32,9 @@
                  [ring/ring-anti-forgery "1.0.1"]
                  ;[compojure "1.4.0"]
                  [compojure "1.5.1"]
+
+                 [bidi "2.0.9"]
+
                  [reagent "0.5.1"]
                  ;[environ "1.0.0"]
                  [environ "1.0.3"]
