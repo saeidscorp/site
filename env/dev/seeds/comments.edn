@@ -1,0 +1,2 @@
+[{:writer 1, :target 1, :text "This article is actually very good as a first post!"}
+ {:writer 2, :target 1, :is_reply true, :reply_to 1, :text "Thank you so much!"}]

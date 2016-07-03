@@ -7,6 +7,3 @@ CREATE TABLE comment (
   reply_to REFERENCES comment (id) DEFAULT NULL,
   text     TEXT
 );
-
-INSERT INTO comment (writer, target, text)
-VALUES (1, 1, 'Nice article! Congratulations to you!');
