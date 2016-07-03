@@ -6,34 +6,41 @@
 
 (defentity user
            (entity-fields :first_name :last_name :email
-                          :role :last_login :is_active
-                          :pass :activationid :uuid)
-           (has-many comment))
+                          :last_login :is_active
+                          :pass :activation_id :uuid)
+           (has-many comment {:fk :writer})
+           (has-one author))
 
 (defentity author
+           (pk :user_id)
            (belongs-to user)
-           (has-many post)
-           (has-many media))
+           (has-many post {:fk :author})
+           (has-many media {:fk :owner}))
 
 (defentity tag
            (many-to-many post :post_tag)
            (entity-fields :name :desc))
 
 (defentity post
-           (has-one author)
-           (entity-fields :title :date_time :content)
+           (belongs-to author {:fk :author})
+           (belongs-to media {:fk :featured_image})
+           (entity-fields :title :date_time :short :featured_image :content)
+           (has-many comment {:fk :writer})
            (many-to-many tag :post_tags))
 
 (defentity media
+           (has-one author {:fk :owner})
            (entity-fields :path :mime))
 
 (defentity comment
-           (belongs-to user)
-           (entity-fields :writer :date_time :text))
+           (belongs-to user {:fk :writer})
+           (belongs-to post {:fk :target})
+           (belongs-to comment {:fk :reply_to})
+           (entity-fields :writer :date_time :is_reply :text))
 
 ;; user functions:
 
-(defn get-all-users [ & [where-email-like]]
+(defn get-all-users [& [where-email-like]]
   (select user (where {:email [like (str "%" where-email-like "%")]})
           (order :email :asc)))
 
@@ -58,10 +65,12 @@
 
 ;; post functions:
 
-(defn get-latest-posts [n]
-  (select post (order :date :DESC) (limit (if (zero? n) 10 n))))
+(defn get-latest-posts
+  ([n] (select post (order :date_time :DESC) (limit n)))
+  ([] (get-latest-posts 10)))
 
 (defn get-latest-post []
-  (first (select post (order :date :DESC) (limit 1))))
+  (first (get-latest-posts 1)))
+
 
 ;;
