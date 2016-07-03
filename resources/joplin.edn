@@ -1,0 +1,11 @@
+{:migrators    {:sqlite-mig "resources/migrators/sqlite"
+                :h2-mig     "resources/migrators/h2"}
+ :seeds        {:sql-dev-seed "seeds.sql/run"}
+ :databases    {:sqlite-dev       {:type :sql, :url "jdbc:sqlite:./db/site.sqlite"}
+                :sqlite-test      {:type :sql, :url "jdbc:sqlite:./db/site-test.sqlite"}
+                :sqlite-integtest {:type :sql, :url "jdbc:sqlite:./db/site-integtest.sqlite"}
+                :h2-dev           {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
+ :environments {:sqlite-dev-env       [{:db :sqlite-dev, :migrator :sqlite-mig, :seed :sql-dev-seed}]
+                :sqlite-test-env      [{:db :sqlite-test, :migrator :sqlite-mig}]
+                :sqlite-integtest-env [{:db :sqlite-integtest, :migrator :sqlite-mig}]
+                :h2-dev-env           [{:db :h2-dev, :migrator :h2-mig :seed :jdbc}]}}

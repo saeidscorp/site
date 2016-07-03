@@ -100,10 +100,6 @@
             ;[lein-cljsbuild "1.0.5"]
             [lein-cljsbuild "1.1.3"]]
 
-  ;database migrations
-  :joplin {:migrators {:sqlite-mig "resources/migrators/sqlite"
-                       :h2-mig     "resources/migrators/h2"}}
-
   :closp-crud {:jdbc-url               "jdbc:sqlite:./db/site.sqlite"
                :migrations-output-path "./resources/migrators/sqlite"
                :clj-src                "src/clj"
@@ -151,7 +147,7 @@
 
   :profiles {:dev     {:repl-options {:init-ns site.user}
 
-                       :source-paths ["env/dev/script"]
+                       :source-paths ["env" "env/dev/script"]
 
                        :plugins      [[lein-ring "0.9.0"]
                                       ;[lein-expectations "0.0.7"]
@@ -160,7 +156,7 @@
                                       ;[lein-figwheel "0.3.3"]
                                       [lein-figwheel "0.5.4-4"]
                                       ;[joplin.lein "0.2.17"]
-                                      [joplin.lein "0.2.18"]
+                                      ;[joplin.lein "0.3.6"]
                                       ;[lein-cooper "1.2.2"]
                                       ;[test2junit "1.1.1"]
                                       ;[test2junit "1.2.2"] ;; we don't use clojure.test at all
@@ -199,22 +195,21 @@
                                       [ring/ring-devel "1.5.0"]
                                       ;[pjstadig/humane-test-output "0.7.0"] ; we don't use clojure.test so we don't need this
                                       ;[joplin.core "0.2.17"]
-                                      [joplin.core "0.2.18"]
+                                      ;[joplin.core "0.2.18"]
                                       ;[joplin.jdbc "0.2.17"]
-                                      [joplin.jdbc "0.2.18"]]
+                                      ;[joplin.jdbc "0.2.18"]
+
+                                      ; new version of joplin (backwards incompatible)
+                                      [joplin.jdbc "0.3.6"]
+                                      [joplin.core "0.3.6"]]}
 
                        ;:injections   [(require 'pjstadig.humane-test-output)
                        ;               (pjstadig.humane-test-output/activate!)]
 
-                       :joplin       {:databases    {:sqlite-dev {:type :sql, :url "jdbc:sqlite:./db/site.sqlite"}
-                                                     :h2-dev     {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
-                                      :environments {:sqlite-dev-env [{:db :sqlite-dev, :migrator :sqlite-mig}]
-                                                     :h2-dev-env     [{:db :h2-dev, :migrator :h2-mig}]}}}
-
              :uberjar {:auto-clean  false                   ; not sure about this one
                        :omit-source true
-                       :aot         :all}
-             :default [:base :system :provided]}
+                       :aot         :all}}
+             ;:default [:base :system :provided]}
 
   :test-paths ["test/clj" "integtest/clj"]
 
@@ -238,4 +233,10 @@
   :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "sass" "once," "uberjar"]
             "devrepl" ["pdo" "clean," "figwheel," "sass" "watch," #_("autoexpect" ":growl,") "repl" ":headless"]
             "unit"    ["do" "test" ":unit"]
-            "integ"   ["do" "test" ":integration"]})
+            "integ"   ["do" "test" ":integration"]
+
+            ;; joplin migration
+            "migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            "rollback" ["run" "-m" "joplin.alias/rollback" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            "seed"  ["run" "-m" "joplin.alias/seed" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]})
