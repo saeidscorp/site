@@ -4,6 +4,7 @@ CREATE TABLE user (
   last_name  VARCHAR(30),
   first_name VARCHAR(25),
   pass VARCHAR(20),
+  role VARCHAR(30) DEFAULT 'none',
   join_date DATE DEFAULT CURRENT_DATE,
   last_login DATE,
   is_active BOOLEAN DEFAULT FALSE,

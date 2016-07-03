@@ -1,4 +1,4 @@
-[{:first_name "Saeid", :last_name "Akbari", :email "saeid@localhost.com",
+[{:first_name "Saeid", :last_name "Akbari", :email "saeid@localhost.com", :role "admin"
   :is_active  true, :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575",
   :uuid       "a0fc38ee-16e0-48dd-ac92-9b608ce7a497"}
  {:first_name "Kiarash", :last_name "Korki", :email "kiarash@localhost.com",

@@ -6,7 +6,7 @@
 
 (defentity user
            (entity-fields :first_name :last_name :email
-                          :last_login :is_active
+                          :last_login :is_active :role
                           :pass :activation_id :uuid)
            (has-many comment {:fk :writer})
            (has-one author))
