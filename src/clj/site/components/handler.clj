@@ -96,8 +96,8 @@
       (wrap-file-info)
       (wrap-if (= (:env config) :prod)
                ;ssl/wrap-forwarded-scheme
-               ssl/wrap-hsts
-               ssl/wrap-ssl-redirect)))
+               ssl/wrap-hsts)))
+               ;ssl/wrap-ssl-redirect)))
 
 ;; TODO: store routes somewhere to be able to use (path-for)
 (defrecord Handler [config locale]
