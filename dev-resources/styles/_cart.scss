@@ -1,0 +1,50 @@
+.cart-table{
+	border: 1px solid #f2f2f2;
+	>tbody{
+		>tr{
+			>th {
+    			padding: 20px 10px;
+    			border: none;
+    			background: #F5F5F5;
+    			text-align: center;
+    			&:nth-child(2){
+    				text-align: left;
+    			}
+    		}
+    		>td{
+    			border: 1px solid #f2f2f2;
+    			vertical-align: middle;
+				text-align: center;
+    			&:first-child {
+    				width: 98px;
+    				padding: 15px;
+    			}
+    			&:nth-child(2){
+    				text-align: left;
+    			}
+			}
+    	}
+	}
+
+	a{
+		transition: all 0.25s ease-in-out;
+		color: #222;
+	}
+	input{
+		text-align: center;
+		width: 70%;
+    	margin: auto;
+	}
+}
+
+.checkout-table {
+    border: 1px solid #e5e5e5;
+}
+
+
+.cart-final-insight {
+    margin-top: 70px;
+    h5 {
+    	margin-bottom: 25px;
+	}
+}

@@ -1,0 +1,75 @@
+.checkout {
+	background-color: $gray13;
+
+	form {
+		.required {
+			label {
+				&:after {
+				    content: "*";
+				    margin-left: 5px;
+				    font-size: $fs6;
+				    color: red;
+				}
+			}
+		}
+		.form-control {
+			border-radius: 0px;
+		}
+	}
+
+	.checkout-form {
+		margin: 25px 0px;
+
+		h5 {
+			text-transform: uppercase;
+			border-bottom: 4px double $gray5;
+		}
+	}
+		
+	.checkout-sidebar {
+		margin-top: 20px;
+		padding: 15px;
+    	background-color: #fff;
+
+    	h4 {
+    		text-transform: uppercase;
+    	}
+
+		.table{
+			text-transform: uppercase;
+
+			thead{
+				tr{
+					th{
+						vertical-align: middle;
+						border-bottom: none;
+						font-size: $fs6;
+						font-weight: 600;
+					}
+				}
+			}
+
+			tbody{
+				tr{
+					td{
+						vertical-align: middle;
+						font-size: $fs6;
+						border-top: none;
+					}
+				}
+			}
+
+			tfoot {
+				border-bottom: 1px solid $gray4;
+			}
+		}
+
+		form {
+			button {
+				margin-bottom: 25px;
+			    margin-top: 15px;
+			    width: 100%;
+			}
+		}
+	}
+}

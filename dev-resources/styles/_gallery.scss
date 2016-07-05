@@ -1,0 +1,66 @@
+.gallery {
+    .popup-gallery {
+        margin: 0 -15px;
+    }
+
+    .gallery-caption {
+        padding: 10px 10px 40px;
+
+        h5 {
+            margin-top: 6px;
+            margin-bottom: 0px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery {
+        %col {
+            float: left;
+        }
+
+        .col-1 {
+            @extend %col;
+            width: 100%;
+        }
+
+        .col-2 {
+            @extend %col;
+            width: 50%;
+        }
+
+        .col-3 {
+            @extend %col;
+            width: 33.33%;
+        }
+
+        .col-4 {
+            @extend %col;
+            width: 25%;
+        }
+
+        .col-5 {
+            @extend %col;
+            width: 20%;
+        }
+
+        .col-6 {
+            @extend %col;
+            width: 16.66%;
+        }
+
+        .col-7 {
+            @extend %col;
+            width: 14.28%;
+        }
+
+        .col-8 {
+            @extend %col;
+            width: 12.5%;
+        }
+
+        .gutter [class*='col-'] {
+            padding: 15px;
+        }
+    }
+}

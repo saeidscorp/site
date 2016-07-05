@@ -1,0 +1,491 @@
+/*
+ *    Common
+ */
+
+.header-fullscreen {
+    position: relative;
+    width: 100%;
+    height: 100vh !important;
+    min-height: 400px;
+}
+
+.header-classic {
+    padding: 200px 0 90px;
+}
+
+/*  */
+
+.zoom-hero {
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+.scaled-up {
+    transform: scale3d(1.4, 1.4, 1);
+}
+
+.parallax-hero,
+.zoom-hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* Background */
+
+%bg {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.bg-01 {
+    @extend %bg;
+    background-image: url(../images/headers/1.jpg);
+}
+
+.bg-02 {
+    @extend %bg;
+    background-image: url(../images/headers/2.jpg);
+}
+
+.bg-03 {
+    @extend %bg;
+    background-image: url(../images/headers/3.jpg);
+}
+.bg-04 {
+    @extend %bg;
+    background-image: url(../images/headers/4.jpg);
+}
+
+.bg-05 {
+    @extend %bg;
+    background-image: url(../images/headers/5.jpg);
+}
+
+.bg-06 {
+    @extend %bg;
+    background-image: url(../images/headers/6.jpg);
+}
+.bg-07 {
+    @extend %bg;
+    background-image: url(../images/headers/7.jpg);
+}
+
+.bg-08 {
+    @extend %bg;
+    background-image: url(../images/headers/8.jpg);
+}
+
+.bg-09 {
+    @extend %bg;
+    background-image: url(../images/headers/9.jpg);
+}
+.bg-10 {
+    @extend %bg;
+    background-image: url(../images/headers/10.jpg);
+}
+
+.bg-11 {
+    @extend %bg;
+    background-image: url(../images/headers/11.jpg);
+}
+
+.bg-12 {
+    @extend %bg;
+    background-image: url(../images/headers/12.jpg);
+}
+.bg-13 {
+    @extend %bg;
+    background-image: url(../images/headers/13.jpg);
+}
+
+.bg-14 {
+    @extend %bg;
+    background-image: url(../images/headers/14.jpg);
+}
+
+.bg-15 {
+    @extend %bg;
+    background-image: url(../images/headers/15.jpg);
+}
+.bg-16 {
+    @extend %bg;
+    background-image: url(../images/headers/16.jpg);
+}
+
+.bg-17 {
+    @extend %bg;
+    background-image: url(../images/headers/17.jpg);
+}
+
+.bg-18 {
+    @extend %bg;
+    background-image: url(../images/headers/18.jpg);
+}
+.bg-19 {
+    @extend %bg;
+    background-image: url(../images/headers/19.jpg);
+}
+
+.bg-20 {
+    @extend %bg;
+    background-image: url(../images/headers/20.jpg);
+}
+.bg-21 {
+    @extend %bg;
+    background-image: url(../images/headers/21.jpg);
+}
+
+.bg-22 {
+    @extend %bg;
+    background-image: url(../images/headers/22.jpg);
+}
+.bg-23 {
+    @extend %bg;
+    background-image: url(../images/headers/23.jpg);
+}
+.bg-24 {
+    @extend %bg;
+    background-image: url(../images/headers/24.jpg);
+}
+.bg-25 {
+    @extend %bg;
+    background-image: url(../images/headers/25.jpg);
+}
+.bg-26 {
+    @extend %bg;
+    background-image: url(../images/headers/26.jpg);
+}
+
+
+%slim-bg {
+    background-repeat: no-repeat;
+    background-position: 50% 0%;
+    background-size: cover;
+}
+
+.slim-bg-01 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/1.jpg);
+}
+
+.slim-bg-02 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/2.jpg);
+}
+
+.slim-bg-03 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/3.jpg);
+}
+
+.slim-bg-04 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/4.jpg);
+}
+
+.slim-bg-05 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/5.jpg);
+}
+
+.slim-bg-06 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/6.jpg);
+}
+
+.slim-bg-07 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/7.jpg);
+}
+
+.slim-bg-08 {
+    @extend %slim-bg;
+    background-image: url(../images/headers/slim/8.jpg);
+}
+
+
+/* Overlay */
+
+%overlay {
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
+.overlay-01 {
+    @extend %overlay;
+
+    &::after {
+        background-color: rgba(0, 0, 0, 0.45);
+    }
+}
+
+.overlay-color{
+    @extend %overlay;
+    
+    &::after {
+        background-color: rgba(0, 108, 144, 0.8);
+    }
+}
+
+/* parallax */
+
+.parallax-hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.wrapper-table {
+    display: table;
+    height: 100%;
+    width: 100%;
+
+    >.valign-center {
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+
+/*
+ *    Header
+ */
+
+.site-header {
+    position: relative;
+    overflow: hidden;
+
+    .intro {
+        color: #fff;
+        text-transform: uppercase;
+
+        h1 {
+            margin-bottom: 0;
+            &.clip{
+                @media (max-width: 767px) {
+                    font-size: $fs4;
+                } 
+            }
+        }
+
+
+        p {
+            margin-bottom: 70px;
+            &.subtitle{
+                font-size: $fs5;
+                letter-spacing: floor($fs7/2);
+            }
+            @media (max-width: 767px) {
+                margin-bottom: 30px;
+            } 
+        }
+    }
+
+    .video-controls-box {
+        position: absolute !important;
+        bottom: 40px;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+
+        a {
+            display: inline-block;
+            color: #fff;
+            margin: 0 5px 0 0;
+            width: 20px;
+
+            &:focus,
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .op-static-intro{
+        .subtitle{
+            margin-bottom: 0;
+            @media (max-width: 767px) {
+                font-size: $fs6 !important;
+            } 
+        }
+        h1{
+            margin-bottom: 70px;
+            @media (max-width: 767px) {
+                font-size: $fs3;
+                margin-bottom: 20px;
+            } 
+        }
+    }
+}
+
+/* Slim Slider */
+
+.slim-slider-clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250.625em;
+    height: 43.75em;
+    background: url(../images/others/clouds.png) 0px 100% repeat-x;
+    animation: cloudLoop 80s linear infinite;
+}
+
+@-webkit-keyframes cloudLoop {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+@keyframes cloudLoop {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+/* Flex Slider */
+
+.flexslider {
+    border: 0;
+    margin: 0;
+
+    .slides > li {
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .flex-direction-nav a{
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+    .flex-direction-nav a::before {
+        font-family: "icomoon";
+        color: #fff;
+        text-shadow: none;
+    }
+
+    .flex-direction-nav a.flex-prev::before {
+        content: "\e640";
+    }
+
+    .flex-direction-nav a.flex-next::before {
+        content: "\e64c";
+    }
+
+}
+
+
+
+/*  Particle Spider  */
+
+.particle-spider-header {
+    .intro {
+        h1 {
+            font-weight: 600;
+        }
+        p {
+            margin-bottom: 0px;
+        }
+    }
+}
+
+//particle fluid
+#particles,  #particles > canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+
+//owl carosel
+.owl-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+}
+
+#videoBackgroundHTML5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+
+
+//video player big with fluid particles
+.video-player-big{
+    .video-btn-big a {
+        font-size: ($fs1 * 1.414);
+        color: #FFF;
+        transition: all 0.25s ease-in-out;
+        display: inline-block;
+        border-radius: 100%;
+        height: 124px;
+        width: 124px;
+        line-height: 0;
+        &:hover, &:active, &:focus{
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.25);
+        }
+    }
+    h1{
+        text-transform: capitalize;
+        font-weight: 100;
+        letter-spacing: 4px;
+    }
+}
+
+
+
+.intro-particle{
+    p{
+        text-transform: none;
+        letter-spacing: $fs8;
+        margin-top: 25px;
+    }
+}
+
+
+
+.video-player-big.vp-style2 h5 {
+    text-align: left;
+    margin: 48px 0;
+    @media only screen and (max-width: 767px) {
+        margin: 30px 0;
+        text-align: center !important;
+    }
+}
+
+.video-player-big.vp-style2 .left h5 {
+    text-align: right;
+}

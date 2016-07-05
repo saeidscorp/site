@@ -1,0 +1,32 @@
+.mask-text-rotator {
+
+	.valign-center {
+		background-size: cover;
+		text-align: center;
+
+		h1 {
+			text-align: center;
+		    position: relative;
+		    border: 1px solid #fff;
+		    background-color: rgba(255,255,255,0.95);
+		    padding: 10px 0px;
+		    border-radius: 100px;
+		    mix-blend-mode: lighten;
+		    display: inline-block;
+		    text-transform: uppercase;
+
+		    span b{
+		    	font-weight: 200 !important;
+		    }
+
+		    @media only screen and (max-width: 991px) {
+            	font-size: $fs2;
+        	}
+        	@media only screen and (max-width: 767px) {
+            	font-size: $fs3;
+            	letter-spacing: 2px;
+            	padding: 10px 15px;
+        	}
+		}
+	}
+}

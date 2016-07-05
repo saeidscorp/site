@@ -1,0 +1,16 @@
+/* ----------------------------------------------------------------
+    Flex Slider
+-----------------------------------------------------------------*/
+ .flex-control-nav {
+    bottom: 0px;
+    z-index: 99;
+}
+
+.flex-control-paging li a {
+    background: transparent;
+    box-shadow: none;
+    border: 1px solid white;
+    &.flex-active {
+        background: white;
+    }
+}

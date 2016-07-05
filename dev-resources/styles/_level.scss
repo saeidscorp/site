@@ -1,0 +1,93 @@
+.level {
+    border-top: none;
+    background-image: url(../images/backgrounds/level-bg.jpg);
+    background-size: cover;
+    background-position: center top;
+
+    .progress-heading {
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .video-info {
+        text-align: center;
+        padding: 90px 0;
+
+        @media only screen and (max-width: 991px) {
+            padding-bottom: 30px;
+        }
+
+        @media only screen and (max-width: 767px) {
+            padding-bottom: 0;
+        }
+
+        .video-icon {
+            color: #222;
+            font-size: $fs1;
+            line-height: 1;
+            transition: all 0.25s;
+            opacity: 0.85;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            @media only screen and (max-width: 767px) {
+                margin-bottom: 20px;
+            }
+
+            &:hover, &:active, &:focus {
+                text-decoration: none;
+            }
+        }
+        h6{
+            text-transform: uppercase;
+            //color: #FFF;
+        }
+    }
+
+    #video-small-container{
+        display: none;
+    }
+}
+
+
+
+
+.progress {
+    background-color: #FFF;
+    border-radius: 0;
+    height: 3px;
+    overflow: visible;
+    margin-bottom: 44px;
+    box-shadow: none;
+}
+
+.progress-bar {
+    background-color: #FFF;
+    width: 0;
+    position: relative;
+    transition: width 3s cubic-bezier(0, 0, 0.2, 1);
+    > span {
+        display: inline-block;
+        right: 0;
+        z-index: 1;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.3);
+        top: 6px;
+        padding: 5px 10px;
+        font-weight: 600;
+    }
+}
+
+.progress-counter {
+    background-color: #323232;
+    color: #fff;
+    font-size: $fs6;
+    font-weight: 300;
+    padding: 8px 10px 5px;
+    position: relative;
+    left: calc(76% - 52px);
+    top: -10px;
+}
