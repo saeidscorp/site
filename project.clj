@@ -16,9 +16,9 @@
 
                  ;[http-kit "2.1.19"]
                  ;[org.immutant/immutant "2.1.1"]
-                 [org.immutant/immutant "2.1.4"]
+                 [org.immutant/immutant "2.1.5"]
 
-                 [org.clojure/core.cache "0.6.4"]
+                 [org.clojure/core.cache "0.6.5"]
                  ;[org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/core.async "0.2.385"]
 
@@ -39,19 +39,20 @@
                  [reagent "0.5.1"]
                  ;[environ "1.0.0"]
                  [environ "1.0.3"]
-                 [leiningen "2.5.1"]
+
                  ;[selmer "0.8.5"]
-                 [selmer "1.0.6"]
+                 [selmer "1.0.7"]
                  [prone "1.1.1"]
-                 [im.chit/cronj "1.4.3"]
+                 [im.chit/cronj "1.4.4"]
                  ;[com.taoensso/timbre "3.2.1"]
-                 [com.taoensso/timbre "4.4.0"]
+                 [com.taoensso/timbre "4.5.1"]
                  [noir-exception "0.2.5"]
 
                  [buddy/buddy-auth "0.6.0"]
                  ;[buddy/buddy-auth "0.13.0"]
-                 [buddy/buddy-hashers "0.6.0"]
-                 ;[buddy/buddy-hashers "0.14.0"]
+                 [buddy/buddy-auth "1.1.0"]
+                 ;[buddy/buddy-hashers "0.6.0"]
+                 [buddy/buddy-hashers "0.14.0"]
 
                  ;[log4j "1.2.17" :exclusions [javax.mail/mail]]
                  [log4j "1.2.17" :exclusions [javax.mail/mail
@@ -62,7 +63,7 @@
                  [org.clojure/java.jdbc "0.3.7"]
                  ;[org.clojure/java.jdbc "0.6.1"]
                  [korma "0.4.2"]
-                 [com.h2database/h2 "1.4.187"]
+                 [com.h2database/h2 "1.4.192"]
                  ;[org.xerial/sqlite-jdbc "3.8.10.1"]
                  [org.xerial/sqlite-jdbc "3.8.11.2"]
 
@@ -88,7 +89,7 @@
                  ;[cljs-ajax "0.3.14"]
                  [cljs-ajax "0.5.8"] ;;
                  ;[ring-transit "0.1.3"]
-                 [ring-transit "0.1.5"]
+                 [ring-transit "0.1.6"]
                  ;[org.clojars.franks42/cljs-uuid-utils "0.1.3"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
@@ -168,9 +169,9 @@
                                       [lein-sassy "1.0.7"]
                                       [lein-pdo "0.1.1"]]
 
-                       :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
+                       :dependencies [[org.bouncycastle/bcprov-jdk15on "1.54"]
 
-                                      [figwheel-sidecar "0.5.4-4"]
+                                      [figwheel-sidecar "0.5.4-5"]
                                       [com.cemerick/piggieback "0.2.1"]
 
                                       ; use this for htmlunit or an older firefox version
@@ -189,10 +190,10 @@
                                       [expectations "2.1.8"]
 
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
-                                      [org.seleniumhq.selenium/selenium-server "2.53.0"]
-                                      [org.seleniumhq.selenium/selenium-htmlunit-driver "2.9.0" :exclusions [org.apache.httpcomponents/httpclient]]
-                                      [org.seleniumhq.selenium/selenium-remote-driver "2.9.0" :exclusions [org.apache.httpcomponents/httpclient]]
-                                      [org.seleniumhq.selenium/selenium-java "2.9.0" :exclusions [org.apache.httpcomponents/httpclient]]
+                                      [org.seleniumhq.selenium/selenium-server "2.53.1"]
+                                      [org.seleniumhq.selenium/selenium-htmlunit-driver "2.52.0" :exclusions [org.apache.httpcomponents/httpclient]]
+                                      [org.seleniumhq.selenium/selenium-remote-driver "2.53.1" :exclusions [org.apache.httpcomponents/httpclient]]
+                                      [org.seleniumhq.selenium/selenium-java "2.53.1" :exclusions [org.apache.httpcomponents/httpclient]]
                                       ;[ring-mock "0.1.5"]
                                       [ring/ring-mock "0.3.0"]
                                       ;[ring/ring-devel "1.4.0"]
@@ -202,6 +203,9 @@
                                       ;[joplin.core "0.2.18"]
                                       ;[joplin.jdbc "0.2.17"]
                                       ;[joplin.jdbc "0.2.18"]
+
+                                      ;; for vinyasa's (./lein) to work
+                                      [leiningen "2.6.1"]
 
                                       ; new version of joplin (backwards incompatible)
                                       [joplin.jdbc "0.3.6"]
