@@ -29,20 +29,22 @@
 
 (def development-middleware
   [wrap-error-page
-   wrap-exceptions
-   #(wrap-miniprofiler % {:store in-memory-store-instance})])
+   #(wrap-miniprofiler % {:store in-memory-store-instance})
+   wrap-exceptions])
 
 (defn production-middleware [config tconfig]
   [#(add-req-properties % config)
    #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-backend)
-   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+   (if (= (:env config) :prod)
+     #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+     identity)
    #(wrap-tower % tconfig)
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
    wrap-trimmings])
 
 (defn load-middleware [config tconfig]
-  (timbre/info (:env config))
+  (timbre/info "Running with" (:env config) "profile")
   (concat (production-middleware config tconfig)
           (when (= (:env config) :dev) development-middleware)))
