@@ -80,5 +80,5 @@
                     ["multi-full" (handler [] (layout/render "blog/multi-full.html" multi-context-map))]
                     ["multi-side" (handler [] (layout/render "blog/multi-side.html" multi-context-map))]
                     ["single-full" (handler [] (layout/render "blog/single-full.html" single-context-map))]
-                    [["single-side" :id] (handler [id] (layout/render "blog/single-side.html"
+                    [["single-side/" :id] (handler [id] (layout/render "blog/single-side.html"
                                                                       (assoc single-context-map :post (e/post-to-map (e/get-post-by-id id)))))]]]]])
