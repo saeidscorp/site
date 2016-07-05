@@ -95,7 +95,7 @@
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)
       (wrap-if (= (:env config) :prod)
-               ssl/wrap-forwarded-scheme
+               ;ssl/wrap-forwarded-scheme
                ssl/wrap-hsts
                ssl/wrap-ssl-redirect)))
 
