@@ -38,8 +38,8 @@
                  [com.taoensso/timbre "4.5.1"]
                  [noir-exception "0.2.5"]
 
-                 [buddy/buddy-auth "1.1.0"]
                  [buddy/buddy-hashers "0.14.0"]
+                 [buddy/buddy-auth "1.1.0"]
 
                  [log4j "1.2.17" :exclusions [javax.mail/mail
                                               javax.jms/jms
