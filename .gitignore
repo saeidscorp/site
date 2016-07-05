@@ -9,6 +9,7 @@ pom.xml.asc
 /resources/public/js/
 /resources/public/assets/images/
 /resources/public/assets/videos/
+/dev-resources/html/
 /out
 /.repl
 .idea/
