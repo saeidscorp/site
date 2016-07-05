@@ -1,5 +1,7 @@
 (ns site.routes.user
   (:require [compojure.core :refer [routes GET POST]]
+            [site.utils :refer [handler]]
+            [bidi.bidi :as bd]
             [buddy.hashers :as hashers]
             [ring.util.response :as resp]
             [noir.session :as sess]
@@ -155,26 +157,44 @@
     (signup-page config (user-form-errors email))))
 
 (defn user-routes [config]
-  (routes
-    (GET "/user/login" [next] (login-page {:nexturl next}))
-    (POST "/user/login" req (login req))
-    (GET "/user/logout" [] (logout))
-    (GET "/user/changepassword" [] (changepassword-page))
-    (POST "/user/changepassword" [oldpassword password confirm :as req]
-          (changepassword oldpassword password confirm (:locale req) (:tconfig req)))
-    (POST "/admin/user/update" [user-uuid role active update_delete :as req]
-          (update-user update_delete user-uuid role active (:locale req) (:tconfig req)))
-    (POST "/admin/user/delete" [user-uuid delete_cancel :as req]
-          (really-delete user-uuid delete_cancel (:locale req) (:tconfig req)))
-    (POST "/admin/user/add" [email password confirm :as req]
-          (admin-add-user email password confirm config (:locale req) (:tconfig req)))
-    (GET "/admin/users" [filter :as req] (admin-page {:filter filter} (:locale req) (:tconfig req)))))
+  ;(routes
+  ;  (GET "/user/login" [next] (login-page {:nexturl next}))
+  ;  (POST "/user/login" req (login req))
+  ;  (GET "/user/logout" [] (logout))
+  ;  (GET "/user/changepassword" [] (changepassword-page))
+  ;  (POST "/user/changepassword" [oldpassword password confirm :as req]
+  ;        (changepassword oldpassword password confirm (:locale req) (:tconfig req)))
+  ;  (POST "/admin/user/update" [user-uuid role active update_delete :as req]
+  ;        (update-user update_delete user-uuid role active (:locale req) (:tconfig req)))
+  ;  (POST "/admin/user/delete" [user-uuid delete_cancel :as req]
+  ;        (really-delete user-uuid delete_cancel (:locale req) (:tconfig req)))
+  ;  (POST "/admin/user/add" [email password confirm :as req]
+  ;        (admin-add-user email password confirm config (:locale req) (:tconfig req)))
+  ;  (GET "/admin/users" [filter :as req] (admin-page {:filter filter} (:locale req) (:tconfig req))))
+  ["/" [["user/" [[:get [["login" (handler [next] (login-page {:nexturl next}))]
+                         ["logout" (handler [] (logout))]
+                         ["changepassword" (handler [] (changepassword-page))]]]
+                  [:post [["login" (handler [:as req] (login req))]]]]]
+        ["admin/" [[:get [["users" (handler [filter :as req] (admin-page {:filter filter} (:locale req) (:tconfig req)))]]]
+                   [:post [["user/" [["update" (handler [user-uuid role active update_delete :as req]
+                                                 (update-user update_delete user-uuid role active (:locale req) (:tconfig req)))]
+                                     ["delete" (handler [user-uuid delete_cancel :as req]
+                                                 (really-delete user-uuid delete_cancel (:locale req) (:tconfig req)))]
+                                     ["add" (handler [email password confirm :as req]
+                                                     (admin-add-user email password confirm config (:locale req) (:tconfig req)))]]]]]]]]])
+
 
 (defn registration-routes [config]
-  (routes
-    (GET "/user/accountcreated" req (account-created-page (:locale req) (:tconfig req)))
-    (GET "/user/activate/:id" [id :as req] (activate-account config id (:locale req) (:tconfig req)))
-    (POST "/user/signup" [email password confirm recaptcha_response_field recaptcha_challenge_field :as req]
-          (signup-user email password confirm config (:locale req) (:tconfig req)
-                       recaptcha_response_field recaptcha_challenge_field))
-    (GET "/user/signup" [] (signup-page config))))
+  ;(routes
+  ;  (GET "/user/accountcreated" req (account-created-page (:locale req) (:tconfig req)))
+  ;  (GET "/user/activate/:id" [id :as req] (activate-account config id (:locale req) (:tconfig req)))
+  ;  (POST "/user/signup" [email password confirm recaptcha_response_field recaptcha_challenge_field :as req]
+  ;        (signup-user email password confirm config (:locale req) (:tconfig req)
+  ;                     recaptcha_response_field recaptcha_challenge_field))
+  ;  (GET "/user/signup" [] (signup-page config)))
+  ["/user/" [[:get [["accountcreated" (handler [:as req] (account-created-page (:locale req) (:tconfig req)))]
+                    [["activate/" :id] (handler [id :as req] (activate-account config id (:locale req) (:tconfig req)))]
+                    ["signup" (handler [] (signup-page config))]]]
+             [:post [["signup" (handler [email password confirm recaptcha_response_field recaptcha_challenge_field :as req]
+                                        (signup-user email password confirm config (:locale req) (:tconfig req)
+                                                     recaptcha_response_field recaptcha_challenge_field))]]]]])

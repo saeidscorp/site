@@ -1,10 +1,19 @@
 (ns site.components.handler
   (:require [taoensso.timbre :as timbre]
-            [compojure.core :refer [defroutes]]
+            [site.utils :refer [handler]]
             [bidi.ring :refer [make-handler]]
             [ring.middleware.ssl :as ssl]
             [noir.response :refer [redirect]]
-            ;[noir.util.middleware :refer [app-handler]]
+
+            [ring.middleware.format]
+            [noir.util.middleware]
+            [ring.middleware.defaults]
+            [hiccup.middleware]
+            [noir.validation]
+            [noir.cookies]
+            [noir.session]
+            [ring.middleware.session.memory]
+
             [ring.middleware.defaults :refer [site-defaults]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.file :refer [wrap-file]]
@@ -18,34 +27,38 @@
             [site.routes.blog :refer [blog-routes]]
             [site.middleware :refer [load-middleware]]))
 
-(defroutes base-routes
-  (route/not-found (site.layout/render "not-found.html")))
+(def base-routes
+  [true (route/not-found (site.layout/render "not-found.html"))])
 
-(defroutes construction-routes
-  (compojure.core/GET "/" [] (site.layout/render "under-construction.html"))
-  (compojure.core/GET "/*" [] (redirect "/")))
+(def construction-routes
+  ["/" [["" (handler [] (site.layout/render "under-construction.html"))]
+        [#".*" (handler [] (redirect "/"))]]])
 
 ;; timeout sessions after 30 minutes
 (def session-defaults
-  {:timeout (* 60 30)
+  {:timeout          (* 60 30)
    :timeout-response (redirect "/")})
 
 (defn- mk-defaults
-       "set to true to enable XSS protection"
-       [xss-protection?]
-       (-> site-defaults
-           (update-in [:session] merge session-defaults)
-           (assoc-in [:security :anti-forgery] xss-protection?)))
+  "set to true to enable XSS protection"
+  [xss-protection?]
+  (-> site-defaults
+      (update-in [:session] merge session-defaults)
+      (assoc-in [:security :anti-forgery] xss-protection?)))
 
 (defmacro wrap-if [handler condition & args]
   `(if ~condition (-> ~handler ~@args) ~handler))
+
+;; these two functions were stolen from ring.util.middleware namespace
+(defn wrap-middleware [routes [wrapper & more]]
+  (if wrapper (recur (wrapper routes) more) routes))
 
 (defn app-handler
   [app-routes & {:keys [base-url session-options middleware access-rules formats ring-defaults]}]
   (letfn [(wrap-middleware-format [handler]
             (if formats (ring.middleware.format/wrap-restful-format handler :formats formats) handler))]
     (-> (make-handler app-routes)
-        (noir.util.middleware/wrap-middleware middleware)
+        (wrap-middleware middleware)
         (noir.util.middleware/wrap-request-map)
         (ring.middleware.defaults/wrap-defaults (dissoc (or ring-defaults site-defaults) :session))
         (hiccup.middleware/wrap-base-url base-url)
@@ -62,11 +75,11 @@
 (defn get-handler [config locale]
   (timbre/info (str "USING CONSTRUCTION PROFILE: " (:under-construction config)))
   (-> (app-handler
-        (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
-                         ;; add your application routes here
-                         (let [rts [(cc-routes config) home-routes blog-routes (user-routes config) base-routes]]
-                           (if (:under-construction config) (vec (cons construction-routes rts))
-                                                            rts))))
+        (site.utils/merge-routes (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
+                                                  ;; add your application routes here
+                                                  (let [rts [(cc-routes config) home-routes blog-routes (user-routes config) base-routes]]
+                                                    (if (:under-construction config) (vec (cons construction-routes rts))
+                                                                                     rts)))))
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
         :ring-defaults (mk-defaults false)
@@ -86,6 +99,7 @@
                ssl/wrap-hsts
                ssl/wrap-ssl-redirect)))
 
+;; TODO: store routes somewhere to be able to use (path-for)
 (defrecord Handler [config locale]
   comp/Lifecycle
   (start [comp]

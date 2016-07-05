@@ -25,6 +25,7 @@
                  ;[ring "1.4.0"]
                  [ring "1.5.0"]
                  [ring/ring-ssl "0.2.1"]
+                 ;[ring-middleware-format "0.7.0"]
 
                  [lib-noir "0.9.9"]
                  [ring-server "0.4.0"]

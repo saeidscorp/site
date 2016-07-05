@@ -1,5 +1,6 @@
 (ns site.routes.home
   (:require [compojure.core :refer [defroutes GET]]
+            [site.utils :refer [handler]]
             [site.layout :as layout]
             [site.db.entities :as post]
             [ring.util.response :refer [response]]))
@@ -28,13 +29,24 @@
 (defn ajax-initial-data []
   (response {:ok "fooo" :loaded true}))
 
-(defroutes home-routes
-           (GET "/contact" [] (contact-page))
-           (GET "/tos" [] (tos-page))
-           (GET "/cookies" [] (cookies-page))
-           (GET "/" [] (layout/render "under-construction.html"))
-           (GET "/test" [] (layout/render "test.html"))
-           (GET "/example" [] (example-page))
-           (GET "/posts" [] (post))
-           (GET "/ajax/page" [] (ajax-page))
-           (GET "/ajax/page/init" [] (ajax-initial-data)))
+;(defroutes home-routes
+;           (GET "/contact" [] (contact-page))
+;           (GET "/tos" [] (tos-page))
+;           (GET "/cookies" [] (cookies-page))
+;           (GET "/" [] (layout/render "under-construction.html"))
+;           (GET "/test" [] (layout/render "test.html"))
+;           (GET "/example" [] (example-page))
+;           (GET "/posts" [] (post))
+;           (GET "/ajax/page" [] (ajax-page))
+;           (GET "/ajax/page/init" [] (ajax-initial-data)))
+
+(def home-routes
+  ["/" [[:get [["contact" (handler [] (contact-page))]
+               ["tos" (handler [] (tos-page))]
+               ["cookies" (handler [] (cookies-page))]
+               ["" (handler [] (layout/render "under-construction.html"))]
+               ["test" (handler [] (layout/render "test.html"))]
+               ["example" (handler [] (example-page))]
+               ["posts" (handler [] (post))]
+               ["ajax/" [["page" (handler [] (ajax-page))]
+                         ["page/init" (handler [] (ajax-initial-data))]]]]]]])
