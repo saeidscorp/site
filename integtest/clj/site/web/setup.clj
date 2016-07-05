@@ -47,10 +47,10 @@ Your Team"
 (def test-base-url (str "http://localhost:3001/"))
 
 (defn start-browser [browser]
-  (j/reset-db
-    {:db       {:type :sql,
-                :url  db-uri}
-     :migrator migrators})
+  #_(j/reset-db
+      {:db       {:type :sql,
+                  :url  db-uri}
+       :migrator migrators})
   (w/set-driver! {:browser browser}))
 
 (defn stop-browser []
