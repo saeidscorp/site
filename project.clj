@@ -10,94 +10,68 @@
   ;:java-source-paths ["src/java"]
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 ;[org.clojure/clojurescript "0.0-3308"]
-                 ;[org.clojure/clojurescript "1.7.170"]
                  [org.clojure/clojurescript "1.9.89"]
 
                  ;[http-kit "2.1.19"]
-                 ;[org.immutant/immutant "2.1.1"]
                  [org.immutant/immutant "2.1.5"]
 
                  [org.clojure/core.cache "0.6.5"]
-                 ;[org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/core.async "0.2.385"]
 
-                 ;[ring "1.4.0"]
                  [ring "1.5.0"]
                  [ring/ring-ssl "0.2.1"]
-                 ;[ring-middleware-format "0.7.0"]
 
                  [lib-noir "0.9.9"]
                  [ring-server "0.4.0"]
-                 ;[ring/ring-anti-forgery "1.0.0"]
                  [ring/ring-anti-forgery "1.0.1"]
-                 ;[compojure "1.4.0"]
                  [compojure "1.5.1"]
 
                  [bidi "2.0.9"]
 
                  [reagent "0.5.1"]
-                 ;[environ "1.0.0"]
+
                  [environ "1.0.3"]
 
-                 ;[selmer "0.8.5"]
                  [selmer "1.0.7"]
                  [prone "1.1.1"]
                  [im.chit/cronj "1.4.4"]
-                 ;[com.taoensso/timbre "3.2.1"]
                  [com.taoensso/timbre "4.5.1"]
                  [noir-exception "0.2.5"]
 
-                 ;[buddy/buddy-auth "0.6.0"]
-                 ;[buddy/buddy-auth "0.13.0"]
                  [buddy/buddy-auth "1.1.0"]
-                 ;[buddy/buddy-hashers "0.6.0"]
                  [buddy/buddy-hashers "0.14.0"]
 
-                 ;[log4j "1.2.17" :exclusions [javax.mail/mail]]
                  [log4j "1.2.17" :exclusions [javax.mail/mail
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]
 
-                 ;[org.clojure/java.jdbc "0.3.7"]
+                 ;[org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in output
                  [org.clojure/java.jdbc "0.5.8"]
                  [korma "0.4.2"]
                  [com.h2database/h2 "1.4.192"]
-                 ;[org.xerial/sqlite-jdbc "3.8.10.1"]
                  [org.xerial/sqlite-jdbc "3.8.11.2"]
 
-                 ;[com.draines/postal "1.11.3"]
                  [com.draines/postal "2.0.0"]
 
-                 ;[jarohen/nomad "0.7.1"]
                  [jarohen/nomad "0.7.2"]
 
                  [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
 
-                 ;[clojure-miniprofiler "0.4.0" :exclusions [fipp]]
                  [clojure-miniprofiler "0.5.0" :exclusions [fipp]]
-                 ;[fipp "0.6.2"]
                  [fipp "0.6.5"]
 
-                 ;[org.danielsz/system "0.1.8"]
-                 ;[org.danielsz/system "0.2.0"]
                  [org.danielsz/system "0.3.0"]
 
-                 ;[datascript "0.11.6"]
                  [datascript "0.15.0"]
-                 ;[cljs-ajax "0.3.14"]
                  [cljs-ajax "0.5.8"] ;;
-                 ;[ring-transit "0.1.3"]
                  [ring-transit "0.1.6"]
-                 ;[org.clojars.franks42/cljs-uuid-utils "0.1.3"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
                  [com.taoensso/tower "3.0.2"]
 
-                 ;[org.clojure/core.typed "0.3.11"]
                  [org.clojure/core.typed "0.3.23"]]
 
   :plugins [[lein-immutant "2.1.0"]
@@ -128,7 +102,6 @@
                                  :asset-path           "/js/compiled/out"
                                  :output-to            "resources/public/js/compiled/app.js"
                                  :output-dir           "resources/public/js/compiled/out"
-                                 ;:source-map           "resources/public/js/compiled/out.js.map"
                                  :source-map           true
                                  :optimizations        :none
                                  :cache-analysis       true
@@ -155,16 +128,9 @@
                        :source-paths ["env" "env/dev/script"]
 
                        :plugins      [[lein-ring "0.9.0"]
-                                      ;[lein-expectations "0.0.7"]
                                       [lein-expectations "0.0.8"]
                                       [lein-autoexpect "1.9.0"]
-                                      ;[lein-figwheel "0.3.3"]
                                       [lein-figwheel "0.5.4-4"]
-                                      ;[joplin.lein "0.2.17"]
-                                      ;[joplin.lein "0.3.6"]
-                                      ;[lein-cooper "1.2.2"]
-                                      ;[test2junit "1.1.1"]
-                                      ;[test2junit "1.2.2"] ;; we don't use clojure.test at all
                                       [lein-immutant "2.1.0"]
                                       [lein-sassy "1.0.7"]
                                       [lein-pdo "0.1.1"]]
@@ -186,7 +152,6 @@
                                       ;  org.seleniumhq.selenium/selenium-java
                                       ;  org.seleniumhq.selenium/selenium-remote-driver]]
 
-                                      ;[expectations "2.0.9"]
                                       [expectations "2.1.8"]
 
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
@@ -194,15 +159,9 @@
                                       [org.seleniumhq.selenium/selenium-htmlunit-driver "2.52.0" :exclusions [org.apache.httpcomponents/httpclient]]
                                       [org.seleniumhq.selenium/selenium-remote-driver "2.53.1" :exclusions [org.apache.httpcomponents/httpclient]]
                                       [org.seleniumhq.selenium/selenium-java "2.53.1" :exclusions [org.apache.httpcomponents/httpclient]]
-                                      ;[ring-mock "0.1.5"]
+
                                       [ring/ring-mock "0.3.0"]
-                                      ;[ring/ring-devel "1.4.0"]
                                       [ring/ring-devel "1.5.0"]
-                                      ;[pjstadig/humane-test-output "0.7.0"] ; we don't use clojure.test so we don't need this
-                                      ;[joplin.core "0.2.17"]
-                                      ;[joplin.core "0.2.18"]
-                                      ;[joplin.jdbc "0.2.17"]
-                                      ;[joplin.jdbc "0.2.18"]
 
                                       ;; for vinyasa's (./lein) to work
                                       [leiningen "2.6.1"]
@@ -210,9 +169,6 @@
                                       ; new version of joplin (backwards incompatible)
                                       [joplin.jdbc "0.3.6"]
                                       [joplin.core "0.3.6"]]}
-
-                       ;:injections   [(require 'pjstadig.humane-test-output)
-                       ;               (pjstadig.humane-test-output/activate!)]
 
              :uberjar {:auto-clean  false                   ; not sure about this one
                        :omit-source true
