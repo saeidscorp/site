@@ -48,7 +48,7 @@
                  [com.taoensso/timbre "4.5.1"]
                  [noir-exception "0.2.5"]
 
-                 [buddy/buddy-auth "0.6.0"]
+                 ;[buddy/buddy-auth "0.6.0"]
                  ;[buddy/buddy-auth "0.13.0"]
                  [buddy/buddy-auth "1.1.0"]
                  ;[buddy/buddy-hashers "0.6.0"]
@@ -60,8 +60,8 @@
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]
 
-                 [org.clojure/java.jdbc "0.3.7"]
-                 ;[org.clojure/java.jdbc "0.6.1"]
+                 ;[org.clojure/java.jdbc "0.3.7"]
+                 [org.clojure/java.jdbc "0.5.8"]
                  [korma "0.4.2"]
                  [com.h2database/h2 "1.4.192"]
                  ;[org.xerial/sqlite-jdbc "3.8.10.1"]
