@@ -1,6 +1,7 @@
 (ns site.utils
   (:require [compojure.response]
-            [clojure.walk :as w]))
+            [clojure.walk :as w]
+            [bidi.bidi :as bd]))
 
 ;; O(n)
 
@@ -17,16 +18,22 @@
                                          sym     (gensym)]
                                     [(conj prev-bindings sym changed) sym])
                                   (let [sym (gensym)] [[sym init] sym]) forms)]
-    `(let ~bindings result)))
+    `(let ~bindings ~result)))
 
-(defmacro handler [params & body]
-  (let [c          (count (take-while #(not= % :as) params))
+(defmacro handler [tag params & body]
+  (let [[params body] (if (keyword? tag) [params body]
+                                         [tag (vec (cons params body))])
+        c          (count (take-while #(not= % :as) params))
         params-map (take c params)
         reqmap     (drop (inc c) params)
-        reqmap     (if (empty? reqmap) ['-req#] reqmap)]
-    `(fn [req#] (let [{:keys ~params-map} (merge (:params req#) (:route-params req#))
-                      ~@reqmap req#]
-                  (compojure.response/render (do ~@body) req#)))))
+        reqmap     (if (empty? reqmap) ['-req#] reqmap)
+        function   `(fn [req#] (let [{:keys ~params-map} (merge (:params req#) (:route-params req#))
+                                     ~@reqmap req#]
+                                 (compojure.response/render (do ~@body) req#)))]
+    (if (keyword? tag) (bd/tag (eval function) tag) function)))
+
+(handler :post [id] nil)
+(handler [id] nil)
 
 (defn merge-routes [routes]
   ["" (vec routes)])
