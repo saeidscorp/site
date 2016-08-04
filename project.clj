@@ -13,7 +13,7 @@
                  [org.clojure/clojurescript "1.9.89"]
 
                  ;[http-kit "2.1.19"]
-                 [org.immutant/web "2.1.5"]
+                 [org.immutant/web "2.1.5" :exclusions [ch.qos.logback/logback-classic]]
 
                  [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.2.385"]
@@ -35,16 +35,22 @@
                  [selmer "1.0.7"]
                  [prone "1.1.1"]
                  [im.chit/cronj "1.4.4"]
-                 [com.taoensso/timbre "4.7.0"]
                  [noir-exception "0.2.5"]
+
+                 [com.taoensso/timbre "4.7.0"]
+                 ;; wrap logging libraries to log to slf4j...
+                 [org.slf4j/slf4j-api "1.7.21"]
+                 [org.slf4j/log4j-over-slf4j "1.7.21"]
+                 ;; ... and route them through our lovely timbre
+                 [com.fzakaria/slf4j-timbre "0.3.2"]
 
                  [buddy/buddy-hashers "0.14.0"]
                  [buddy/buddy-auth "1.1.0"]
 
-                 [log4j "1.2.17" :exclusions [javax.mail/mail
-                                              javax.jms/jms
-                                              com.sun.jdmk/jmxtools
-                                              com.sun.jmx/jmxri]]
+                 ;[log4j "1.2.17" :exclusions [javax.mail/mail
+                 ;                             javax.jms/jms
+                 ;                             com.sun.jdmk/jmxtools
+                 ;                             com.sun.jmx/jmxri]
 
                  ;[org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in output
                  [org.clojure/java.jdbc "0.5.8"]

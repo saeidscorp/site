@@ -2,7 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [taoensso.timbre :as timbre]
             [ring.server.standalone :refer [serve]]
-            ;[org.httpkit.server :refer [run-server]]
+    ;[org.httpkit.server :refer [run-server]]
             [immutant.web :as web]
             [environ.core :refer [env]]
             [cronj.core :as cronj]
@@ -26,16 +26,11 @@
    an app server such as Tomcat
    put any initialization code here"
   [config]
-  (timbre/set-config! {})
-  (timbre/merge-config!
-    {:appenders {:rotor {:min-level             :info
-                         :enabled?              true
-                         :async?                false       ; should be always false for rotor
-                         :max-message-per-msecs nil
-                         :fn                    rotor/rotor-appender}}})
 
   (timbre/merge-config!
-    {:shared-appender-config {:rotor {:path "logs/site.log" :max-size (* 512 1024) :backlog 10}}})
+    {:appenders {:rotor (rotor/rotor-appender {:path "./logs/site.log" :max-size (* 1024 1024) :backlog 10})}
+     :level     :info})
+  (timbre/set-level! :info)
 
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
