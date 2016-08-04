@@ -10,7 +10,7 @@
             [selmer.parser :as parser]
             [site.session :as session]))
 
-(def server-instance nil)
+(defonce server-instance nil)
 
 (defn destroy
   "destroy will be called when your application
@@ -49,8 +49,9 @@
                           :auto-reload?  true
                           :destroy       destroy
                           :join?         false
-                          :open-browser? false})]
-      (do (alter-var-root #'server-instance (constantly server)) (assoc component :server server))))
+                          :open-browser? false})
+          updated (assoc component :server server)]
+      (do (alter-var-root #'server-instance (constantly updated)) updated)))
   (stop [component]
     (let [server (:server component)]
       (timbre/info (str "attempting to stop the server: " server))
