@@ -1,4 +1,5 @@
 (ns site.db.entities
+  (:require [site.utils :refer [->>>]])
   (:use [korma.core])
   (:import (java.util UUID)))
 
@@ -24,7 +25,7 @@
 (defentity post
            (belongs-to author {:fk :author})
            (belongs-to media {:fk :featured_image})
-           (entity-fields :id :title :date_time :short :featured_image :content)
+           (entity-fields :id :title :author :date_time :short :featured_image :content)
            (has-many comment {:fk :writer})
            (many-to-many tag :post_tag))
 
@@ -73,11 +74,17 @@
   (first (get-latest-posts 1)))
 
 (defn post-to-map [post]
-  (assoc post :author
-    (let [a (into {} (filter #((set (:fields user)) (first %)) post))]
-      (assoc a :name (:first_name a)))))
+  (->>> post
+        (assoc _ :author
+               (let [a (into {} (filter #((set (:fields user)) (first %)) post))]
+                 (assoc a :name (:first_name a))))
+        (assoc _ :image-src (:path _))))
 
 (defn get-post-by-id [id]
-  (first (select post (with author (with user)) (where {:id id}))))
+  (->>> (first (select post (where {:id id})))
+        (assoc _ :author
+                 (first (select user (where {:id (:author _)}))))
+        (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))))
+  ;(first (select post (with author (with user)) (with media) (where {:id id}))))
 
 ;;

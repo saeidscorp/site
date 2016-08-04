@@ -8,8 +8,10 @@
 
 {% include "/blog/includes/includes/post-media.html" %}
 
-{{post.content}}
+<p>
+    {{post.content}}
+</p>
 
 {% include "/blog/includes/includes/share.html" %}
 
-{% include "/blog/includes/includes/disqus.html" %}
+{% comment %} {% include "/blog/includes/includes/disqus.html" %} {% endcomment %}

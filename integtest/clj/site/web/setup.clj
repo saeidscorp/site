@@ -57,7 +57,7 @@ Your Team"
   (w/quit))
 
 (defn start-server []
-  (system.repl/set-init! test-system)
+  (system.repl/set-init! #'test-system)
   (go))
 
 (defn stop-server []

@@ -7,4 +7,4 @@
            [:last_login :time]
            [:is_active :boolean :null false :default false]
            [:pass [:varchar 200]]
-           [:activationid [:varchar 100] :unique true]]}
+           [:activation_id [:varchar 100] :unique true]]}

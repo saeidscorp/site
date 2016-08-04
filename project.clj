@@ -125,7 +125,7 @@
              :nrepl-port 3450
              :server-logfile "logs/figwheel.log"} ;; watch and update CSS}
 
-  :sass {:src   "resources\\styles"
+  :sass {:src   "dev-resources\\styles"
          :dst   "resources/public/assets/css/"
          :style :expanded}
 
@@ -136,7 +136,7 @@
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-expectations "0.0.8"]
                                       [lein-autoexpect "1.9.0"]
-                                      [lein-figwheel "0.5.4-4"]
+                                      [lein-figwheel "0.5.4-5"]
                                       [lein-immutant "2.1.0"]
                                       [lein-sassy "1.0.7"]
                                       [lein-pdo "0.1.1"]]

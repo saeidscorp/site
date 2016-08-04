@@ -1,18 +1,11 @@
 (ns site.components.handler
   (:require [taoensso.timbre :as timbre]
-            [site.utils :refer [handler]]
+            [site.utils :refer [handler ->>>]]
             [bidi.ring :refer [make-handler]]
             [ring.middleware.ssl :as ssl]
             [noir.response :refer [redirect]]
 
-            [ring.middleware.format]
             [noir.util.middleware]
-            [ring.middleware.defaults]
-            [hiccup.middleware]
-            [noir.validation]
-            [noir.cookies]
-            [noir.session]
-            [ring.middleware.session.memory]
 
             [ring.middleware.defaults :refer [site-defaults]]
             [ring.middleware.file-info :refer [wrap-file-info]]
@@ -72,14 +65,17 @@
             (or session-options (:session ring-defaults) (:session site-defaults))
             [:store] #(or % (ring.middleware.session.memory/memory-store noir.session/mem)))))))
 
-(defn get-handler [config locale]
+(defn get-routes [config]
+  (site.utils/merge-routes (into [] (concat (when (:registration-allowed? config) [(registration-routes config)]
+                                              (let [rts [(cc-routes config) home-routes blog-routes (user-routes config) base-routes]]
+                                                (if (:under-construction config) (vec (cons construction-routes rts))
+                                                                             rts)))))))
+
+
+(defn get-handler [routes config locale]
   (timbre/info (str "USING CONSTRUCTION PROFILE: " (:under-construction config)))
   (-> (app-handler
-        (site.utils/merge-routes (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
-                                                  ;; add your application routes here
-                                                  (let [rts [(cc-routes config) home-routes blog-routes (user-routes config) base-routes]]
-                                                    (if (:under-construction config) (vec (cons construction-routes rts))
-                                                                                     rts)))))
+        routes
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
         :ring-defaults (mk-defaults false)
@@ -95,15 +91,16 @@
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)
       (wrap-if (= (:env config) :prod)
-               ssl/wrap-forwarded-scheme
-               ssl/wrap-hsts
-               ssl/wrap-ssl-redirect)))
+               ;ssl/wrap-forwarded-scheme
+               ssl/wrap-hsts)))
+               ;ssl/wrap-ssl-redirect)))
 
-;; TODO: store routes somewhere to be able to use (path-for)
 (defrecord Handler [config locale]
   comp/Lifecycle
   (start [comp]
-    (assoc comp :handler (get-handler (:config config) locale)))
+    (->>> comp
+          (assoc _ :routes (get-routes (:config config)))
+          (assoc _ :handler (get-handler (:routes _) (:config _) locale))))
   (stop [comp]
     (assoc comp :handler nil)))
 

@@ -3,8 +3,11 @@
             [clojure.string :as s]
             [ring.util.response :refer [content-type response]]
             [ring.middleware.anti-forgery :as af]
+            [bidi.bidi :as bd]
             [compojure.response :refer [Renderable]]
             [noir.session :as sess]))
+
+(defonce routes nil)
 
 (defn merge-flash-messages
   "Expects a map containing keys and a values which will be put into the sessions flash"
@@ -16,6 +19,14 @@
   (merge-flash-messages {:flash-message message :flash-alert-type div-class}))
 
 (parser/set-resource-path!  (clojure.java.io/resource "templates"))
+
+(parser/add-tag! :url
+          (fn [[url-type & params] context-map]
+            (let [[handler handler-params] (case url-type
+                                             "post" [:post [:id]]
+                                             "author" [:author [:id]])]
+                 (apply bd/path-for (:routes context-map) handler
+                        (mapcat vector handler-params params)))))
 
 (deftype RenderableTemplate [template params]
   Renderable
@@ -34,6 +45,7 @@
              :role (sess/get :role)
              :af-token af/*anti-forgery-token*
              :page template
+             :routes routes
              :registration-allowed? (sess/get :registration-allowed?)
              :captcha-enabled? (sess/get :captcha-enabled?)
              :flash-message (sess/flash-get :flash-message)
