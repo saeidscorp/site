@@ -29,8 +29,9 @@
         reqmap     (if (empty? reqmap) ['-req#] reqmap)
         function   `(fn [req#] (let [{:keys ~params-map} (merge (:params req#) (:route-params req#))
                                      ~@reqmap req#]
-                                 (compojure.response/render (do ~@body) req#)))]
-    (if (keyword? tag) (bd/tag (eval function) tag) function)))
+                                 (compojure.response/render (do ~@body) req#)))
+        function   (eval function)]
+    (if (keyword? tag) (bd/tag function tag) function)))
 
 (handler :post [id] nil)
 (handler [id] nil)
