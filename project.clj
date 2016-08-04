@@ -13,7 +13,7 @@
                  [org.clojure/clojurescript "1.9.89"]
 
                  ;[http-kit "2.1.19"]
-                 [org.immutant/immutant "2.1.5"]
+                 [org.immutant/web "2.1.5"]
 
                  [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.2.385"]
@@ -35,7 +35,7 @@
                  [selmer "1.0.7"]
                  [prone "1.1.1"]
                  [im.chit/cronj "1.4.4"]
-                 [com.taoensso/timbre "4.5.1"]
+                 [com.taoensso/timbre "4.7.0"]
                  [noir-exception "0.2.5"]
 
                  [buddy/buddy-hashers "0.14.0"]
@@ -63,7 +63,7 @@
 
                  [org.danielsz/system "0.3.0"]
 
-                 [datascript "0.15.0"]
+                 [datascript "0.15.2"]
                  [cljs-ajax "0.5.8"] ;;
                  [ring-transit "0.1.6"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
@@ -152,7 +152,7 @@
                                       ;  org.seleniumhq.selenium/selenium-java
                                       ;  org.seleniumhq.selenium/selenium-remote-driver]]
 
-                                      [expectations "2.1.8"]
+                                      [expectations "2.1.9"]
 
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [org.seleniumhq.selenium/selenium-server "2.53.1"]
