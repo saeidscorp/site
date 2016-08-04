@@ -1,1 +1,2 @@
-[{:path "/media/uploads/screenshot.png", :mime "image/png"}]
+[{:path "/media/uploads/screenshot.png", :mime "image/png", :owner 1}
+ {:path "/media/uploads/saeid.jpg", :mime nil, :owner 1}]

@@ -5,5 +5,6 @@ CREATE TABLE comment (
   date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   is_reply BOOLEAN             DEFAULT FALSE,
   reply_to REFERENCES comment (id) DEFAULT NULL,
+  is_accepted BOOLEAN DEFAULT FALSE,
   text     TEXT
 );

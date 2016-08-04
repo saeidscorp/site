@@ -9,5 +9,6 @@ CREATE TABLE user (
   last_login DATE,
   is_active BOOLEAN DEFAULT FALSE,
   activation_id VARCHAR(100) UNIQUE,
-  uuid VARCHAR(43) NOT NULL
+  uuid VARCHAR(43) NOT NULL,
+  profile_picture REFERENCES media(id)
 );
