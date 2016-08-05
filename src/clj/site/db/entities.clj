@@ -74,17 +74,17 @@
   (first (get-latest-posts 1)))
 
 (defn post-to-map [post]
-  (->>> post
-        (assoc _ :author
-               (let [a (into {} (filter #((set (:fields user)) (first %)) post))]
-                 (assoc a :name (:first_name a))))
-        (assoc _ :image-src (:path _))))
-
-(defn get-post-by-id [id]
-  (->>> (first (select post (where {:id id})))
+  (->>> (first post)
         (assoc _ :author
                  (first (select user (where {:id (:author _)}))))
         (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))))
-  ;(first (select post (with author (with user)) (with media) (where {:id id}))))
+
+(defn get-post-by-id [id]
+  (->> (select post (where {:id id}))
+       (post-to-map)))
+
+(defn get-post-by-title [title]
+  (->> (select post (where {:url_title title}))
+       (post-to-map)))
 
 ;;
