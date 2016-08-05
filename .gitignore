@@ -10,6 +10,7 @@ pom.xml.asc
 /resources/public/assets/images/
 /resources/public/assets/videos/
 /dev-resources/html/
+/logs/
 /out
 /.repl
 .idea/
