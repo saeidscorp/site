@@ -80,7 +80,7 @@
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
                  [environ "1.0.3"]
-                 ;[im.chit/cronj "1.4.4"]
+                 [funcool/cuerdas "0.8.0"]
                  [com.draines/postal "2.0.0"]
                  [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
 
