@@ -1,11 +1,9 @@
 (ns site.session
   (:require [noir.session :refer [clear-expired-sessions]]
-            [cronj.core :refer [cronj]]))
+            [hara.io.scheduler :as sch]))
 
 (def cleanup-job
-  (cronj
-    :entries
-    [{:id "session-cleanup"
-      :handler (fn [_ _] (clear-expired-sessions))
-      :schedule "* /30 * * * * *"
-      :opts {}}]))
+  (sch/scheduler {:session-cleanup
+                  {:handler  (fn [_ _] (clear-expired-sessions))
+                   :schedule "* /30 * * * * *"
+                   :params   {}}}))

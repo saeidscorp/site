@@ -9,75 +9,92 @@
   ; TODO: remove java bullshits
   ;:java-source-paths ["src/java"]
 
+                 ;; clojure/clojurescript
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.89"]
 
-                 ;[http-kit "2.1.19"]
+                 ;; webserver
+                 ;    [http-kit "2.1.19"]
                  [org.immutant/web "2.1.5" :exclusions [ch.qos.logback/logback-classic]]
 
+                 ;; core facilities
                  [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.2.385"]
 
+                 ;; ring handler
                  [ring "1.5.0"]
                  [ring/ring-ssl "0.2.1"]
 
+                 ;; ring utilities
                  [lib-noir "0.9.9"]
                  [ring-server "0.4.0"]
                  [ring/ring-anti-forgery "1.0.1"]
-                 [compojure "1.5.1"]
+                 [ring-transit "0.1.6"]
 
+                 ;; routing
+                 [compojure "1.5.1"]
                  [bidi "2.0.9"]
 
-                 [reagent "0.5.1"]
-
-                 [environ "1.0.3"]
-
+                 ;; templating
                  [selmer "1.0.7"]
+
+                 ;; error-reporting
                  [prone "1.1.1"]
-                 [im.chit/cronj "1.4.4"]
                  [noir-exception "0.2.5"]
 
+                 ;; logging
                  [com.taoensso/timbre "4.7.0"]
-                 ;; wrap logging libraries to log to slf4j...
+                 ;;   wrap logging libraries to log to slf4j...
                  [org.slf4j/slf4j-api "1.7.21"]
                  [org.slf4j/log4j-over-slf4j "1.7.21"]
-                 ;; ... and route them through our lovely timbre
+                 ;;   ... and route them through our lovely timbre
                  [com.fzakaria/slf4j-timbre "0.3.2"]
 
+                 ;; authentication
                  [buddy/buddy-hashers "0.14.0"]
                  [buddy/buddy-auth "1.1.0"]
 
-                 ;[log4j "1.2.17" :exclusions [javax.mail/mail
-                 ;                             javax.jms/jms
-                 ;                             com.sun.jdmk/jmxtools
-                 ;                             com.sun.jmx/jmxri]
-
-                 ;[org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in output
+                 ;; database
+                 ;    [org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in the output
                  [org.clojure/java.jdbc "0.5.8"]
                  [korma "0.4.2"]
                  [com.h2database/h2 "1.4.192"]
                  [org.xerial/sqlite-jdbc "3.8.11.2"]
 
-                 [com.draines/postal "2.0.0"]
-
+                 ;; configuration
                  [jarohen/nomad "0.7.2"]
 
-                 [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
-
+                 ;; profiling
                  [clojure-miniprofiler "0.5.0" :exclusions [fipp]]
                  [fipp "0.6.5"]
 
+                 ;; components and systems
                  [org.danielsz/system "0.3.0"]
 
+                 ;; client-side
                  [datascript "0.15.2"]
                  [cljs-ajax "0.5.8"] ;;
-                 [ring-transit "0.1.6"]
+                 [reagent "0.5.1"]
+
+                 ;; utilities
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
-
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
+                 [environ "1.0.3"]
+                 ;[im.chit/cronj "1.4.4"]
+                 [com.draines/postal "2.0.0"]
+                 [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
 
+                 ;; useful libraries
+                 [im.chit/hara.event "2.3.6"]
+                 [im.chit/hara.io.scheduler "2.3.6"]
+                 [im.chit/hara.expression "2.3.6"]
+                 [im.chit/hara.function "2.3.6"]
+                 [im.chit/hara.time "2.3.6"]
+
+                 ;; localization
                  [com.taoensso/tower "3.0.2"]
 
+                 ;; typed
                  [org.clojure/core.typed "0.3.23"]]
 
   :plugins [[lein-immutant "2.1.0"]
@@ -158,8 +175,10 @@
                                       ;  org.seleniumhq.selenium/selenium-java
                                       ;  org.seleniumhq.selenium/selenium-remote-driver]]
 
+                                      ;; testing
                                       [expectations "2.1.9"]
 
+                                      ;; integration testing
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [org.seleniumhq.selenium/selenium-server "2.53.1"]
                                       [org.seleniumhq.selenium/selenium-htmlunit-driver "2.52.0" :exclusions [org.apache.httpcomponents/httpclient]]
@@ -174,7 +193,10 @@
 
                                       ; new version of joplin (backwards incompatible)
                                       [joplin.jdbc "0.3.6"]
-                                      [joplin.core "0.3.6"]]}
+                                      [joplin.core "0.3.6"]
+
+                                      ;; library for using in the migrations
+                                      [sqlingvo "0.8.16"]]}
 
              :uberjar {:auto-clean  false                   ; not sure about this one
                        :omit-source true

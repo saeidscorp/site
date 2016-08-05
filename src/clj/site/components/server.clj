@@ -5,7 +5,7 @@
             ;[org.httpkit.server :refer [run-server]]
             [immutant.web :as web]
             [environ.core :refer [env]]
-            [cronj.core :as cronj]
+            [hara.io.scheduler :as sch]
             [taoensso.timbre.appenders.3rd-party.rotor :as rotor]
             [selmer.parser :as parser]
             [site.session :as session]))
@@ -17,7 +17,7 @@
    shuts down, put any clean up code here"
   []
   (timbre/info "site is shutting down...")
-  (cronj/shutdown! session/cleanup-job)
+  (sch/shutdown! session/cleanup-job)
   (timbre/info "shutdown complete!"))
 
 (defn init
@@ -34,7 +34,7 @@
 
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
-  (cronj/start! session/cleanup-job)
+  (sch/start! session/cleanup-job)
   (timbre/info "\n-=[ site started successfully"
                (when (= (:env config) :dev) "using the development profile") "]=-"))
 
