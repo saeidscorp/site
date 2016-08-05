@@ -14,4 +14,5 @@
 (defn run [target & _]
   (j/with-db-connection [db {:connection-uri (-> target :db :url)}]
     (doseq [entity [:user :author :media :post :tag :comment :post_tag]]
+      (j/delete! db entity [1])
       (insert-seeds entity db))))
