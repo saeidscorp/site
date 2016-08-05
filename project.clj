@@ -193,10 +193,7 @@
 
                                       ; new version of joplin (backwards incompatible)
                                       [joplin.jdbc "0.3.6"]
-                                      [joplin.core "0.3.6"]
-
-                                      ;; library for using in the migrations
-                                      [sqlingvo "0.8.16"]]}
+                                      [joplin.core "0.3.6"]]}
 
              :uberjar {:auto-clean  false                   ; not sure about this one
                        :omit-source true
