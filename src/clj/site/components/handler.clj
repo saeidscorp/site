@@ -74,7 +74,7 @@
                                                                              rts)))))))
 
 
-(defn get-handler [routes config locale]
+(defn get-handler [routes {config :config} locale]
   (timbre/info (str "USING CONSTRUCTION PROFILE: " (:under-construction config)))
   (-> (app-handler
         routes
