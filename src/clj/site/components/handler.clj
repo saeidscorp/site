@@ -1,7 +1,7 @@
 (ns site.components.handler
   (:require [taoensso.timbre :as timbre]
             [site.utils :refer [handler ->>>]]
-            [bidi.ring :refer [make-handler]]
+            [bidi.ring :as bdr :refer [make-handler]]
             [ring.middleware.ssl :as ssl]
             [noir.response :refer [redirect]]
 
@@ -20,8 +20,10 @@
             [site.routes.blog :refer [blog-routes]]
             [site.middleware :refer [load-middleware]]))
 
+;; TODO: either fully move media serving facilities to somewhere else or make it work.
 (def base-routes
-  [true (route/not-found (site.layout/render "not-found.html"))])
+  [true [["/media/*" (bdr/->Files {:dir "./resources/public/mediatwo"})]
+         [true (route/not-found (site.layout/render "not-found.html"))]]])
 
 (def construction-routes
   ["/" [["" (handler [] (site.layout/render "under-construction.html"))]
