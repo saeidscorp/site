@@ -1,7 +1,8 @@
 (ns site.user
   (:require [system.repl :refer [reset stop]]
             [com.stuartsierra.component]
-            [site.components.components :refer [dev-system]]))
+            [site.components.components :refer [dev-system]]
+            [site.migrations :as m]))
 
 (defn start-dev-system []
   (system.repl/go))
