@@ -1,0 +1,17 @@
+
+.comments-box {
+  margin-top: 35px;
+  h5 {
+    color: #1c3f52;
+    margin-bottom: 20px;
+    padding: 10px 0 10px 0;
+    $border-color: #DBDBDB;
+    border:{
+      bottom: 2px lighten($border-color, 0.5) solid;
+    }
+  }
+
+  .comments {
+    background: linear-gradient(to bottom, #FFF, #F4F5F7);
+  }
+}

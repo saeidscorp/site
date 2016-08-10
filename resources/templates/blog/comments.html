@@ -1,6 +1,8 @@
-<div class="comments">
-    Comments
-    {% for comment in post.replies %}
-        {% include "/blog/includes/single-comment.html" %}
-    {% endfor %}
+<div class="comments-box">
+    <h5>Comments</h5>
+    <div class="comments">
+        {% for comment in post.replies %}
+            {% include "/blog/includes/single-comment.html" %}
+        {% endfor %}
+    </div>
 </div>

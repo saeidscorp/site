@@ -63,7 +63,7 @@
 (defn change-password [email pw] (update user (set-fields {:pass pw}) (where {:email email})))
 
 
-;;
+;; media functions:
 
 (defn get-media-by-id [id]
   (first (select media (where {:id id}))))
@@ -79,12 +79,40 @@
   (->> (select user (where {:id id}))
        (author-to-map)))
 
+;; comment functions:
+
+(defn comment-to-map [com]
+  (->>> com
+        (assoc _ :writer (get-author-by-id (:writer _)))))
+
+(defn comments-for [post n]
+  (->> (select comment (where {:target (:id post), :is_reply 0})
+               (order :date_time :DESC)
+               (limit n))
+       (map comment-to-map)))
+
+(defn replies-to [com n]
+  (->> (select comment (where {:is_reply 1, :reply_to (:id com)})
+               (order :date_time :DESC)
+               (limit n))
+       (map comment-to-map)))
+
+(defn nested-comments
+  ([post n max-depth] (mapv #(nested-comments % n max-depth 0)
+                            (comments-for post n)))
+  ([this-comment n max-depth curr-depth]
+   (if (= curr-depth max-depth)
+     this-comment
+     (assoc this-comment :replies (mapv #(nested-comments % n max-depth (inc curr-depth))
+                                        (replies-to this-comment n))))))
+
 ;; post functions:
 
 (defn post-to-map [post]
   (->>> post
         (assoc _ :author (get-author-by-id (:author _)))
-        (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))))
+        (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))
+        (assoc _ :replies (nested-comments _ 5 5))))
 
 (defn get-post-by-id [id]
   (->> (first (select post (with tag) (where {:id id})))
@@ -100,14 +128,3 @@
 
 (defn get-latest-post []
   (first (get-latest-posts 1)))
-
-;; comment functions:
-
-(defn comments-for [post]
-  (select comment (where {:target (:id post), :is_reply 0})))
-
-(defn add-to [cms]
-  (loop [out []
-         visited #{}
-         curr 0]
-    ()))

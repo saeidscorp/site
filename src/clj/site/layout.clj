@@ -5,7 +5,10 @@
             [ring.middleware.anti-forgery :as af]
             [bidi.bidi :as bd]
             [compojure.response :refer [Renderable]]
-            [noir.session :as sess]))
+            [noir.session :as sess]
+            [cuerdas.core :as str])
+  (:use delimc.core
+        hara.event))
 
 (defonce routes nil)
 
@@ -28,6 +31,24 @@
                                                     "tag" [:tag [:id]])]
                      (apply bd/path-for (:routes context-map) handler
                             (mapcat vector handler-params (map (selmer.filter-parser/lookup-args context-map) params))))))
+
+(parser/add-tag! :rec-include
+                 (fn [[filename & [_with_ & bindings] :as args] context-map]
+                   (if _with_
+                     (reset
+                       (shift k (if (not= _with_ "with")
+                                  (raise [:template-error
+                                          {:msg (str "syntax error: unknown keyword " _with_)}])
+                                  (k :ok)))
+                       (shift k (if (empty? bindings)
+                                  (raise [:template-error
+                                          {:msg "with specified but no bindings provided"}])
+                                  (k :ok)))
+                       (let [raw-bs (map #(str/split % "=")
+                                     bindings)
+                             bs (map (fn [[k v]] [(keyword k) (context-map (keyword v))]) raw-bs)
+                             new-cmap (reduce #(apply assoc %1 %2) context-map bs)]
+                         (parser/render-file (str/unsurround filename "\"") new-cmap))))))
 
 (deftype RenderableTemplate [template params]
   Renderable
