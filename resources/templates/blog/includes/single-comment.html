@@ -1,1 +1,15 @@
+<div class="comment">
+    <div class="writer">{{ comment.writer }}</div>
+    <div class="text">
+        {{ comment.text }}
+    </div>
 
+    {% if comment.replies|not-empty %}
+        <div class="replies">
+            {% for c in comment.replies %}
+                {% include "/blog/includes/single-comment.html" with comment=c %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>

@@ -1,5 +1,5 @@
 {% if link %}
-<h4 class="blog-title">{{post.title}}</h4>
+    <h4 class="blog-title">{{ post.title }}</h4>
 {% else %}
-<a href="{% url post @post.url_title %}"><h4 class="blog-title">{{post.title}}</h4></a>
+    <a href="{% url post @post.url_title %}"><h4 class="blog-title">{{ post.title }}</h4></a>
 {% endif %}

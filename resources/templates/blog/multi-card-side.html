@@ -1,28 +1,28 @@
 {% extends "/blog/blog-base.html" %}
 
-{% block header-resp-classes %}{{block.super}} header-inner-2 text-center bg-24 overlay-01{% endblock %}
-{% block blog-section-styles %}{{block.super}} section blog blog-card-fullwidth mild-bg{% endblock %}
+{% block header-resp-classes %}{{ block.super }} header-inner-2 text-center bg-24 overlay-01{% endblock %}
+{% block blog-section-styles %}{{ block.super }} section blog blog-card-fullwidth mild-bg{% endblock %}
 
 {% block blog-in-row %}
-<!--blog content-->
-<div class="col-md-8 col-md-push-4">
-    {% for row in blog-box-rows %}
-    <div class="row">
-        {% for post in row %}
-        <div class="col-md-6">
-            <div class="blog-post ">
-                {% include "/blog/includes/post-card.html" %}
+    <!--blog content-->
+    <div class="col-md-8 col-md-push-4">
+        {% for row in blog-box-rows %}
+            <div class="row">
+                {% for post in row %}
+                    <div class="col-md-6">
+                        <div class="blog-post ">
+                            {% include "/blog/includes/post-card.html" %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
         {% endfor %}
+
+        {% include "/blog/includes/pagination.html" %}
     </div>
-    {% endfor %}
-
-    {% include "/blog/includes/pagination.html" %}
-</div>
-<!--blog content end-->
+    <!--blog content end-->
 
 
-{% include "/blog/includes/sidebar.html" %}
+    {% include "/blog/includes/sidebar.html" %}
 
 {% endblock blog-in-row %}

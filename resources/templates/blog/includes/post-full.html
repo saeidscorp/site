@@ -4,18 +4,18 @@
 
 {% include "/blog/includes/includes/author-row.html" %}
 
-<h4 class="blog-title">{{post.title}}</h4>
+<h4 class="blog-title">{{ post.title }}</h4>
 
 {% include "/blog/includes/includes/post-media.html" %}
 
 <div class="main-description">
-    {{post.content|safe}}
+    {{ post.content|safe }}
 </div>
 
 {% include "/blog/includes/includes/share.html" %}
 
 {% if comments %}
-{% include "/blog/comments.html" %}
+    {% include "/blog/comments.html" %}
 {% endif %}
 
 {% comment %} {% include "/blog/includes/includes/disqus.html" %} {% endcomment %}

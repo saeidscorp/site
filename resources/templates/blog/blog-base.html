@@ -2,22 +2,22 @@
 
 {% block below-nav %}
 
-<header id="header" class="{% block header-resp-classes %}{% endblock %}">
-    <div class="container">
-        {% include "/includes/breadcrumbs.html" %}
-        <h3>{% block blog-page-title %}Blog{% endblock %}</h3>
-    </div>
-</header>
-
-<section id="blog-standard" class="{% block blog-section-styles %}section{% endblock %}">
-    <div class="container">
-        {% block blog-in-container %}
-        <div class="row">
-            {% block blog-in-row %}
-            {% endblock %}
+    <header id="header" class="{% block header-resp-classes %}{% endblock %}">
+        <div class="container">
+            {% include "/includes/breadcrumbs.html" %}
+            <h3>{% block blog-page-title %}Blog{% endblock %}</h3>
         </div>
-        {% endblock blog-in-container %}
-    </div>
-</section>
+    </header>
+
+    <section id="blog-standard" class="{% block blog-section-styles %}section{% endblock %}">
+        <div class="container">
+            {% block blog-in-container %}
+                <div class="row">
+                    {% block blog-in-row %}
+                    {% endblock %}
+                </div>
+            {% endblock blog-in-container %}
+        </div>
+    </section>
 
 {% endblock below-nav %}

@@ -1,17 +1,17 @@
 {% extends "/blog/blog-base.html" %}
 
-{% block header-resp-classes %}{{block.super}} header-inner mild-bg{% endblock %}
-{% block blog-section-styles %}{{block.super}} section blog-standard single-blog{% endblock %}
+{% block header-resp-classes %}{{ block.super }} header-inner mild-bg{% endblock %}
+{% block blog-section-styles %}{{ block.super }} section blog-standard single-blog{% endblock %}
 
 {% block blog-in-row %}
-<!--blog content-->
-<div class="col-md-8 col-md-push-4">
+    <!--blog content-->
+    <div class="col-md-8 col-md-push-4">
 
-    {% include "/blog/includes/post-full.html" %}
+        {% include "/blog/includes/post-full.html" %}
 
-</div>
-<!--blog content end-->
+    </div>
+    <!--blog content end-->
 
-{% include "/blog/includes/sidebar.html" %}
+    {% include "/blog/includes/sidebar.html" %}
 
 {% endblock blog-in-row %}

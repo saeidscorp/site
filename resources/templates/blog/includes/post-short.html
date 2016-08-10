@@ -8,13 +8,14 @@
         </div>
 
         <div class="main-description">
-            {{post.short|safe}}
+            {{ post.short|safe }}
         </div>
     </div>
 </div>
 
 <div class="blog-footer">
-    <span><i class="icon-chat"></i> {{post.comments-count}} Comments</span> {% comment %} <!-- TODO: make "No Comments" possible --> {% endcomment %}
+    <span><i
+            class="icon-chat"></i> {{ post.comments-count }} Comments</span> {% comment %} <!-- TODO: make "No Comments" possible --> {% endcomment %}
     <a href="{% url post @post.url_title %}" class="btn btn-read-more">
         Read more
         <span><i class="fa fa-angle-double-right"></i></span>

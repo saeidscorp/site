@@ -1,20 +1,21 @@
 <div class="row">
     <div class="col-sm-6 col-xs-12">
         <div class="author">
-            <img src="{{post.author.profile_picture.path}}" class="img-responsive img-circle"
+            <img src="{{ post.author.profile_picture.path }}" class="img-responsive img-circle"
                  alt="Blog Author">
-            <span>by </span><a href="{% url author @post.author.first_name %}">{{post.author.first_name}}</a>
+            <span>by </span><a href="{% url author @post.author.first_name %}">{{ post.author.first_name }}</a>
         </div>
     </div>
 
     <div class="col-sm-6 col-xs-12">
         <div class="tag">
             {% if post.tag %}
-            <span>tagged as: </span> {% for tag in post.tag %}<a href="{% url tag @tag.id %}">{{tag.name}}</a>{% if not forloop.last %}, {%
-            endif %}{% endfor %}
+                <span>tagged as: </span> {% for tag in post.tag %}<a href="{% url tag @tag.id %}">{{ tag.name }}</a>
+                {% if not forloop.last %}, {%
+                endif %}{% endfor %}
             {% endif %}
             {% if post.date_time %}
-            <span>Date: </span> <a href="{{post.date_time.url}}">{{post.date_time}}</a>
+                <span>Date: </span> <a href="{{ post.date_time.url }}">{{ post.date_time }}</a>
             {% endif %}
         </div>
     </div>

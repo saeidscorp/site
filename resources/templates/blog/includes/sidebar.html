@@ -84,9 +84,9 @@
             <h5>Catagories</h5>
             <ul>
                 {% for c in categories %}
-                <li>
-                    <a href="{{c.href}}" title="View all posts from {{c.name}}">{{c.name}}</a>
-                </li>
+                    <li>
+                        <a href="{{ c.href }}" title="View all posts from {{ c.name }}">{{ c.name }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -95,7 +95,7 @@
             <h5>Popular Tags</h5>
             <div class="tags">
                 {% for t in popular-tags %}
-                <a href="{{t.href}}">{{t.name}}</a>
+                    <a href="{{ t.href }}">{{ t.name }}</a>
                 {% endfor %}
             </div>
         </div>

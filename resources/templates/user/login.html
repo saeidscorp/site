@@ -1,28 +1,28 @@
 {% extends "/template-base.html" %}
 
-{% block nav-wrapper-classes %}{{block.super}}{% endblock nav-wrapper-classes %}
+{% block nav-wrapper-classes %}{{ block.super }}{% endblock nav-wrapper-classes %}
 
 {% block below-nav %}
 
-<header id="header" class="header-inner-2 mild-bg text-center">
-    <div class="container">
-        {% include "/includes/breadcrumbs.html" %}
-        <h3>{% block page-title %}Login{% endblock %}</h3>
-    </div>
-</header>
+    <header id="header" class="header-inner-2 mild-bg text-center">
+        <div class="container">
+            {% include "/includes/breadcrumbs.html" %}
+            <h3>{% block page-title %}Login{% endblock %}</h3>
+        </div>
+    </header>
 
-<!--<div class="container-fluid block-center" id="login">-->
+    <!--<div class="container-fluid block-center" id="login">-->
     <div class="row section">
         <div class="col-md-4 col-md-offset-4">
 
             <form class="form-horizontal" role="form" action="/user/login" method="POST">
-                <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+                <input name="__anti-forgery-token" type="hidden" value="{{ af-token }}"/>
                 {% if nexturl %}
-                    <input name="nexturl" type="hidden" value="{{nexturl}}"/>
+                    <input name="nexturl" type="hidden" value="{{ nexturl }}"/>
                 {% endif %}
 
                 {% if error %}
-                    <div id="error" class="alert alert-danger">{{error}}</div>
+                    <div id="error" class="alert alert-danger">{{ error }}</div>
                 {% endif %}
 
 
@@ -50,7 +50,7 @@
 
         </div>
     </div>
-<!--</div>-->
+    <!--</div>-->
 
 {% endblock %}
 

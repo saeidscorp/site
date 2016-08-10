@@ -1,21 +1,21 @@
 {% if pagination-pages %}
-<nav class="blog-pagination">
-    <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
+    <nav class="blog-pagination">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
 
-        {% for page in pagination-pages %}
-        <li><a href="{{page.url}}">{{page.number}}</a></li> {#<!-- TODO: make current page a span -->#}
-        {% endfor %}
+            {% for page in pagination-pages %}
+                <li><a href="{{ page.url }}">{{ page.number }}</a></li> {#<!-- TODO: make current page a span -->#}
+            {% endfor %}
 
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 {% endif %}

@@ -1,19 +1,19 @@
 {% extends "/blog/blog-base.html" %}
 
-{% block header-resp-classes %}{{block.super}} header-inner-2 text-center bg-24 overlay-01{% endblock %}
-{% block blog-section-styles %}{{block.super}} section blog-standard multiple-blog{% endblock %}
+{% block header-resp-classes %}{{ block.super }} header-inner-2 text-center bg-24 overlay-01{% endblock %}
+{% block blog-section-styles %}{{ block.super }} section blog-standard multiple-blog{% endblock %}
 
 {% block blog-in-row %}
-<!--blog content-->
-<div class="col-md-8 col-md-offset-2">
-    {% for post in posts %}
-    <div class="different-blog">
-        {% include "/blog/includes/post-short.html" %}
-    </div>
-    {% endfor %}
+    <!--blog content-->
+    <div class="col-md-8 col-md-offset-2">
+        {% for post in posts %}
+            <div class="different-blog">
+                {% include "/blog/includes/post-short.html" %}
+            </div>
+        {% endfor %}
 
-    {% include "/blog/includes/pagination.html" %}
-</div>
-<!--blog content end-->
+        {% include "/blog/includes/pagination.html" %}
+    </div>
+    <!--blog content end-->
 
 {% endblock blog-in-row %}
