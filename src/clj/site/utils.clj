@@ -1,7 +1,8 @@
 (ns site.utils
   (:require [compojure.response]
             [clojure.walk :as w]
-            [bidi.bidi :as bd]))
+            [bidi.bidi :as bd]
+            [cuerdas.core :as str]))
 
 (defmacro ->>> [init & forms]
   (let [[bindings result] (reduce #(let [[prev-bindings prev-sym] %1
@@ -29,3 +30,24 @@
 
 (defn seqable? [x]
   (some boolean ((juxt map? seq? vector? set? list?) x)))
+
+(defn- leading-whitespaces [s]
+  (-> s (str/split #"\S+") (first) (count)))
+
+(defn- safe-substring [s n]
+  (if (>= (leading-whitespaces s) n)
+    (subs s n)
+    s))
+
+(defn- remove-spaces [s n]
+  (let [lines (str/split s "\n")]
+    (str/join \newline (cons (first lines) (for [line (rest lines)]
+                                             (safe-substring line n))))))
+
+(defmacro nice-string [s]
+  (let [lines (str/split s "\n")]
+    (if (> (count lines) 1)
+      (let [second-line     (second lines)
+            starting-length (leading-whitespaces second-line)]
+        (remove-spaces s starting-length))
+      s)))
