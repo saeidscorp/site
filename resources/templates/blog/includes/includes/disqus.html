@@ -8,14 +8,19 @@
 <script>
     /* discus */
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'californiatemplate';
+    var disqus_shortname = 'personal-site';
+
+    var disqus_config = function () {
+        this.page.url = {{ page.url }};  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = {{ page.url }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function () {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.async = true;
+        s.src = '//' + disqus_shortname + 'personal-site.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        d.body.appendChild(s);
     })();
 </script>
