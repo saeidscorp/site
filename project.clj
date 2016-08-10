@@ -191,6 +191,8 @@
                                       ;; for vinyasa's (./lein) to work
                                       [leiningen "2.6.1"]
 
+                                      [lein-sassy "1.0.7"]
+
                                       ; new version of joplin (backwards incompatible)
                                       [joplin.jdbc "0.3.6"]
                                       [joplin.core "0.3.6"]]}
