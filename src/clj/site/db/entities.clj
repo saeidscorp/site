@@ -7,7 +7,7 @@
 
 (defentity user
            (entity-fields :id :first_name :last_name :email
-                          :last_login :is_active :role
+                          :last_login :is_active :role :profile_picture
                           :pass :activation_id :uuid)
            (has-many comment {:fk :writer})
            (has-one author))
@@ -25,8 +25,8 @@
 (defentity post
            (belongs-to author {:fk :author})
            (belongs-to media {:fk :featured_image})
-           (entity-fields :id :title :author :date_time :short :featured_image :content)
-           (has-many comment {:fk :writer})
+           (entity-fields :id :url_title :title :author :date_time :short :featured_image :content)
+           (has-many comment {:fk :target})
            (many-to-many tag :post_tag))
 
 (defentity media
@@ -37,7 +37,7 @@
            (belongs-to user {:fk :writer})
            (belongs-to post {:fk :target})
            (belongs-to comment {:fk :reply_to})
-           (entity-fields :writer :date_time :is_reply :text))
+           (entity-fields :id :writer :date_time :is_reply :text))
 
 ;; user functions:
 
@@ -63,28 +63,51 @@
 (defn change-password [email pw] (update user (set-fields {:pass pw}) (where {:email email})))
 
 
+;;
+
+(defn get-media-by-id [id]
+  (first (select media (where {:id id}))))
+
+;; author functions:
+
+(defn author-to-map [author]
+  (->>> (first author)
+        (assoc _ :profile_picture
+                 (get-media-by-id (:profile_picture _)))))
+
+(defn get-author-by-id [id]
+  (->> (select user (where {:id id}))
+       (author-to-map)))
 
 ;; post functions:
 
+(defn post-to-map [post]
+  (->>> post
+        (assoc _ :author (get-author-by-id (:author _)))
+        (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))))
+
+(defn get-post-by-id [id]
+  (->> (first (select post (with tag) (where {:id id})))
+       (post-to-map)))
+
+(defn get-post-by-title [title]
+  (->> (first (select post (with tag) (where {:url_title title})))
+       (post-to-map)))
+
 (defn get-latest-posts
-  ([n] (select post (order :date_time :DESC) (limit n)))
+  ([n] (map post-to-map (select post (with tag) (order :date_time :DESC) (limit n))))
   ([] (get-latest-posts 10)))
 
 (defn get-latest-post []
   (first (get-latest-posts 1)))
 
-(defn post-to-map [post]
-  (->>> (first post)
-        (assoc _ :author
-                 (first (select user (where {:id (:author _)}))))
-        (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))))
+;; comment functions:
 
-(defn get-post-by-id [id]
-  (->> (select post (where {:id id}))
-       (post-to-map)))
+(defn comments-for [post]
+  (select comment (where {:target (:id post), :is_reply 0})))
 
-(defn get-post-by-title [title]
-  (->> (select post (where {:url_title title}))
-       (post-to-map)))
-
-;;
+(defn add-to [cms]
+  (loop [out []
+         visited #{}
+         curr 0]
+    ()))

@@ -13,7 +13,8 @@
                                            :title   "A Blog Post"
                                            :author  {:name      "Saeid"
                                                      :image-src "/assets/images/blog/author/author_1.jpg"}
-                                           :tags    [{:name "Welcome" :url "#"}]}})
+                                           :tags    [{:name "Welcome" :url "#"}]}
+                         :comments true})
 
 (def multi-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                         :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
@@ -75,13 +76,20 @@
 ;                                                            (assoc single-context-map :post (e/post-to-map (e/get-post-by-id id))))))
 
 (def blog-routes
-  ["/blog/" [[:get [["multi-card-boxed" (handler [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map))]
-                    ["multi-card-side" (handler [] (layout/render "blog/multi-card-side.html" multi-context-map))]
-                    ["multi-full" (handler [] (layout/render "blog/multi-full.html" multi-context-map))]
-                    ["multi-side" (handler [] (layout/render "blog/multi-side.html" multi-context-map))]
-                    ["single-full" (handler [] (layout/render "blog/single-full.html" single-context-map))]
-                    [["single-side/" :id] (handler :post-id [id] (layout/render "blog/single-side.html"
-                                                                             (assoc single-context-map :post (e/get-post-by-id id))))]
-                    [[:url-title] (handler :post [url-title]
-                                                 (layout/render "blog/single-side.html"
-                                                   (assoc single-context-map :post (e/get-post-by-title url-title))))]]]]])
+  ["/" [["blog/" [[:get [["multi-card-boxed" (handler [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map))]
+                         ["multi-card-side" (handler [] (layout/render "blog/multi-card-side.html" multi-card-context-map))]
+                         ["multi-full" (handler [] (layout/render "blog/multi-full.html" multi-context-map))]
+                         ["multi-side" (handler [] (layout/render "blog/multi-side.html" (assoc multi-context-map
+                                                                                           :posts (e/get-latest-posts))))]
+                         [["single-full/" :id] (handler [id] (layout/render "blog/single-full.html" (assoc single-context-map
+                                                                                                      :post (e/get-post-by-id id))))]
+                         [["single-side/" :id] (handler :post-id [id] (layout/render "blog/single-side.html"
+                                                                                     (assoc single-context-map :post (e/get-post-by-id id))))]
+                         [[:url-title] (handler :post [url-title]
+                                                (layout/render "blog/single-side.html"
+                                                               (assoc single-context-map :post (e/get-post-by-title url-title))))]]]]]
+        ["author/" [[:get [[[[#"\d+" :id]] (handler :author-id [id]
+                                                  {:body (str "author: " id)})]
+                           [[:name] (handler :author [name]
+                                          {:content-type "text/html"
+                                           :body (str "author name: " name)})]]]]]]])

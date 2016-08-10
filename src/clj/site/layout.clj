@@ -21,12 +21,13 @@
 (parser/set-resource-path!  (clojure.java.io/resource "templates"))
 
 (parser/add-tag! :url
-          (fn [[url-type & params] context-map]
-            (let [[handler handler-params] (case url-type
-                                             "post" [:post [:id]]
-                                             "author" [:author [:id]])]
-                 (apply bd/path-for (:routes context-map) handler
-                        (mapcat vector handler-params params)))))
+                 (fn [[url-type & params] context-map]
+                   (let [[handler handler-params] (case url-type
+                                                    "post" [:post [:url-title]]
+                                                    "author" [:author [:name]]
+                                                    "tag" [:tag [:id]])]
+                     (apply bd/path-for (:routes context-map) handler
+                            (mapcat vector handler-params (map (selmer.filter-parser/lookup-args context-map) params))))))
 
 (deftype RenderableTemplate [template params]
   Renderable

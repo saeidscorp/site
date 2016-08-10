@@ -8,10 +8,14 @@
 
 {% include "/blog/includes/includes/post-media.html" %}
 
-<p>
-    {{post.content}}
-</p>
+<div class="main-description">
+    {{post.content|safe}}
+</div>
 
 {% include "/blog/includes/includes/share.html" %}
+
+{% if comments %}
+{% include "/blog/comments.html" %}
+{% endif %}
 
 {% comment %} {% include "/blog/includes/includes/disqus.html" %} {% endcomment %}

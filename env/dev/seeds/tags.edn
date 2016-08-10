@@ -1,2 +1,5 @@
 [{:name "clojure", :desc "The Clojure programming language."}
- {:name "java", :desc "The Java programming language."}]
+ {:name "java", :desc "The Java programming language."}
+ {:name "linux", :desc "The Linux operating system."}
+ {:name "os", :desc "Operating systems."}
+ {:name "cloud", :desc "Cloud computing."}]

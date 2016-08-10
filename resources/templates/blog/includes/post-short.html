@@ -1,21 +1,21 @@
-{% include "/blog/includes/includes/author-row.html" with date=post.date %}
+{% include "/blog/includes/includes/author-row.html" with post=post %}
 
 <div class="row">
     <div class="col-md-12">
-        {% include "/blog/includes/includes/post-title.html" %}
+        {% include "/blog/includes/includes/post-title.html" with link=true %}
         <div class="blog-media">
             {% include "/blog/includes/includes/post-media.html" %}
         </div>
 
         <div class="main-description">
-            {{post.description}}
+            {{post.short|safe}}
         </div>
     </div>
 </div>
 
 <div class="blog-footer">
     <span><i class="icon-chat"></i> {{post.comments-count}} Comments</span> {% comment %} <!-- TODO: make "No Comments" possible --> {% endcomment %}
-    <a href="{{post.url}}" class="btn btn-read-more">
+    <a href="{% url post @post.url_title %}" class="btn btn-read-more">
         Read more
         <span><i class="fa fa-angle-double-right"></i></span>
     </a>

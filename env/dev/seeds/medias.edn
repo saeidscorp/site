@@ -1,2 +1,4 @@
 [{:path "/media/uploads/screenshot.png", :mime "image/png", :owner 1}
- {:path "/media/uploads/saeid.jpg", :mime nil, :owner 1}]
+ {:path "/media/uploads/saeid.jpg", :mime nil, :owner 1}
+ {:path "/media/uploads/site-in-idea.png", :mime nil, :owner 1}
+ {:path "/media/uploads/linux-tux-wallpaper.jpg", :mime nil, :owner 1}]
