@@ -9,7 +9,10 @@ pom.xml.asc
 /resources/public/js/
 /resources/public/assets/images/
 /resources/public/assets/videos/
+/resources/public/assets/lib/semantic-ui/
+/resources/public/media/*
 /dev-resources/html/
+/dev-resources/libs/node_modules
 /logs/
 /out
 /.repl

@@ -11,7 +11,7 @@
       "packaged": "..\\..\\..\\resources\\public\\assets\\lib\\semantic-ui\\dist\\",
       "uncompressed": "..\\..\\..\\resources\\public\\assets\\lib\\semantic-ui\\dist\\components\\",
       "compressed": "..\\..\\..\\resources\\public\\assets\\lib\\semantic-ui\\dist\\components\\",
-      "themes": "..\\..\\..\\dist/themes/"
+      "themes": "..\\..\\..\\resources\\public\\assets\\lib\\semantic-ui\\dist/themes/"
     },
     "clean": "dist/"
   },
