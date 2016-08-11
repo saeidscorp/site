@@ -2,6 +2,7 @@
 
 ### Important
 - [ ] Customize template to better match my usage.
+- [ ] Make comments available via Ajax
 
 ### Extra
 

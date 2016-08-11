@@ -1,6 +1,7 @@
-# Site (My personal site/blog system written in Clojure) [![Build Status](https://travis-ci.org/saeidscorp/site.svg?branch=master)](https://travis-ci.org/saeidscorp/site)
+# Site
 
-
+*(My personal site/blog system written in Clojure)*
+ [![Build Status](https://travis-ci.org/saeidscorp/site.svg?branch=master)](https://travis-ci.org/saeidscorp/site)
 
 ## Installation
 
@@ -14,6 +15,13 @@ put it on clojars)
 You have to run database migrations first:
 
     lein migrate
+
+Then you also probably want to feed the database some initial data:
+
+    lein seed
+
+Running the above command will insert rows defined in `env/dev/seeds/...` files
+into database.
 
 ### Running
 
@@ -38,6 +46,15 @@ You can compile the scss files in one shot using:
 Or watch the directories and auto build them:
 
     lein sass watch
+
+And if you don't want the extra overhead of a whole JVM running for
+compiling Sass files, you can also run:
+
+    site.user => (oneshot)
+
+or
+
+    site.user => (watch)
 
 ## License
 
