@@ -1,15 +1,24 @@
 <div class="comment">
-    <div class="writer">by: {{ comment.writer.first_name }}</div>
-    <div class="text">
-        {{ comment.text }}
+    <a class="avatar">
+        <img src="{{ comment.writer.profile_picture }}">
+    </a>
+    <div class="content">
+        <a class="author">{{ comment.writer.first_name }} {{ comment.writer.last_name }}</a>
+        <div class="metadata">
+            <span class="date">{{ comment.date_time|pretty-date|title }}</span>
+        </div>
+        <div class="text">
+            <p>{{ comment.text }}</p>
+        </div>
+        <div class="actions">
+            <a class="reply">Reply</a>
+        </div>
     </div>
-
     {% if comment.replies|not-empty %}
-        <div class="replies">
+        <div class="comments">
             {% for c in comment.replies %}
                 {% rec-include "/blog/includes/single-comment.html" with comment=c %}
             {% endfor %}
         </div>
     {% endif %}
-
 </div>

@@ -90,9 +90,12 @@
                  [im.chit/hara.expression "2.3.6"]
                  [im.chit/hara.function "2.3.6"]
                  [im.chit/hara.time "2.3.6"]
+                 [im.chit/hara.time.joda "2.2.17"]
+                 [delimc "0.1.0"]
 
                  ;; localization
                  [com.taoensso/tower "3.0.2"]
+                 [clojure-humanize "0.2.0"]
 
                  ;; typed
                  [org.clojure/core.typed "0.3.23"]]
