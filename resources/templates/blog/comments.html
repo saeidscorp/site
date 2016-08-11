@@ -1,8 +1,14 @@
-<div class="comments-box">
-    <h5>Comments</h5>
-    <div class="comments">
-        {% for comment in post.replies %}
-            {% include "/blog/includes/single-comment.html" %}
-        {% endfor %}
-    </div>
+<div class="ui comments">
+    <h3 class="ui dividing header">Comments</h3>
+    {% for comment in post.replies %}
+        {% include "/blog/includes/single-comment.html" %}
+    {% endfor %}
+    <form class="ui reply form">
+        <div class="field">
+            <textarea></textarea>
+        </div>
+        <div class="ui blue labeled submit icon button">
+            <i class="icon edit"></i> Add Reply
+        </div>
+    </form>
 </div>

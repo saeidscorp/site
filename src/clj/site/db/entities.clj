@@ -73,7 +73,7 @@
 (defn author-to-map [author]
   (->>> (first author)
         (assoc _ :profile_picture
-                 (get-media-by-id (:profile_picture _)))))
+                 (:path (get-media-by-id (:profile_picture _))))))
 
 (defn get-author-by-id [id]
   (->> (select user (where {:id id}))

@@ -6,7 +6,10 @@
             [bidi.bidi :as bd]
             [compojure.response :refer [Renderable]]
             [noir.session :as sess]
-            [cuerdas.core :as str])
+            [cuerdas.core :as str]
+            [clojure.contrib.humanize :as hmz]
+            [hara.time :as t]
+            [hara.time.joda])
   (:use delimc.core
         hara.event))
 
@@ -49,6 +52,10 @@
                              bs (map (fn [[k v]] [(keyword k) (context-map (keyword v))]) raw-bs)
                              new-cmap (reduce #(apply assoc %1 %2) context-map bs)]
                          (parser/render-file (str/unsurround filename "\"") new-cmap))))))
+
+(t/default-type org.joda.time.DateTime)
+
+(selmer.filters/add-filter! :pretty-date hmz/datetime)
 
 (deftype RenderableTemplate [template params]
   Renderable
