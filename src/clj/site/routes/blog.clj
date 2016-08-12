@@ -9,33 +9,11 @@
 (def single-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                          :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                         :post            {:content "Lorem ispum dolor sit amet."
-                                           :title   "A Blog Post"
-                                           :author  {:name      "Saeid"
-                                                     :image-src "/assets/images/blog/author/author_1.jpg"}
-                                           :tags    [{:name "Welcome" :url "#"}]}
                          :comments true})
 
 (def multi-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                         :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                        :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                        :posts           [{:title       "Welcome to this blog!"
-                                           :description "Lorem ispum dolor sit amet."
-                                           :author      {:name      "Saeid"
-                                                         :image-src "/assets/images/blog/author/author_1.jpg"}
-                                           :tags        [{:name "Welcome" :url "#"}]}
-                                          {:title       "Mac OS X Yosemite"
-                                           :description "This is the first time I tried Mac OS X."
-                                           :author      {:name      "Saeid"
-                                                         :image-src "/assets/images/blog/author/author_3.jpg"}
-                                           :tags        [{:name "OS" :url "#"}]
-                                           :image-src   "/media/uploads/screenshot.png"}
-                                          {:title       "OpenShift Hosting"
-                                           :description "Lorem ipsum dolor sit amet."
-                                           :author      {:name      "Saeid"
-                                                         :image-src "/assets/images/blog/author/author_2.jpg"}
-                                           :tags        [{:name "Clojure" :url "#"}
-                                                         {:name "Cloud" :url "#"}]}]})
+                        :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]})
 
 (def multi-card-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                              :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
@@ -87,7 +65,11 @@
                                                                                      (assoc single-context-map :post (e/get-post-by-id id))))]
                          [[:url-title] (handler :post [url-title]
                                                 (layout/render "blog/single-side.html"
-                                                               (assoc single-context-map :post (e/get-post-by-title url-title))))]]]]]
+                                                               (assoc single-context-map :post (e/get-post-by-title url-title))))]]]
+                  ["admin/" [["post" [[:get (handler :post-page []
+                                              (layout/render "blog/write-post.html"))]
+                                      [:post (handler :post-do [:as reqmap]
+                                               (layout/render "blog/write-post.html" {:reqmap reqmap}))]]]]]]]
         ["author/" [[:get [[[[#"\d+" :id]] (handler :author-id [id]
                                                   {:body (str "author: " id)})]
                            [[:name] (handler :author [name]
