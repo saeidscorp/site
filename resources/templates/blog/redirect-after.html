@@ -1,0 +1,19 @@
+{% extends "/base.html" %}
+
+{% block add-header %}
+    {% style "/assets/lib/semantic-ui/dist/semantic.min.css" %}
+    <meta http-equiv="refresh" content="3; url='{{ redirect-target }}'"/>
+{% endblock %}
+
+{% block page-content %}
+    {% ifequal status ":success" %}
+        <div class="ui positive icon message">
+            <i class="green checkmark icon"></i>
+            <div class="content">
+                <div class="header">{{ message }}</div>
+            </div>
+            <p>{{ detail-message }}</p>
+        </div>
+    {% else %}
+    {% endifequal %}
+{% endblock %}

@@ -1,15 +1,19 @@
 (ns site.routes.blog
   (:require [compojure.core :refer (defroutes GET PUT ANY)]
-            [site.utils :refer [handler]]
+            [site.utils :refer [handler ->>>]]
             [korma.core :as k]
             [site.db.entities :as e]
             [site.layout :as layout]
-            [ring.util.response :refer [redirect]]))
+            [ring.util.response :refer [redirect]]
+            [bidi.ring :as bdr]
+            [bidi.bidi :as bd]
+            [site.utils.markdown])
+  (:use delimc.core))
 
 (def single-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                          :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                         :comments true})
+                         :comments        true})
 
 (def multi-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                         :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
@@ -53,6 +57,14 @@
 ;           (GET "/blog/single-side/:id" [id] (layout/render "blog/single-side.html"
 ;                                                            (assoc single-context-map :post (e/post-to-map (e/get-post-by-id id))))))
 
+;; TODO: use site.service.user/get-logged-in-user
+(defn handle-new-post [title short-title short-content post-content]
+  (reset (shift k (e/create-post title short-title short-content post-content) (k :ok))
+         (layout/render "blog/redirect-after.html" {:status          :success
+                                                    :message         "Post created successfully."
+                                                    :detail-message  "Redirecting to post..."
+                                                    :redirect-target (bd/path-for site.layout/routes :post :url-title short-title)})))
+
 (def blog-routes
   ["/" [["blog/" [[:get [["multi-card-boxed" (handler [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map))]
                          ["multi-card-side" (handler [] (layout/render "blog/multi-card-side.html" multi-card-context-map))]
@@ -62,16 +74,18 @@
                          [["single-full/" :id] (handler [id] (layout/render "blog/single-full.html" (assoc single-context-map
                                                                                                       :post (e/get-post-by-id id))))]
                          [["single-side/" :id] (handler :post-id [id] (layout/render "blog/single-side.html"
-                                                                                     (assoc single-context-map :post (e/get-post-by-id id))))]
+                                                                                     (assoc single-context-map :post (->>> (e/get-post-by-id id)
+                                                                                                                       (assoc _
+                                                                                                                        :content (site.utils.markdown/markdown-to-html (:content _)))))))]
                          [[:url-title] (handler :post [url-title]
-                                                (layout/render "blog/single-side.html"
-                                                               (assoc single-context-map :post (e/get-post-by-title url-title))))]]]
+                                         (layout/render "blog/single-side.html"
+                                                        (assoc single-context-map :post (e/get-post-by-title url-title))))]]]
                   ["admin/" [["post" [[:get (handler :post-page []
                                               (layout/render "blog/write-post.html"))]
-                                      [:post (handler :post-do [:as reqmap]
-                                               (layout/render "blog/write-post.html" {:reqmap reqmap}))]]]]]]]
+                                      [:post (handler :post-do [title short_title short_content post_content :as reqmap]
+                                               (handle-new-post title short_title short_content post_content))]]]]]]]
         ["author/" [[:get [[[[#"\d+" :id]] (handler :author-id [id]
-                                                  {:body (str "author: " id)})]
+                                             {:body (str "author: " id)})]
                            [[:name] (handler :author [name]
-                                          {:content-type "text/html"
-                                           :body (str "author name: " name)})]]]]]]])
+                                      {:content-type "text/html"
+                                       :body         (str "author name: " name)})]]]]]]])

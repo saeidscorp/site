@@ -128,3 +128,10 @@
 
 (defn get-latest-post []
   (first (get-latest-posts 1)))
+
+(defn create-post [title short-title short-content md-content]
+  (insert post (values {:title title,
+                        :short short-content,
+                        :url_title short-title,
+                        :content md-content,
+                        :author 1})))

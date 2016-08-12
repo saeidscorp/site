@@ -8,7 +8,9 @@
 
 {% block blog-in-row %}
     <!--<div class="col-md-10 col-md-offset-1">-->
-    <div class="ui form">
+    {% if reqmap %}{% debug %}{% endif %}
+    <form method="post" class="ui form">
+        <input name="__anti-forgery-token" type="hidden" value="{{ af-token }}"/>
         <div class="field">
             <label>Title</label>
             <input name="title" placeholder="Title" type="text">
@@ -19,11 +21,11 @@
         </div>
         <div class="field">
             <label>Short Content</label>
-            <textarea rows="3" placeholder="Short content here..."></textarea>
+            <textarea name="short_content" rows="3" placeholder="Short content here..."></textarea>
         </div>
         <div class="field">
             <div id="editormd-area">
-                <textarea name="">
+                <textarea name="post_content">
 ### Welcome
 Here is an image about programming languages:
 
@@ -32,7 +34,7 @@ Here is an image about programming languages:
             </div>
         </div>
     <button class="ui primary button" type="submit">Post</button>
-    </div>
+    </form>
     <!--</div>-->
 {% endblock %}
 
@@ -66,7 +68,7 @@ Here is an image about programming languages:
                     saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
                     searchReplace: true,
                     //watch : false,                // 关闭实时预览
-                    //htmlDecode: "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode: "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
                     //toolbar  : false,             //关闭工具栏
                     //previewCodeHighlight : false, // 关闭预览 HTML 的代码块高亮，默认开启
                     emoji: true,

@@ -31,10 +31,10 @@
 (defonce ^:private load-marked
   (memoize #(eval-js-file (jio/resource script-path))))
 
-(defn markdown-to-html [html-string]
+(defn markdown-to-html [md-string]
   (locking javascript-engine
     (load-marked)
-    (set-js :input html-string)
+    (set-js :input md-string)
     (let [output (eval-js "marked(input)")]
       (eval-js "input = undefined;")
       output)))
