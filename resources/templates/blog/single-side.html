@@ -1,5 +1,7 @@
 {% extends "/blog/blog-base.html" %}
 
+{% block page-title %}{{ post.title }} | Scorp Blog{% endblock %}
+
 {% block header-resp-classes %}{{ block.super }} header-inner mild-bg{% endblock %}
 {% block blog-section-styles %}{{ block.super }} section blog-standard single-blog{% endblock %}
 

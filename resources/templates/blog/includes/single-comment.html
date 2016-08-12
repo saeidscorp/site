@@ -5,13 +5,16 @@
     <div class="content">
         <a class="author">{{ comment.writer.first_name }} {{ comment.writer.last_name }}</a>
         <div class="metadata">
-            <span class="date">{{ comment.date_time|pretty-date|title }}</span>
+            <span class="date">{{ comment.date_time|pretty-date|capitalize }}</span>
+            <span class="rating"><i class="star icon"></i>5</span>
         </div>
         <div class="text">
             <p>{{ comment.text }}</p>
         </div>
         <div class="actions">
-            <a class="reply">Reply</a>
+            <a><i class="angle up icon"></i></a>
+            <a><i class="angle down icon"></i></a>
+            <a class="reply"><i class="reply icon"></i>Reply</a>
         </div>
     </div>
     {% if comment.replies|not-empty %}
