@@ -68,6 +68,11 @@
 (defn get-media-by-id [id]
   (first (select media (where {:id id}))))
 
+(defn create-media [path & [mime owner]]
+  (insert media (values {:path  path
+                         :mime  mime
+                         :owner (or owner 1)})))
+
 ;; author functions:
 
 (defn author-to-map [author]

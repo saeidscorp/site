@@ -18,7 +18,8 @@
             [site.routes.cc :refer [cc-routes]]
             [site.routes.user :refer [user-routes registration-routes]]
             [site.routes.blog :refer [blog-routes]]
-            [site.middleware :refer [load-middleware]]))
+            [site.middleware :refer [load-middleware]]
+            [site.service.media :as media]))
 
 ;; TODO: either fully move media serving facilities to somewhere else or make it work.
 (def base-routes
@@ -76,11 +77,13 @@
 
 (defn get-handler [routes {config :config} locale]
   (timbre/info (str "USING CONSTRUCTION PROFILE: " (:under-construction config)))
+  (media/data-dir config)
+  (media/media-dir config)
   (-> (app-handler
         routes
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
-        :ring-defaults (mk-defaults false)
+        :ring-defaults (merge (mk-defaults false) {:params {:multipart true}})
         ;; add access rules here
         :access-rules []
         ;; serialize/deserialize the following data formats
@@ -89,7 +92,7 @@
         :formats [:json-kw :edn :transit-json])
       ; Makes static assets in $PROJECT_DIR/resources/public/ available.
       (wrap-resource "public")
-      (wrap-file (str (env :openshift-data-dir "resources/") "public"))
+      (wrap-file (media/data-path))
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)
       (wrap-if (= (:env config) :prod)

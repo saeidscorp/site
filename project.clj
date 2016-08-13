@@ -83,6 +83,7 @@
                  [funcool/cuerdas "0.8.0"]
                  [com.draines/postal "2.0.0"]
                  [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
+                 [me.raynes/fs "1.4.6"]
 
                  ;; useful libraries
                  [im.chit/hara.event "2.3.6"]
