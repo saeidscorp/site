@@ -10,8 +10,8 @@
     <div class="col-sm-6 col-xs-12">
         <div class="tag">
             {% if post.tag %}
-                <span>tagged as: </span> {% for tag in post.tag %}<a href="{% url tag @tag.id %}">{{ tag.name }}</a>
-                {% if not forloop.last %}, {%
+                {% for tag in post.tag %}<a class="ui {% cycle red green orange purple %} tag label" href="{% url tag @tag.id %}"><i class="ui linux icon"></i>{{ tag.name }}</a>
+                {% if not forloop.last %}{%
                 endif %}{% endfor %}
             {% endif %}
             {% if post.date_time %}

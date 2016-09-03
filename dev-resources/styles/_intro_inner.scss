@@ -62,4 +62,15 @@
 	}
 }
 
+.header-inner-m {
+    @extend .header-inner-2;
 
+    background-size: cover;
+    text-transform: uppercase;
+    padding: 200px 0 30px;
+
+    h2 {
+        color: white;
+        margin-top: 5px;
+    }
+}

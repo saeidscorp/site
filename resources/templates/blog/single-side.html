@@ -2,7 +2,7 @@
 
 {% block page-title %}{{ post.title }} | Scorp Blog{% endblock %}
 
-{% block header-resp-classes %}{{ block.super }} header-inner mild-bg{% endblock %}
+{% block header-resp-classes %}{{ block.super }} header-inner-m text-center mild-bg bg-24 overlay-01{% endblock %}
 {% block blog-section-styles %}{{ block.super }} section blog-standard single-blog{% endblock %}
 
 {% block blog-in-row %}
@@ -17,3 +17,8 @@
     {% include "/blog/includes/sidebar.html" %}
 
 {% endblock blog-in-row %}
+
+{% block add-script %}
+    {{ block.super }}
+    <script
+{% endblock %}
