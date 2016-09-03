@@ -13,6 +13,7 @@
                                   (let [sym (gensym)] [[sym init] sym]) forms)]
     `(let ~bindings ~result)))
 
+;; TODO: improve it so it handles strings as well as keywords and fully supports destructuring.
 (defmacro handler [tag params & body]
   (let [[params body] (if (keyword? tag) [params body]
                                          [tag (vec (cons params body))])

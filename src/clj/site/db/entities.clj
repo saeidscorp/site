@@ -102,6 +102,14 @@
                (limit n))
        (map comment-to-map)))
 
+(defn all-comments-count [post]
+  (-> (select comment (aggregate (count :id) :replies-count)
+              (where {:target (:id post)}))
+      (first)
+      (:replies-count)))
+
+;; post functions:
+
 (defn nested-comments
   ([post n max-depth] (mapv #(nested-comments % n max-depth 0)
                             (comments-for post n)))
@@ -111,13 +119,12 @@
      (assoc this-comment :replies (mapv #(nested-comments % n max-depth (inc curr-depth))
                                         (replies-to this-comment n))))))
 
-;; post functions:
-
 (defn post-to-map [post]
   (->>> post
         (assoc _ :author (get-author-by-id (:author _)))
         (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))
-        (assoc _ :replies (nested-comments _ 5 5))))
+        (assoc _ :replies (nested-comments _ 5 5))
+        (assoc _ :replies-count (all-comments-count _))))
 
 (defn get-post-by-id [id]
   (->> (first (select post (with tag) (where {:id id})))

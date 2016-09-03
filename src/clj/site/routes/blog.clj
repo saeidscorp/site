@@ -90,7 +90,8 @@
 (def blog-routes
   ["/" [["blog/" [[:get [["multi-card-boxed" (handler [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map))]
                          ["multi-card-side" (handler [] (layout/render "blog/multi-card-side.html" multi-card-context-map))]
-                         ["multi-full" (handler [] (layout/render "blog/multi-full.html" multi-context-map))]
+                         ["multi-full" (handler [] (layout/render "blog/multi-full.html" (assoc multi-context-map
+                                                                                           :posts (e/get-latest-posts))))]
                          ["multi-side" (handler [] (layout/render "blog/multi-side.html" (assoc multi-context-map
                                                                                            :posts (e/get-latest-posts))))]
                          [["single-full/" :id] (handler [id] (layout/render "blog/single-full.html" (assoc single-context-map
@@ -100,14 +101,21 @@
                                                                                                                            (assoc _
                                                                                                                              :content (site.utils.markdown/markdown-to-html (:content _)))))))]
                          [[:url-title] (handler :post [url-title]
-                                         (layout/render "blog/single-side.html"
-                                                        (assoc single-context-map :post (e/get-post-by-title url-title))))]]]
+                                         (layout/render "blog/single-full.html"
+                                                        (assoc single-context-map :post (->>> (e/get-post-by-title url-title)
+                                                                                              (assoc _
+                                                                                                :content (site.utils.markdown/markdown-to-html (:content _)))))))]
+                         ;["recent"]
+                         #_[true]]]
                   ["admin/" [["post" [[:get (handler :post-page []
                                               (layout/render "blog/write-post.html" {:image-upload-url (bd/path-for site.layout/routes :upload-image)}))]
                                       [:post (handler :post-do [:as reqmap]
                                                (handle-new-post reqmap))]]]
                              ["upload-image" [[:post (handler :upload-image [:as reqmap]
                                                        (handle-image-upload reqmap))]]]]]]]
+        [#"blog/?" [[:get (handler [] (layout/render "blog/multi-full.html"
+                                                  (assoc multi-context-map
+                                                    :posts (e/get-latest-posts))))]]]
 
         ["author/" [[:get [[[[#"\d+" :id]] (handler :author-id [id]
                                              {:body (str "author: " id)})]

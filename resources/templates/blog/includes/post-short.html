@@ -15,7 +15,8 @@
 
 <div class="blog-footer">
     <span><i
-            class="icon-chat"></i> {{ post.comments-count }} Comments</span> {% comment %} <!-- TODO: make "No Comments" possible --> {% endcomment %}
+            class="icon-chat"></i> {% ifequal post.replies-count 0 %}No{% else %}{{ post.replies-count }}{% endifequal %}
+        Comments</span> {% comment %} <!-- TODO: make "No Comments" localizable --> {% endcomment %}
     <a href="{% url post @post.url_title %}" class="btn btn-read-more">
         Read more
         <span><i class="fa fa-angle-double-right"></i></span>
