@@ -33,7 +33,7 @@
 
                  ;; routing
                  [compojure "1.5.1"]
-                 [bidi "2.0.9"]
+                 [bidi "2.0.10"]
 
                  ;; templating
                  [selmer "1.0.7"]
@@ -51,8 +51,8 @@
                  [com.fzakaria/slf4j-timbre "0.3.2"]
 
                  ;; authentication
-                 [buddy/buddy-hashers "0.14.0"]
-                 [buddy/buddy-auth "1.1.0"]
+                 [buddy/buddy-hashers "1.0.0"]
+                 [buddy/buddy-auth "1.2.0"]
 
                  ;; database
                  ;    [org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in the output
@@ -79,17 +79,17 @@
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
                  [environ "1.1.0"]
-                 [funcool/cuerdas "1.0.0"]
+                 [funcool/cuerdas "1.0.1"]
                  [com.draines/postal "2.0.0"]
                  [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
                  [me.raynes/fs "1.4.6"]
 
                  ;; useful libraries
-                 [im.chit/hara.event "2.3.7"]
-                 [im.chit/hara.io.scheduler "2.3.7"]
-                 [im.chit/hara.expression "2.3.7"]
-                 [im.chit/hara.function "2.3.7"]
-                 [im.chit/hara.time "2.3.7"]
+                 [im.chit/hara.event "2.4.0"]
+                 [im.chit/hara.io.scheduler "2.4.0"]
+                 [im.chit/hara.expression "2.4.0"]
+                 [im.chit/hara.function "2.4.0"]
+                 [im.chit/hara.time "2.4.0"]
                  [im.chit/hara.time.joda "2.2.17"]
                  [delimc "0.1.0"]
 
