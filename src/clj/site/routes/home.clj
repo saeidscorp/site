@@ -29,17 +29,6 @@
 (defn ajax-initial-data []
   (response {:ok "fooo" :loaded true}))
 
-;(defroutes home-routes
-;           (GET "/contact" [] (contact-page))
-;           (GET "/tos" [] (tos-page))
-;           (GET "/cookies" [] (cookies-page))
-;           (GET "/" [] (layout/render "under-construction.html"))
-;           (GET "/test" [] (layout/render "test.html"))
-;           (GET "/example" [] (example-page))
-;           (GET "/posts" [] (post))
-;           (GET "/ajax/page" [] (ajax-page))
-;           (GET "/ajax/page/init" [] (ajax-initial-data)))
-
 (def home-routes
   ["/" [[:get [["contact" (handler [] (contact-page))]
                ["tos" (handler [] (tos-page))]

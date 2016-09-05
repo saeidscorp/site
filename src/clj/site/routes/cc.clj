@@ -18,8 +18,5 @@
     (response {:ex-entities files-beautified :loaded true})))
 
 (defn cc-routes [config]
-  ;(routes
-  ;  (GET "/admin/cc" [] (cc-page))
-  ;  (GET "/admin/cc/initial" [] (initial-data config)))
   ["/admin/cc" [[:get [["" (handler [] (cc-page))]
                        ["/initial" (handler [] (initial-data config))]]]]])

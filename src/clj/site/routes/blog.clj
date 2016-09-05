@@ -5,7 +5,6 @@
             [site.service.media :as media]
             [site.layout :as layout]
             [ring.util.response :refer [redirect]]
-            [bidi.ring :as bdr]
             [bidi.bidi :as bd]
             [site.utils.markdown]
             [me.raynes.fs :as fs])
@@ -13,27 +12,10 @@
         hara.event)
   (:import (java.io IOException)))
 
-(def single-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
+(def sample-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                          :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :comments        true})
-
-(def multi-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
-                        :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                        :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]})
-
-(def multi-card-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
-                             :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                             :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]})
-
-;(defroutes blog-routes
-;           (GET "/blog/multi-card-boxed" [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map)) ;; check
-;           (GET "/blog/multi-card-side" [] (layout/render "blog/multi-card-side.html" multi-context-map)) ;; check
-;           (GET "/blog/multi-full" [] (layout/render "blog/multi-full.html" multi-context-map))
-;           (GET "/blog/multi-side" [] (layout/render "blog/multi-side.html" multi-context-map))
-;           (GET "/blog/single-full" [] (layout/render "blog/single-full.html" single-context-map)) ;; check
-;           (GET "/blog/single-side/:id" [id] (layout/render "blog/single-side.html"
-;                                                            (assoc single-context-map :post (e/post-to-map (e/get-post-by-id id))))))
 
 ;; TODO: use site.service.user/get-logged-in-user
 (defn handle-new-post [{{:keys [title short-title short-content post-content]}
@@ -64,25 +46,25 @@
   (into [] (map vec (partition n posts))))
 
 (def blog-routes
-  ["/" [["blog/" [[:get [["multi-card-boxed" (handler [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map))]
-                         ["multi-card-side" (handler [] (layout/render "blog/multi-card-side.html" multi-card-context-map))]
-                         ["multi-full" (handler [] (layout/render "blog/multi-full.html" (assoc multi-context-map
+  ["/" [["blog/" [[:get [["multi-card-boxed" (handler [] (layout/render "blog/multi-card-boxed.html" sample-context-map))]
+                         ["multi-card-side" (handler [] (layout/render "blog/multi-card-side.html" sample-context-map))]
+                         ["multi-full" (handler [] (layout/render "blog/multi-full.html" (assoc sample-context-map
                                                                                            :posts (e/get-latest-posts))))]
-                         ["multi-side" (handler [] (layout/render "blog/multi-side.html" (assoc multi-context-map
+                         ["multi-side" (handler [] (layout/render "blog/multi-side.html" (assoc sample-context-map
                                                                                            :posts (e/get-latest-posts))))]
-                         [["single-full/" :id] (handler [id] (layout/render "blog/single-full.html" (assoc single-context-map
+                         [["single-full/" :id] (handler [id] (layout/render "blog/single-full.html" (assoc sample-context-map
                                                                                                       :post (e/get-post-by-id id))))]
                          [["single-side/" :id] (handler :post-id [id] (layout/render "blog/single-side.html"
-                                                                                     (assoc single-context-map :post (->>> (e/get-post-by-id id)
+                                                                                     (assoc sample-context-map :post (->>> (e/get-post-by-id id)
                                                                                                                            (assoc _
                                                                                                                              :content (site.utils.markdown/markdown-to-html (:content _)))))))]
                          [#"all/?" (handler :all-posts []
                                          (layout/render "blog/multi-card-boxed.html"
-                                                        (assoc multi-card-context-map :posts-card (make-cards (e/get-latest-posts 12) 3))))]
+                                                        (assoc sample-context-map :posts-card (make-cards (e/get-latest-posts 12) 3))))]
                          ;; single blog post
                          [[:url-title] (handler :post [url-title]
                                          (layout/render "blog/single-full.html"
-                                                        (assoc single-context-map :post (->>> (e/get-post-by-title url-title)
+                                                        (assoc sample-context-map :post (->>> (e/get-post-by-title url-title)
                                                                                               (assoc _
                                                                                                 :content (site.utils.markdown/markdown-to-html (:content _)))))))]]]
                   ["admin/" [["post" [[:get (handler :post-page []
@@ -92,7 +74,7 @@
                              ["upload-image" [[:post (handler :upload-image [:as reqmap]
                                                        (handle-image-upload reqmap))]]]]]]]
         [#"blog/?" [[:get (handler [] (layout/render "blog/multi-full.html"
-                                                  (assoc multi-context-map
+                                                  (assoc sample-context-map
                                                     :posts (e/get-latest-posts))))]]]
 
         ["author/" [[:get [[[[#"\d+" :id]] (handler :author-id [id]
