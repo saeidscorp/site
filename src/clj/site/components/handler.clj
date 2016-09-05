@@ -49,6 +49,12 @@
 (defn wrap-middleware [routes [wrapper & more]]
   (if wrapper (recur (wrapper routes) more) routes))
 
+(defn wrap-debug [handler & [options]]
+  (fn [request]
+    (if (= (:request-method request) :post)
+      (prone.debug/debug)
+      (handler request))))
+
 (defn app-handler
   [app-routes & {:keys [base-url session-options middleware access-rules formats ring-defaults]}]
   (letfn [(wrap-middleware-format [handler]
@@ -83,7 +89,7 @@
         routes
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
-        :ring-defaults (merge (mk-defaults false) {:params {:multipart true}})
+        :ring-defaults (mk-defaults false)
         ;; add access rules here
         :access-rules []
         ;; serialize/deserialize the following data formats

@@ -61,18 +61,16 @@
 ;                                                            (assoc single-context-map :post (e/post-to-map (e/get-post-by-id id))))))
 
 ;; TODO: use site.service.user/get-logged-in-user
-(defn handle-new-post [{{title         "title", short-title "short_title",
-                         short-content "short_content", post-content "post_content"}
-                        :params
-                        :as reqmap}]
-  ;(prone.debug/debug)
+(defn handle-new-post [{{:keys [title short-title short-content post-content]}
+                        :params :as reqmap}]
+  ;#spy/p reqmap
   (reset (shift k (e/create-post title short-title short-content post-content) (k :ok))
          (layout/render "blog/redirect-after.html" {:status          :success
                                                     :message         "Post created successfully."
                                                     :detail-message  "Redirecting to post..."
                                                     :redirect-target (bd/path-for site.layout/routes :post :url-title short-title)})))
 
-(defn handle-image-upload [{{{:keys [filename tempfile content-type] :as file-props} "editormd-image-file"} :params :as reqmap}]
+(defn handle-image-upload [{{{:keys [filename tempfile content-type] :as file-props} :editormd-image-file} :params :as reqmap}]
   (cheshire.core/encode
     (reset (let [path (str (media/media-path reqmap) filename)]
              (shift k (try (fs/copy+ tempfile path)
@@ -87,6 +85,9 @@
                         :message "successfully uploaded."
                         :url     (str "/media/uploads/" filename)}))))))
 
+(defn make-cards [posts n]
+  (into [] (map vec (partition n posts))))
+
 (def blog-routes
   ["/" [["blog/" [[:get [["multi-card-boxed" (handler [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map))]
                          ["multi-card-side" (handler [] (layout/render "blog/multi-card-side.html" multi-card-context-map))]
@@ -100,6 +101,10 @@
                                                                                      (assoc single-context-map :post (->>> (e/get-post-by-id id)
                                                                                                                            (assoc _
                                                                                                                              :content (site.utils.markdown/markdown-to-html (:content _)))))))]
+                         [#"all/?" (handler :all-posts []
+                                         (layout/render "blog/multi-card-boxed.html"
+                                                        (assoc multi-card-context-map :posts-card (make-cards (e/get-latest-posts 12) 3))))]
+                         ;; single blog post
                          [[:url-title] (handler :post [url-title]
                                          (layout/render "blog/single-full.html"
                                                         (assoc single-context-map :post (->>> (e/get-post-by-title url-title)
@@ -118,7 +123,6 @@
                                                     :posts (e/get-latest-posts))))]]]
 
         ["author/" [[:get [[[[#"\d+" :id]] (handler :author-id [id]
-                                             {:body (str "author: " id)})]
+                                             {:body (ring.util.response/response (str "author: " id))})]
                            [[:name] (handler :author [name]
-                                      {:content-type "text/html"
-                                       :body         (str "author name: " name)})]]]]]]])
+                                      (ring.util.response/response (str "author name: " name)))]]]]]]])
