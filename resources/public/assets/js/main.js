@@ -106,6 +106,8 @@ jQuery(document).ready(function(){
 	FixedTop Navigation
  ===================================*/
 
+var _navbarAnimation;
+
  (function(){
 
      var $nav = $('#topNavBar');
@@ -121,12 +123,22 @@ jQuery(document).ready(function(){
     }
 
     navbarAnimation();
+    _navbarAnimation = navbarAnimation;
 
     $(window).scroll(function() {
       navbarAnimation();
   });
 
 })();
+
+$(function () {
+    var navbar = $('#topNavBar');
+    navbar.hover(function () {
+        navbar.addClass('navbar-solid');
+    }, function () {
+        _navbarAnimation();
+    })
+});
 
 
 
@@ -981,7 +993,7 @@ $(window).load(function () {
     var feed = new Instafeed({
         get: 'tagged',
         tagName: 'nature',
-        limit: 6,
+        limit: 4,
         clientId: 'fa06c7e2c5d24947907f097b79d0f99a'
     });
     feed.run();

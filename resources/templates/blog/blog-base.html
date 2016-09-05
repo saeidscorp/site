@@ -1,8 +1,10 @@
 {% extends "/template-base.html" %}
 
+{% block page-title %}{{ block.super }} Blog{% endblock %}
+
 {% block below-nav %}
 
-    <header id="header" class="{% block header-resp-classes %}{% endblock %}">
+    <header id="header" class="{% block header-resp-classes %}THIS_IS_A_CLASS{% endblock %}">
         <div class="container">
             {% include "/includes/breadcrumbs.html" %}
             <h2>{% block blog-page-title %}Blog{% endblock %}</h2>

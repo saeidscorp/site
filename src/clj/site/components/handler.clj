@@ -55,23 +55,38 @@
       (prone.debug/debug)
       (handler request))))
 
-(defn make-sitemap
-  ([routes] (make-sitemap routes (transient []) (transient {})))
-  ([current-routes current-path generated]
-   (cond (vector? current-routes))
-   (let [{name :name} (meta current-routes)]
-      )))
+(defn make-sitemap [routes]
+  (let [generated    (transient {})]
+
+    ((fn rec [current-routes current-path]
+       (cond (vector? current-routes)
+             (let [mt (meta current-routes)]
+               (let [new-path (if mt (conj current-path mt) current-path)]
+                 (doseq [rv current-routes] (rec rv new-path))))
+
+             (instance? bidi.bidi.TaggedMatch current-routes)
+             (assoc! generated (:tag current-routes)
+                     current-path)))
+
+      routes [])
+    (persistent! generated)))
 
 (defn handler-wrapper [handler]
   (reify bidi.ring/Ring
     (request [this req context]
       (handler (assoc req :page (:tag context))))))
 
+(defn wrap-sitemap [handler routes]
+  (let [sitemap (make-sitemap routes)]
+    (fn [req]
+      (handler (assoc req :sitemap sitemap)))))
+
 (defn app-handler
   [app-routes & {:keys [base-url session-options middleware access-rules formats ring-defaults]}]
   (letfn [(wrap-middleware-format [handler]
             (if formats (ring.middleware.format/wrap-restful-format handler :formats formats) handler))]
     (-> (make-handler app-routes handler-wrapper)
+        (wrap-sitemap app-routes)
         (wrap-middleware middleware)
         (noir.util.middleware/wrap-request-map)
         (ring.middleware.defaults/wrap-defaults (dissoc (or ring-defaults site-defaults) :session))
@@ -88,9 +103,9 @@
 
 (defn get-routes [config]
   (site.utils/merge-routes (into [] (concat (when (:registration-allowed? config) [(registration-routes config)]
-                                              (let [rts [(cc-routes config) home-routes blog-routes (user-routes config) base-routes]]
-                                                (if (:under-construction config) (vec (cons construction-routes rts))
-                                                                             rts)))))))
+                                                                                  (let [rts [(cc-routes config) home-routes blog-routes (user-routes config) base-routes]]
+                                                                                    (if (:under-construction config) (vec (cons construction-routes rts))
+                                                                                                                     rts)))))))
 
 
 (defn get-handler [routes {config :config} locale]

@@ -24,7 +24,7 @@
 (defn flash-result [message div-class]
   (merge-flash-messages {:flash-message message :flash-alert-type div-class}))
 
-(parser/set-resource-path!  (clojure.java.io/resource "templates"))
+(parser/set-resource-path! (clojure.java.io/resource "templates"))
 
 (parser/add-tag! :url
                  (fn [[url-type & params] context-map]
@@ -48,28 +48,35 @@
                                   (raise [:template-error
                                           {:msg "with specified but no bindings provided"}])
                                   (k :ok)))
-                       (let [raw-bs (map #(str/split % "=")
-                                     bindings)
-                             bs (map (fn [[k v]] [(keyword k) (context-map (keyword v))]) raw-bs)
+                       (let [raw-bs   (map #(str/split % "=")
+                                           bindings)
+                             bs       (map (fn [[k v]] [(keyword k) (context-map (keyword v))]) raw-bs)
                              new-cmap (reduce #(apply assoc %1 %2) context-map bs)]
                          (parser/render-file (str/unsurround filename "\"") new-cmap))))))
 
 (t/default-type org.joda.time.DateTime)
 
 (def month-name
-  {1  ["January" "Jan."], 2 ["February" "Feb."], 3  ["March" "Mar."], 4 ["April" "Apr."],
-   5  ["May" "May"], 6 ["June" "Jun."], 7  ["July" "Jul."], 8 ["August" "Aug."],
-   9  ["September" "Sep."], 10 ["October" "Oct."], 11 ["November" "Nov."], 12 ["December" "Dec."]})
+  {1 ["January" "Jan."], 2 ["February" "Feb."], 3 ["March" "Mar."], 4 ["April" "Apr."],
+   5 ["May" "May"], 6 ["June" "Jun."], 7 ["July" "Jul."], 8 ["August" "Aug."],
+   9 ["September" "Sep."], 10 ["October" "Oct."], 11 ["November" "Nov."], 12 ["December" "Dec."]})
 
 (defn humanize-date [date]
-  (let [year (t/year date)
+  (let [year  (t/year date)
         month (t/month date)
         [month-full _] (month-name month)
-        day (t/day date)]
+        day   (t/day date)]
     (str month-full " " day ", " year)))
 
 (selmer.filters/add-filter! :pretty-date-span hmz/datetime)
 (selmer.filters/add-filter! :pretty-date humanize-date)
+
+(defn breadcrumbs [sitemap page]
+  (->> (get sitemap page)
+       (map (fn [p]
+              (update p :url #(if (keyword? %)
+                               (bd/path-for routes %)
+                               %))))))
 
 (deftype RenderableTemplate [template params]
   Renderable
@@ -88,6 +95,8 @@
              :role (sess/get :role)
              :af-token af/*anti-forgery-token*
              :page (:page request)
+             ;:sitemap (:sitemap request)
+             :breadcrumbs-path (breadcrumbs (:sitemap request) (:page request))
              :page-tempalate template
              :routes routes
              :registration-allowed? (sess/get :registration-allowed?)

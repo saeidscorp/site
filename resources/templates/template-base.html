@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
+{% block page-title %}Scorp{% endblock %}
+
 {% block add-header %}
-    {% style "/assets/lib/semantic-ui/dist/semantic.min.css" %}
     <link rel="stylesheet" type="text/css" href="/assets/lib/semantic-ui/dist/semantic.min.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/fonts/lato/lato-multi.css"/>
 {% endblock %}
+
+{% block wrapper-classes %}{{ block.super }} fixed-footer{% endblock %}
 
 {% block page-content %}
 
@@ -17,15 +20,20 @@
                     </a>
                     <ul class="menuzord-menu">
                         <li {% ifequal page ":home" %}class="active"{% endifequal %}>
-                            <a href="{% url page home %}"><i class="home icon"></i>Home ({{ page }})</a>
+                            <a href="{% url page home %}"><i class="home icon"></i>Home</a>
                         </li>
                         <li {% ifequal page ":recent-posts" %}class="active"{% endifequal %}>
                             <a href="{% url page recent-posts %}"><i class="fa fa-pencil-square-o"></i>Blog</a>
                             <ul class="dropdown">
-                                <li {% ifequal page ":recent-posts" %}class="act"{% endifequal %}
-                                ><a href="{% url page recent-posts %}"><i class="hourglass start icon"></i> Recent Posts</a></li>
-                                <li {% ifequal page ":posts-archive" %}class="active"{% endifequal %}><a href="{% url page posts-archive %}"><i class="archive icon"></i> Archive</a></li>
-                                <li {% ifequal page ":all-posts" %}class="active"{% endifequal %}><a href="{% url page all-posts %}"><i class="grid layout icon"></i> All Posts</a></li>
+                                <li {% ifequal page ":recent-posts" %}class="act"{% endifequal %}>
+                                    <a href="{% url page recent-posts %}"><i class="hourglass start icon"></i> Recent Posts</a>
+                                </li>
+                                <li {% ifequal page ":posts-archive" %}class="active"{% endifequal %}>
+                                    <a href="{% url page posts-archive %}"><i class="archive icon"></i> Archive</a>
+                                </li>
+                                <li {% ifequal page ":all-posts" %}class="active"{% endifequal %}>
+                                    <a href="{% url page all-posts %}"><i class="grid layout icon"></i> All Posts</a>
+                                </li>
                             </ul>
                         </li>
                         <li {% ifequal page ":projects" %}class="active"{% endifequal %}>
@@ -44,7 +52,7 @@
                                 <i class="ion-ios-search-strong"></i>
                             </a>
                             <form id="searchInput" class="navbar-form" role="search">
-                                <div class="input-group">
+                                <div class="input-group ui input">
                                     <input type="text" class="form-control" placeholder="TYPE &amp; HIT ENTER...">
                                 </div>
                             </form>
@@ -101,11 +109,6 @@
     {% block below-nav %}
     {% endblock %}
 
-{% endblock page-content %}
-
-{% block wrapper-classes %}{{ block.super }} fixed-footer{% endblock %}
-
-{% block off-canvas %}
     <!-- Footer -->
     <section id="footer-container" class="footer-container">
         <!-- Footer widgets -->
@@ -208,4 +211,4 @@
         {% endblock footer-outer %}
     </section>
 
-{% endblock off-canvas %}
+{% endblock page-content %}

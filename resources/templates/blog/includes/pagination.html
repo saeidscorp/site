@@ -1,21 +1,18 @@
 {% if pagination-pages %}
     <nav class="blog-pagination">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
+        <div class="ui icon pagination menu">
+            <a class="item" href="#" aria-label="Previous">
+                <i class="small left chevron icon" aria-hidden="true"></i>
+            </a>
 
             {% for page in pagination-pages %}
-                <li><a href="{{ page.url }}">{{ page.number }}</a></li> {#<!-- TODO: make current page a span -->#}
+                <!-- TODO: make current page apear as a normal text -->
+                <a class="item" href="{{ page.url }}">{{ page.number }}</a>
             {% endfor %}
 
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
+            <a class="item" href="#" aria-label="Next">
+                <i class="small right chevron icon" aria-hidden="true"></i>
+            </a>
+        </div>
     </nav>
 {% endif %}

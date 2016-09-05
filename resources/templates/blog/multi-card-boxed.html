@@ -1,5 +1,7 @@
 {% extends "/blog/blog-base.html" %}
 
+{% block page-title %}All Posts | {{ block.super }}{% endblock %}
+
 {% block header-resp-classes %}{{ block.super }} header-inner-m text-center bg-24 overlay-01{% endblock %}
 {% block blog-section-styles %}{{ block.super }} section blog blog-card-fullwidth mild-bg{% endblock %}
 
