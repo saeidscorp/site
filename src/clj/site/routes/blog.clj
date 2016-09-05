@@ -24,32 +24,7 @@
 
 (def multi-card-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                              :popular-tags    [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                             :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
-                             :blog-box-rows   [[{:title       "Welcome to this blog!"
-                                                 :description "Lorem ispum dolor sit amet."
-                                                 :author      {:name      "Saeid"
-                                                               :image-src "/assets/images/blog/author/author_1.jpg"}
-                                                 :tags        [{:name "Welcome" :url "#"}]
-                                                 :categories  [{:title "Welcome"}]
-                                                 :has-image   true
-                                                 :image-src   "/assets/images/blog/card/blog_1.jpg"
-                                                 :date        "02 Sep"}
-                                                {:title       "Clojure for Summer!"
-                                                 :description "A short outline of plans to do in summer."
-                                                 :author      {:name "Saeid" :image-src ""}
-                                                 :tag         [[:name "Plans" :url "#"] [:name "Clojure" :url "#"]]}]
-                                               [{:title       "Mac OS X Yosemite"
-                                                 :description "This is the first time I tried Mac OS X."
-                                                 :author      {:name      "Saeid"
-                                                               :image-src "/assets/images/blog/author/author_3.jpg"}
-                                                 :tags        [{:name "OS" :url "#"}]
-                                                 :image-src   "/media/uploads/screenshot.png"}
-                                                {:title       "OpenShift Hosting"
-                                                 :description "Lorem ipsum dolor sit amet."
-                                                 :author      {:name      "Saeid"
-                                                               :image-src "/assets/images/blog/author/author_2.jpg"}
-                                                 :tags        [{:name "Clojure" :url "#"}
-                                                               {:name "Cloud" :url "#"}]}]]})
+                             :categories      [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]})
 
 ;(defroutes blog-routes
 ;           (GET "/blog/multi-card-boxed" [] (layout/render "blog/multi-card-boxed.html" multi-card-context-map)) ;; check
@@ -109,9 +84,7 @@
                                          (layout/render "blog/single-full.html"
                                                         (assoc single-context-map :post (->>> (e/get-post-by-title url-title)
                                                                                               (assoc _
-                                                                                                :content (site.utils.markdown/markdown-to-html (:content _)))))))]
-                         ;["recent"]
-                         #_[true]]]
+                                                                                                :content (site.utils.markdown/markdown-to-html (:content _)))))))]]]
                   ["admin/" [["post" [[:get (handler :post-page []
                                               (layout/render "blog/write-post.html" {:image-upload-url (bd/path-for site.layout/routes :upload-image)}))]
                                       [:post (handler :post-do [:as reqmap]

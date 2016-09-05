@@ -1,6 +1,6 @@
 .footer {
     background-color: #0f0f0f;
-    padding: 20px 0 10px;
+    padding: 10px 0;
     color: #eeeeee;
 
     .footer-menu {
@@ -20,4 +20,14 @@
             text-align: center;
         }
     }
+}
+
+.footer-container {
+    position: fixed;
+    display: block;
+    height: auto;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: -1000;
 }

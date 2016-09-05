@@ -16,7 +16,11 @@
                         <img style="height: 50px;" src="/assets/images/logos/1-w.png" alt="california">
                     </a>
                     <ul class="menuzord-menu">
-                        <li class="active"><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                        <li class="active"><a href="#"><i class="home icon"></i>Home</a>
+                        <ul class="dropdown">
+                            <li><a href="#"><i class="at icon"></i> Contact</a></li>
+                        </ul>
+                        </li>
                         <li><a href="#"><i class="fa fa-pencil-square-o"></i>Blog</a>
                             <ul class="dropdown">
                                 <li><a href="/blog"><i class="hourglass start icon"></i> Recent Posts</a></li>
@@ -26,6 +30,8 @@
                         </li>
                         <li><a href="#"><i class="fa fa-certificate"></i>Projects</a></li>
                         <li><a href="#"><i class="fa fa-info-circle"></i>About Me</a></li>
+
+                        <!-- Hidden menus -->
                         <li class="item-icon hidden-xs">
                             <a id="toggelSearch" href="#">
                                 <i class="ion-ios-search-strong"></i>
@@ -88,99 +94,108 @@
     {% block below-nav %}
     {% endblock %}
 
-    <!-- Footer widgets -->
-    {% block footer-outer %}
-        <section id="footer-widgets" class="section footer-widgets dark-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2 col-sm-4 hidden-xs">
-                        <div class="footer-title">
-                            <div class="text-uppercase">
-                                <h4><img class="img-responsive footer-logo" src="/assets/images/logos/1-w.png"
-                                         alt="Logo"></h4>
+{% endblock page-content %}
+
+{% block wrapper-classes %}{{ block.super }} fixed-footer{% endblock %}
+
+{% block off-canvas %}
+    <!-- Footer -->
+    <section id="footer-container" class="footer-container">
+        <!-- Footer widgets -->
+        {% block footer-outer %}
+            <section id="footer-widgets" class="section footer-widgets dark-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4 hidden-xs">
+                            <div class="footer-title">
+                                <div class="text-uppercase">
+                                    <h4><img class="img-responsive footer-logo" src="/assets/images/logos/1-w.png"
+                                             alt="Logo"></h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4 col-sm-6">
-                        <div class="content-wrap widget-text" style="margin-bottom: 10px;">
-                            <p>I'm a passionate computer programmer/hacker.</p>
-                        </div>
-                        <ul class="list-inline social-icon">
-                            <li><a href="#"><span class="ion-social-facebook"></span></a></li>
-                            <li><a href="#"><span class="ion-social-twitter"></span></a></li>
-                            <li><a href="#"><span class="ion-social-googleplus"></span></a></li>
-                            <li><span></span></li>
-                            <li><a href="#"><span class="ion-social-linkedin"></span></a></li>
-                            <li><a href="#"><span class="ion-social-github"></span></a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-2 col-sm-4">
-                        <div class="content-wrap widget-contact">
-                            <ul class="list-unstyled list-arrows-right" style="font-size: 1.1em; line-height: 2.5em;">
-                                <li>
-                                    <a href="/">Home</a>
-                                </li>
-                                <li>
-                                    <a href="/blog">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="/projects">Projects</a>
-                                </li>
-                                <li>
-                                    <a href="/about">About Me</a>
-                                </li>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="content-wrap widget-text" style="margin-bottom: 10px;">
+                                <p>I'm a passionate computer programmer/hacker.</p>
+                            </div>
+                            <ul class="list-inline social-icon">
+                                <li><a href="#"><span class="ion-social-facebook"></span></a></li>
+                                <li><a href="#"><span class="ion-social-twitter"></span></a></li>
+                                <li><a href="#"><span class="ion-social-googleplus"></span></a></li>
+                                <li><span></span></li>
+                                <li><a href="#"><span class="ion-social-linkedin"></span></a></li>
+                                <li><a href="#"><span class="ion-social-github"></span></a></li>
                             </ul>
                         </div>
-                    </div>
 
-                    <div class="col-md-4 col-sm-6">
-                        <div class="content-wrap widget-gallery">
-                            <div class="lightbox-gallery">
-                                <a target="_blank" href="/assets/images/gallery/big/big_1.jpg">
-                                    <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/1.jpg"
-                                         alt=""/>
-                                </a>
-                                <a target="_blank" href="/assets/images/gallery/big/big_3.jpg">
-                                    <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/3.jpg"
-                                         alt=""/>
-                                </a>
-                                <a target="_blank" href="/assets/images/gallery/big/big_8.jpg">
-                                    <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/8.jpg"
-                                         alt=""/>
-                                </a>
-                                <a target="_blank" href="/assets/images/gallery/big/big_9.jpg">
-                                    <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/9.jpg"
-                                         alt=""/>
-                                </a>
+                        <div class="col-md-2 col-sm-4">
+                            <div class="content-wrap widget-contact">
+                                <ul class="list-unstyled list-arrows-right"
+                                    style="font-size: 1.1em; line-height: 2.5em;">
+                                    <li>
+                                        <a href="/">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="/blog">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="/projects">Projects</a>
+                                    </li>
+                                    <li>
+                                        <a href="/about">About Me</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <div class="content-wrap widget-gallery">
+                                <div class="lightbox-gallery">
+                                    <a target="_blank" href="/assets/images/gallery/big/big_1.jpg">
+                                        <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/1.jpg"
+                                             alt=""/>
+                                    </a>
+                                    <a target="_blank" href="/assets/images/gallery/big/big_3.jpg">
+                                        <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/3.jpg"
+                                             alt=""/>
+                                    </a>
+                                    <a target="_blank" href="/assets/images/gallery/big/big_8.jpg">
+                                        <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/8.jpg"
+                                             alt=""/>
+                                    </a>
+                                    <a target="_blank" href="/assets/images/gallery/big/big_9.jpg">
+                                        <img class="img-responsive" src="/assets/images/gallery/thumbnail/full_8/9.jpg"
+                                             alt=""/>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section> <!-- /.Footer widgets -->
-        <footer id="footer" class="section footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <p class="copyright">&copy; 2016 Saeid Akbari (Scorp)</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p class="footer-menu" style="color: grey; letter-spacing: 2px; cursor: default">
-                            <i class="fa fa-firefox"></i>
-                            <i class="fa fa-chrome"></i>
-                            <i class="fa fa-opera"></i>
-                            <i class="fa fa-internet-explorer"></i>
-                            <span>|</span>
-                            <i class="fa fa-html5"></i>
-                            <i class="fa fa-css3"></i>
-                            <!-- TODO: motto goes here -->
-                        </p>
+            </section> <!-- /.Footer widgets -->
+            <footer id="footer" class="section footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <p class="copyright">&copy; 2016 Saeid Akbari (Scorp)</p>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <p class="footer-menu" style="color: grey; letter-spacing: 2px; cursor: default">
+                                <i class="fa fa-firefox"></i>
+                                <i class="fa fa-chrome"></i>
+                                <i class="fa fa-opera"></i>
+                                <i class="fa fa-internet-explorer"></i>
+                                <span>|</span>
+                                <i class="fa fa-html5"></i>
+                                <i class="fa fa-css3"></i>
+                                <!-- TODO: motto goes here -->
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer> <!-- /.footer -->
-    {% endblock footer-outer %}
+            </footer> <!-- /.footer -->
+        {% endblock footer-outer %}
+    </section>
 
-{% endblock page-content %}
+{% endblock off-canvas %}
