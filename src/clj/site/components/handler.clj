@@ -55,11 +55,23 @@
       (prone.debug/debug)
       (handler request))))
 
+(defn make-sitemap
+  ([routes] (make-sitemap routes (transient []) (transient {})))
+  ([current-routes current-path generated]
+   (cond (vector? current-routes))
+   (let [{name :name} (meta current-routes)]
+      )))
+
+(defn handler-wrapper [handler]
+  (reify bidi.ring/Ring
+    (request [this req context]
+      (handler (assoc req :page (:tag context))))))
+
 (defn app-handler
   [app-routes & {:keys [base-url session-options middleware access-rules formats ring-defaults]}]
   (letfn [(wrap-middleware-format [handler]
             (if formats (ring.middleware.format/wrap-restful-format handler :formats formats) handler))]
-    (-> (make-handler app-routes)
+    (-> (make-handler app-routes handler-wrapper)
         (wrap-middleware middleware)
         (noir.util.middleware/wrap-request-map)
         (ring.middleware.defaults/wrap-defaults (dissoc (or ring-defaults site-defaults) :session))

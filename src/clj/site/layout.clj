@@ -31,7 +31,8 @@
                    (let [[handler handler-params] (case url-type
                                                     "post" [:post [:url-title]]
                                                     "author" [:author [:name]]
-                                                    "tag" [:tag [:id]])]
+                                                    "tag" [:tag [:id]]
+                                                    "page" [(keyword (first params)) []])]
                      (apply bd/path-for (:routes context-map) handler
                             (mapcat vector handler-params (map (selmer.filter-parser/lookup-args context-map) params))))))
 
@@ -86,7 +87,8 @@
              :identity (sess/get :identity)
              :role (sess/get :role)
              :af-token af/*anti-forgery-token*
-             :page template
+             :page (:page request)
+             :page-tempalate template
              :routes routes
              :registration-allowed? (sess/get :registration-allowed?)
              :captcha-enabled? (sess/get :captcha-enabled?)

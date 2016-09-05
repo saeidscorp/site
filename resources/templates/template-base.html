@@ -12,24 +12,31 @@
         <section id="topNavBar" class="{% block nav-wrapper-classes %}nav-wrapper {% endblock %}">
             <div class="container-fluid">
                 <div id="menuzord" class="menuzord red">
-                    <a href="index.html" class="menuzord-brand">
+                    <a href="{% url page home %}" class="menuzord-brand">
                         <img style="height: 50px;" src="/assets/images/logos/1-w.png" alt="california">
                     </a>
                     <ul class="menuzord-menu">
-                        <li class="active"><a href="#"><i class="home icon"></i>Home</a>
-                        <ul class="dropdown">
-                            <li><a href="#"><i class="at icon"></i> Contact</a></li>
-                        </ul>
+                        <li {% ifequal page ":home" %}class="active"{% endifequal %}>
+                            <a href="{% url page home %}"><i class="home icon"></i>Home ({{ page }})</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-pencil-square-o"></i>Blog</a>
+                        <li {% ifequal page ":recent-posts" %}class="active"{% endifequal %}>
+                            <a href="{% url page recent-posts %}"><i class="fa fa-pencil-square-o"></i>Blog</a>
                             <ul class="dropdown">
-                                <li><a href="/blog"><i class="hourglass start icon"></i> Recent Posts</a></li>
-                                <li><a href="/blog/archive"><i class="archive icon"></i> Archive</a></li>
-                                <li><a href="/blog/all"><i class="grid layout icon"></i> All Posts</a></li>
+                                <li {% ifequal page ":recent-posts" %}class="act"{% endifequal %}
+                                ><a href="{% url page recent-posts %}"><i class="hourglass start icon"></i> Recent Posts</a></li>
+                                <li {% ifequal page ":posts-archive" %}class="active"{% endifequal %}><a href="{% url page posts-archive %}"><i class="archive icon"></i> Archive</a></li>
+                                <li {% ifequal page ":all-posts" %}class="active"{% endifequal %}><a href="{% url page all-posts %}"><i class="grid layout icon"></i> All Posts</a></li>
                             </ul>
                         </li>
-                        <li><a href="#"><i class="fa fa-certificate"></i>Projects</a></li>
-                        <li><a href="#"><i class="fa fa-info-circle"></i>About Me</a></li>
+                        <li {% ifequal page ":projects" %}class="active"{% endifequal %}>
+                            <a href="{% url page projects %}"><i class="fa fa-certificate"></i>Projects</a>
+                        </li>
+                        <li {% ifequal page ":about-me" %}class="active"{% endifequal %}>
+                            <a href="{% url page about-me %}"><i class="fa fa-info-circle"></i>About Me</a>
+                            <ul class="dropdown">
+                                <li {% ifequal page ":contact" %}class="active"{% endifequal %}><a href="{% url page contact %}"><i class="at icon"></i> Contact</a></li>
+                            </ul>
+                        </li>
 
                         <!-- Hidden menus -->
                         <li class="item-icon hidden-xs">
@@ -134,16 +141,19 @@
                                 <ul class="list-unstyled list-arrows-right"
                                     style="font-size: 1.1em; line-height: 2.5em;">
                                     <li>
-                                        <a href="/">Home</a>
+                                        <a href="{% url page home %}">Home</a>
                                     </li>
                                     <li>
-                                        <a href="/blog">Blog</a>
+                                        <a href="{% url page recent-posts %}">Blog</a>
                                     </li>
                                     <li>
-                                        <a href="/projects">Projects</a>
+                                        <a href="{% url page projects %}">Projects</a>
                                     </li>
                                     <li>
-                                        <a href="/about">About Me</a>
+                                        <a href="{% url page about-me %}">About Me</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url page contact %}">Contact</a>
                                     </li>
                                 </ul>
                             </div>
