@@ -55,7 +55,20 @@
 
 (t/default-type org.joda.time.DateTime)
 
-(selmer.filters/add-filter! :pretty-date hmz/datetime)
+(def month-name
+  {1  ["January" "Jan."], 2 ["February" "Feb."], 3  ["March" "Mar."], 4 ["April" "Apr."],
+   5  ["May" "May"], 6 ["June" "Jun."], 7  ["July" "Jul."], 8 ["August" "Aug."],
+   9  ["September" "Sep."], 10 ["October" "Oct."], 11 ["November" "Nov."], 12 ["December" "Dec."]})
+
+(defn humanize-date [date]
+  (let [year (t/year date)
+        month (t/month date)
+        [month-full _] (month-name month)
+        day (t/day date)]
+    (str month-full " " day ", " year)))
+
+(selmer.filters/add-filter! :pretty-date-span hmz/datetime)
+(selmer.filters/add-filter! :pretty-date humanize-date)
 
 (deftype RenderableTemplate [template params]
   Renderable

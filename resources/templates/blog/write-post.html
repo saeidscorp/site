@@ -9,7 +9,7 @@
 {% block blog-in-row %}
     <!--<div class="col-md-10 col-md-offset-1">-->
     {% if reqmap %}{% debug %}{% endif %}
-    <form method="post" enctype="multipart/form-data" class="ui form">
+    <form method="post" class="ui form">
         <input name="__anti-forgery-token" type="hidden" value="{{ af-token }}"/>
         <div class="field">
             <label>Title</label>
@@ -17,15 +17,15 @@
         </div>
         <div class="field">
             <label>Short Title</label>
-            <input name="short_title" placeholder="Short Title" type="text">
+            <input name="short-title" placeholder="Short Title" type="text">
         </div>
         <div class="field">
             <label>Short Content</label>
-            <textarea name="short_content" rows="3" placeholder="Short content here..."></textarea>
+            <textarea name="short-content" rows="3" placeholder="Short content here..."></textarea>
         </div>
         <div class="field">
             <div id="editormd-area">
-                <textarea name="post_content">
+                <textarea name="post-content">
 ### Welcome
 Here is an image about programming languages:
 

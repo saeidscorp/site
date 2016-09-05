@@ -1,12 +1,12 @@
 {% extends "/blog/blog-base.html" %}
 
 {% block header-resp-classes %}{{ block.super }} header-inner-2 text-center bg-24 overlay-01{% endblock %}
-{% block blog-section-styles %}{{ block.super }} blog-card-fullwidth blog mild-bg{% endblock %}
+{% block blog-section-styles %}{{ block.super }} section blog blog-card-fullwidth mild-bg{% endblock %}
 
 {% block blog-in-container %}
     <!-- label: {{label}} --> {{ label }}
     <!-- blog content -->
-    {% for row in blog-box-rows %}
+    {% for row in posts-card %}
         <div class="row">
             {% for post in row %}
                 <div class="col-md-4 col-sm-4">

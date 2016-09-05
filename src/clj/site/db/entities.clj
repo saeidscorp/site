@@ -1,5 +1,6 @@
 (ns site.db.entities
-  (:require [site.utils :refer [->>>]])
+  (:require [site.utils :refer [->>>]]
+            [hara.time :as t])
   (:use [korma.core])
   (:import (java.util UUID)))
 
@@ -119,12 +120,16 @@
      (assoc this-comment :replies (mapv #(nested-comments % n max-depth (inc curr-depth))
                                         (replies-to this-comment n))))))
 
+;; TODO: make some fields optional (like comments/replies, as they're not always needed).
 (defn post-to-map [post]
   (->>> post
         (assoc _ :author (get-author-by-id (:author _)))
         (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))
         (assoc _ :replies (nested-comments _ 5 5))
-        (assoc _ :replies-count (all-comments-count _))))
+        (assoc _ :replies-count (all-comments-count _))
+        ;; FIXME: I probably fail on a Postgres backend
+        (assoc _ :date_time (t/parse (:date_time _) "yyy-MM-dd HH:mm:ss"))
+        (assoc _ :category "Programming")))
 
 (defn get-post-by-id [id]
   (->> (first (select post (with tag) (where {:id id})))

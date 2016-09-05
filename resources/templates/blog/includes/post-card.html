@@ -1,16 +1,25 @@
-{% if post.has-image %}
-    <img class="img-responsive center-block" src="{{ post.image-src }}" alt="{{ page.short-title }}">
-{% endif %}
+{% include "/blog/includes/includes/post-media.html" %}
+
+<span class="center-block" style="width: 100%;"></span>
+
 <div class="blog-content">
     <h5>
-        <a href="{{ post.url }}">
+        <a href="{% url post @post.url_title %}">
             {{ post.title }}
         </a>
     </h5>
     <div class="post-meta">
-        {% for cat in post.categories %}
-            <span class="blog-catagory"><a href="{{ cat.url }}">{{ cat.title }}</a></span>
-        {% endfor %}
-        <span>{{ post.date }}</span>
+        {% if post.category %}
+            <!-- TODO: implement the category subsystem (+ url template tag) -->
+            <span class="blog-catagory"><a href="{{ post.category.url }}">{{ post.category }}</a></span>
+        {% endif %}
+        {% if post.date_time %}
+            <span>
+                <div class="ui basic label">
+                    <a href="{{ post.date_time.url }}"><i class="calendar icon"></i> {{ post.date_time|pretty-date }}
+                    </a>
+                </div>
+            </span>
+        {% endif %}
     </div>
 </div>

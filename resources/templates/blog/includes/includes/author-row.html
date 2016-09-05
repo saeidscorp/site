@@ -3,19 +3,32 @@
         <div class="post-author">
             <img src="{{ post.author.profile_picture }}" class="img-responsive img-circle"
                  alt="Blog Author">
-            <span>by </span><a href="{% url author @post.author.first_name %}">{{ post.author.first_name }}</a>
+
+            <span>
+                By <a href="{% url author @post.author.first_name %}">{{ post.author.first_name }}</a>
+            </span>
+
+            <span></span>
+
+            {% if post.date_time %}
+                <div class="ui left pointing basic label">
+                    <a href="{{ post.date_time.url }}"><i class="calendar icon"></i> {{ post.date_time|pretty-date }}
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
 
     <div class="col-sm-6 col-xs-12">
         <div class="tag">
             {% if post.tag %}
-                {% for tag in post.tag %}<a class="ui {% cycle red green orange purple %} tag label" href="{% url tag @tag.id %}"><i class="ui linux icon"></i>{{ tag.name }}</a>
-                {% if not forloop.last %}{%
-                endif %}{% endfor %}
-            {% endif %}
-            {% if post.date_time %}
-                <span>Date: </span> <a href="{{ post.date_time.url }}">{{ post.date_time }}</a>
+                {% for tag in post.tag %}
+                    <a class="ui {% cycle red green orange purple %} tiny tag label" href="{% url tag @tag.id %}">
+                        {{ tag.name }}
+                    </a>
+                    {% if not forloop.last %}
+                    {% endif %}
+                {% endfor %}
             {% endif %}
         </div>
     </div>

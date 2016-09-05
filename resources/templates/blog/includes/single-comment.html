@@ -5,7 +5,7 @@
     <div class="content">
         <a class="author">{{ comment.writer.first_name }} {{ comment.writer.last_name }}</a>
         <div class="metadata">
-            <span class="date">{{ comment.date_time|pretty-date|capitalize }}</span>
+            <span class="date">{{ comment.date_time|pretty-date-span|capitalize }}</span>
             <span class="rating"><i class="star icon"></i>5</span>
         </div>
         <div class="text">
