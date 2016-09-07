@@ -13,6 +13,8 @@
 ### Extra
 - [x] Pretty dates (such as "July 2, 2016")
 - [ ] Add external rewrite rules file (using `ring-rewrite`)
+- [ ] Use a combination of jsDelivr & CloudFlare CDNs support to the project
+    - [ ] Remove all library files from project 
 - [ ] Add page caching
 - [ ] Try using an asset pipeline (such as `optimus`)
 - [ ] Design another favicon
