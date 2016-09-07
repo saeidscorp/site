@@ -1,6 +1,6 @@
 (ns site.components.handler
   (:require [taoensso.timbre :as timbre]
-            [site.utils :refer [handler ->>>]]
+            [site.utils :refer [handler]]
             [bidi.ring :as bdr :refer [make-handler]]
             [ring.middleware.ssl :as ssl]
             [noir.response :refer [redirect]]
@@ -136,7 +136,7 @@
 (defrecord Handler [config locale]
   comp/Lifecycle
   (start [comp]
-    (->>> comp
+    (as-> comp _
           (assoc _ :routes (get-routes (:config config)))
           (assoc _ :handler (get-handler (:routes _) (:config _) locale))))
   (stop [comp]

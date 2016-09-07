@@ -1,6 +1,6 @@
 (ns site.routes.blog
   (:require [compojure.core :refer (defroutes GET PUT ANY)]
-            [site.utils :refer [handler ->>>]]
+            [site.utils :refer [handler]]
             [site.db.entities :as e]
             [site.service.media :as media]
             [site.layout :as layout]
@@ -12,12 +12,12 @@
         hara.event)
   (:import (java.io IOException)))
 
-(def sample-context-map {:breadcrumb-path [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
+(def sample-context-map {:breadcrumb-path  [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
                          :popular-tags     [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :categories       [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :comments         true
-                         :pagination-pages [{:url "1", :number 1}
-                                            {:url "2", :number 2}]})
+                         :pagination-pages [{:number "&#8544"}
+                                            {:number "&#8545"}]})
 
 ;; TODO: use site.service.user/get-logged-in-user
 (defn handle-new-post [{{:keys [title short-title short-content post-content]}
@@ -47,6 +47,24 @@
 (defn make-cards [posts n]
   (into [] (map vec (partition-all n posts))))
 
+(defn pagination-params [{:keys [page items-per-page]}
+                         & [{:keys [default-ipp default-page]
+                             :or   {:default-ipp 6 :default-page 1}}]]
+  (let [page (if page (Long. ^String page) default-page)
+        items-per-page (if items-per-page (Long. ^String items-per-page) default-ipp)]
+    [page items-per-page]))
+
+(defn pagination-pages [total-items page items-per-page]
+  (let [total-pages (int (Math/ceil (/ (float total-items) items-per-page)))]
+    [:pagination-pages (for [p (range 1 (inc total-pages))]
+                         {:number p, :current (= p page)})
+     :pagination-prev (let [prev (dec page)]
+                        (if (pos? prev) {:active true, :number prev}
+                                        {:active false}))
+     :pagination-next (let [next (inc page)]
+                        (if (<= next total-pages) {:active true, :number next}
+                                                  {:active false}))]))
+
 (def blog-routes
   ^{:name "Home"
     :url  :home}
@@ -59,31 +77,44 @@
                                          [["single-full/" :id] (handler [id] (layout/render "blog/single-full.html" (assoc sample-context-map
                                                                                                                       :post (e/get-post-by-id id))))]
                                          [["post/" :id] (handler :post-id [id] (layout/render "blog/single-side.html"
-                                                                                              (assoc sample-context-map :post (->>> (e/get-post-by-id id)
+                                                                                              (assoc sample-context-map :post (as-> (e/get-post-by-id id) _
                                                                                                                                     (assoc _
                                                                                                                                       :content (site.utils.markdown/markdown-to-html (:content _)))))))]
+                                         ;; TODO: implement pagination as a middleware
                                          ^{:name "All"
                                            :url  :all-posts}
-                                         [#{"all" "all/"} (handler :all-posts []
+                                         ;; FIXME: any invalid url input would cause a 500.
+                                         [#{"all" "all/"} (handler :all-posts [:as reqmap]
                                                             (layout/render "blog/multi-card-boxed.html"
-                                                                           (assoc sample-context-map :posts-card (make-cards (e/get-latest-posts 12) 3))))]
+                                                                           (if-let [[page items-per-page] (pagination-params (:params reqmap) {:default-ipp 12})]
+                                                                             (as-> sample-context-map _
+                                                                                   (assoc _ :posts-card (make-cards (e/get-posts-range
+                                                                                                                      (* (dec page) items-per-page) items-per-page)
+                                                                                                                    3))
+                                                                                   (apply assoc _ (pagination-pages (e/all-posts-count) page items-per-page)))
+                                                                             (assoc sample-context-map :posts-card (make-cards (e/get-latest-posts 12) 3)))))]
                                          ;; single blog post
                                          [[:url-title] (handler :post [url-title]
                                                          (layout/render "blog/single-full.html"
-                                                                        (assoc sample-context-map :post (->>> (e/get-post-by-title url-title)
+                                                                        (assoc sample-context-map :post (as-> (e/get-post-by-title url-title) _
                                                                                                               (assoc _
                                                                                                                 :content (site.utils.markdown/markdown-to-html (:content _)))))))]]]
                                   ^{:name "Admin"
-                                    :url :admin}
+                                    :url  :admin}
                                   ["admin/" [["post" [[:get (handler :post-page []
                                                               (layout/render "blog/write-post.html" {:image-upload-url (bd/path-for site.layout/routes :upload-image)}))]
                                                       [:post (handler :post-do [:as reqmap]
                                                                (handle-new-post reqmap))]]]
                                              ["upload-image" [[:post (handler :upload-image [:as reqmap]
                                                                        (handle-image-upload reqmap))]]]]]]]
-        [#{"blog" "blog/"} [[:get (handler :recent-posts [] (layout/render "blog/multi-full.html"
-                                                                           (assoc sample-context-map
-                                                                             :posts (e/get-latest-posts))))]]]
+        [#{"blog" "blog/"} [[:get (handler :recent-posts [:as reqmap]
+                                    (layout/render "blog/multi-full.html"
+                                                   (if-let [[page items-per-page] (pagination-params (:params reqmap))]
+                                                     (as-> sample-context-map _
+                                                           (assoc _
+                                                             :posts (e/get-posts-range (* (dec page) items-per-page) items-per-page))
+                                                           (apply assoc _ (pagination-pages (e/all-posts-count) page items-per-page)))
+                                                     (assoc sample-context-map :posts (e/get-latest-posts)))))]]]
 
         ["author/" [[:get [[[[#"\d+" :id]] (handler :author-id [id]
                                              {:body (ring.util.response/response (str "author: " id))})]

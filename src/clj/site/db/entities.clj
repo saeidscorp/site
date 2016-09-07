@@ -1,6 +1,5 @@
 (ns site.db.entities
-  (:require [site.utils :refer [->>>]]
-            [hara.time :as t])
+  (:require [hara.time :as t])
   (:use [korma.core])
   (:import (java.util UUID)))
 
@@ -77,7 +76,7 @@
 ;; author functions:
 
 (defn author-to-map [author]
-  (->>> (first author)
+  (as-> (first author) _
         (assoc _ :profile_picture
                  (:path (get-media-by-id (:profile_picture _))))))
 
@@ -88,7 +87,7 @@
 ;; comment functions:
 
 (defn comment-to-map [com]
-  (->>> com
+  (as-> com _
         (assoc _ :writer (get-author-by-id (:writer _)))))
 
 (defn comments-for [post n]
@@ -120,35 +119,53 @@
      (assoc this-comment :replies (mapv #(nested-comments % n max-depth (inc curr-depth))
                                         (replies-to this-comment n))))))
 
-;; TODO: make some fields optional (like comments/replies, as they're not always needed).
-(defn post-to-map [post]
-  (->>> post
-        (assoc _ :author (get-author-by-id (:author _)))
-        (assoc _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))
-        (assoc _ :replies (nested-comments _ 5 5))
-        (assoc _ :replies-count (all-comments-count _))
+(defmacro assoc-if [test form key val & kvs]
+  `(if ~test (apply assoc ~form ~key ~val ~kvs) ~form))
+
+(defn post-to-map [post & {{replies-num :num replies-depth :depth,
+                            :as         replies} :replies,
+                           :keys                 [category replies-count
+                                                  author featured-image date-time]
+                           :or                   {author         true
+                                                  replies-count  true
+                                                  featured-image true
+                                                  date-time      true
+                                                  category       "Programming"}}]
+  (as-> post _
+        (assoc-if author _ :author (get-author-by-id (:author _)))
+        (assoc-if featured-image _ :image-src (:path (first (select media (where {:id (:featured_image _)})))))
+        (assoc-if replies _ :replies (nested-comments _ replies-num replies-depth))
+        (assoc-if replies-count _ :replies-count (all-comments-count _))
         ;; FIXME: I probably fail on a Postgres backend
-        (assoc _ :date_time (t/parse (:date_time _) "yyy-MM-dd HH:mm:ss"))
-        (assoc _ :category "Programming")))
+        (assoc-if date-time _ :date_time (t/parse (:date_time _) "yyy-MM-dd HH:mm:ss"))
+        (assoc-if category _ :category category)))
 
 (defn get-post-by-id [id]
   (->> (first (select post (with tag) (where {:id id})))
        (post-to-map)))
 
 (defn get-post-by-title [title]
-  (->> (first (select post (with tag) (where {:url_title title})))
-       (post-to-map)))
+  (-> (first (select post (with tag) (where {:url_title title})))
+      (post-to-map :replies {:num 5 :depth 5})))
 
 (defn get-latest-posts
   ([n] (map post-to-map (select post (with tag) (order :date_time :DESC) (limit n))))
   ([] (get-latest-posts 10)))
 
+(defn get-posts-range [start count]
+  (map post-to-map (select post (with tag) (order :date_time :DESC) (limit count) (offset start))))
+
 (defn get-latest-post []
   (first (get-latest-posts 1)))
 
+(defn all-posts-count []
+  (-> (select post (aggregate (count :id) :cnt))
+      (first)
+      (:cnt)))
+
 (defn create-post [title short-title short-content md-content]
-  (insert post (values {:title title,
-                        :short short-content,
+  (insert post (values {:title     title,
+                        :short     short-content,
                         :url_title short-title,
-                        :content md-content,
-                        :author 1})))
+                        :content   md-content,
+                        :author    1})))

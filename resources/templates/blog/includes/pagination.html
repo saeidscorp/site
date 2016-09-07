@@ -1,18 +1,29 @@
 {% if pagination-pages %}
     <nav class="blog-pagination">
         <div class="ui icon pagination menu">
-            <a class="item" href="#" aria-label="Previous">
-                <i class="small left chevron icon" aria-hidden="true"></i>
-            </a>
+            {% if pagination-prev.active %}
+                <a class="item" href="{% url pagination @page @pagination-prev.number %}" aria-label="Previous">
+                    <i class="small left chevron icon" aria-hidden="true"></i>
+                </a>
+            {% else %}
+                <div class="active item"><i class="small left chevron icon" aria-hidden="true"></i></div>
+            {% endif %}
 
-            {% for page in pagination-pages %}
-                <!-- TODO: make current page apear as a normal text -->
-                <a class="item" href="{{ page.url }}">{{ page.number }}</a>
+            {% for p in pagination-pages %}
+                {% if p.current %}
+                    <div class="active item">{{ p.number }}</div>
+                {% else %}
+                    <a class="item" href="{% url pagination @page @p.number %}">{{ p.number|safe }}</a>
+                {% endif %}
             {% endfor %}
 
-            <a class="item" href="#" aria-label="Next">
-                <i class="small right chevron icon" aria-hidden="true"></i>
-            </a>
+            {% if pagination-next.active %}
+                <a class="item" href="{% url pagination @page @pagination-next.number %}" aria-label="Next">
+                    <i class="small right chevron icon" aria-hidden="true"></i>
+                </a>
+            {% else %}
+                <div class="active item"><i class="small right chevron icon" aria-hidden="true"></i></div>
+            {% endif %}
         </div>
     </nav>
 {% endif %}

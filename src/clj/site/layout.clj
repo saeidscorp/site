@@ -28,13 +28,20 @@
 
 (parser/add-tag! :url
                  (fn [[url-type & params] context-map]
-                   (let [[handler handler-params] (case url-type
-                                                    "post" [:post [:url-title]]
-                                                    "author" [:author [:name]]
-                                                    "tag" [:tag [:id]]
-                                                    "page" [(keyword (first params)) []])]
-                     (apply bd/path-for (:routes context-map) handler
-                            (mapcat vector handler-params (map (selmer.filter-parser/lookup-args context-map) params))))))
+                   (let [lookup (selmer.filter-parser/lookup-args context-map)
+                         [handler handler-params appender]
+                         (case url-type
+                           "post" [:post [:url-title]]
+                           "author" [:author [:name]]
+                           "tag" [:tag [:id]]
+                           "page" [(keyword (first params)) []]
+                           ;; TODO: a better implementation would prevent generation of these small fns.
+                           "pagination" [(keyword (lookup (first params))) [] #(str % "?page="
+                                                                                    (lookup (second params)))])]
+                     (let [base-url (apply bd/path-for (:routes context-map) handler
+                                           (mapcat vector handler-params (map lookup params)))]
+                       (if appender (appender base-url)
+                                    base-url)))))
 
 (parser/add-tag! :rec-include
                  (fn [[filename & [_with_ & bindings] :as args] context-map]
