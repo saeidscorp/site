@@ -49,8 +49,8 @@
 
 (defn pagination-params [{:keys [page items-per-page]}
                          & [{:keys [default-ipp default-page]
-                             :or   {:default-ipp 6 :default-page 1}}]]
-  (let [page (if page (Long. ^String page) default-page)
+                             :or   {default-ipp 6 default-page 1}}]]
+  (let [page #spy/p (if page (Long. ^String page) default-page)
         items-per-page (if items-per-page (Long. ^String items-per-page) default-ipp)]
     [page items-per-page]))
 
@@ -109,7 +109,7 @@
                                                                        (handle-image-upload reqmap))]]]]]]]
         [#{"blog" "blog/"} [[:get (handler :recent-posts [:as reqmap]
                                     (layout/render "blog/multi-full.html"
-                                                   (if-let [[page items-per-page] (pagination-params (:params reqmap))]
+                                                   (if-let [[page items-per-page] (pagination-params (:params reqmap) {:default-ipp 4})]
                                                      (as-> sample-context-map _
                                                            (assoc _
                                                              :posts (e/get-posts-range (* (dec page) items-per-page) items-per-page))
