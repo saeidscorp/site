@@ -9,11 +9,13 @@
 - [ ] Multi-lingual site
 - [ ] A full-fledged style for Markdown (consistent across preview and real view)
 - [ ] Make sure all backend services (like DB) use UTC time
+- [ ] Automated CI/deployment by Travis OpenShift Deployment
+    - [ ] Using binary deployments to reduce server down-time
 
 ### Extra
 - [x] Pretty dates (such as "July 2, 2016")
 - [ ] Add external rewrite rules file (using `ring-rewrite`)
-- [ ] Use a combination of jsDelivr & CloudFlare CDNs support to the project
+- [ ] Add a combination of jsDelivr & CloudFlare CDNs support to the project
     - [ ] Remove all library files from project 
 - [ ] Add page caching
 - [ ] Try using an asset pipeline (such as `optimus`)

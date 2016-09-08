@@ -200,7 +200,8 @@
                                       [joplin.jdbc "0.3.7"]
                                       [joplin.core "0.3.7"]]}
 
-             :uberjar {:auto-clean  false                   ; not sure about this one
+             :uberjar {:dependencies [[org.clojure/tools.nrepl "0.2.12"]]
+                       :auto-clean  false                   ; not sure about this one
                        :omit-source true
                        :aot         :all}}
              ;:default [:base :system :provided]}

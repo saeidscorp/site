@@ -50,7 +50,7 @@
 (defn pagination-params [{:keys [page items-per-page]}
                          & [{:keys [default-ipp default-page]
                              :or   {default-ipp 6 default-page 1}}]]
-  (let [page #spy/p (if page (Long. ^String page) default-page)
+  (let [page (if page (Long. ^String page) default-page)
         items-per-page (if items-per-page (Long. ^String items-per-page) default-ipp)]
     [page items-per-page]))
 
