@@ -1,4 +1,4 @@
-{% extends "/template-base.html" %}
+{% extends "template-base.html" %}
 
 {% block nav-wrapper-classes %}{{ block.super }}{% endblock nav-wrapper-classes %}
 
@@ -6,7 +6,7 @@
 
     <header id="header" class="header-inner-2 mild-bg text-center">
         <div class="container">
-            {% include "/includes/breadcrumbs.html" %}
+            {% include "includes/breadcrumbs.html" %}
             <h3>{% block page-title %}Login{% endblock %}</h3>
         </div>
     </header>

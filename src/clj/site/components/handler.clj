@@ -56,20 +56,18 @@
       (handler request))))
 
 (defn make-sitemap [routes]
-  (let [generated    (transient {})]
+  (-> ((fn rec [generated current-routes current-path]
+         (cond (vector? current-routes)
+               (let [mt (meta current-routes)
+                     new-path (if mt (conj current-path mt) current-path)]
+                 (reduce #(rec %1 %2 new-path) generated current-routes))
 
-    ((fn rec [current-routes current-path]
-       (cond (vector? current-routes)
-             (let [mt (meta current-routes)]
-               (let [new-path (if mt (conj current-path mt) current-path)]
-                 (doseq [rv current-routes] (rec rv new-path))))
-
-             (instance? bidi.bidi.TaggedMatch current-routes)
-             (assoc! generated (:tag current-routes)
-                     current-path)))
-
-      routes [])
-    (persistent! generated)))
+               (instance? bidi.bidi.TaggedMatch current-routes)
+               (assoc! generated (:tag current-routes)
+                       current-path)
+               :else generated))
+        (transient {}) routes [])
+      (persistent!)))
 
 (defn handler-wrapper [handler]
   (reify bidi.ring/Ring
@@ -131,7 +129,7 @@
       (wrap-if (= (:env config) :prod)
                ;ssl/wrap-forwarded-scheme
                ssl/wrap-hsts)))
-               ;ssl/wrap-ssl-redirect)))
+;ssl/wrap-ssl-redirect)))
 
 (defrecord Handler [config locale]
   comp/Lifecycle

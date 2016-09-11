@@ -12,7 +12,8 @@
 {% block page-content %}
 
     {% block page-nav-outer %}
-        <section id="topNavBar" class="{% block nav-wrapper-classes %}nav-wrapper {% endblock %}">
+        <section id="topNavBar"
+                 class="{% block nav-wrapper-classes-outer %}nav-wrapper {% block nav-wrapper-classes %}{% endblock %}{% endblock %}">
             <div class="container-fluid">
                 <div id="menuzord" class="menuzord red">
                     <a href="{% url page home %}" class="menuzord-brand">
@@ -26,7 +27,8 @@
                             <a href="{% url page recent-posts %}"><i class="fa fa-pencil-square-o"></i>Blog</a>
                             <ul class="dropdown">
                                 <li {% ifequal page ":recent-posts" %}class="act"{% endifequal %}>
-                                    <a href="{% url page recent-posts %}"><i class="hourglass start icon"></i> Recent Posts</a>
+                                    <a href="{% url page recent-posts %}"><i class="hourglass start icon"></i> Recent
+                                        Posts</a>
                                 </li>
                                 <li {% ifequal page ":posts-archive" %}class="active"{% endifequal %}>
                                     <a href="{% url page posts-archive %}"><i class="archive icon"></i> Archive</a>
@@ -42,7 +44,8 @@
                         <li {% ifequal page ":about-me" %}class="active"{% endifequal %}>
                             <a href="{% url page about-me %}"><i class="fa fa-info-circle"></i>About Me</a>
                             <ul class="dropdown">
-                                <li {% ifequal page ":contact" %}class="active"{% endifequal %}><a href="{% url page contact %}"><i class="at icon"></i> Contact</a></li>
+                                <li {% ifequal page ":contact" %}class="active"{% endifequal %}><a
+                                        href="{% url page contact %}"><i class="at icon"></i> Contact</a></li>
                             </ul>
                         </li>
 
@@ -107,7 +110,31 @@
     {% endblock page-nav-outer %}
 
     {% block below-nav %}
-    {% endblock %}
+        <!-- Header -->
+        <header id="header" class="{% block header-resp-classes %}{% endblock %}">
+            <div class="ui centered stackable grid container">
+                <div class="{% block header-grid-classes-outer %}eleven wide left aligned {% block header-grid-classes %}{% endblock %}{% endblock %} column">
+                    <div class="ui middle aligned grid">
+                        <div class="eight wide column">
+                            <div class="ui huge {% block header-inside-header-classes %}inverted{% endblock %} header">
+                                {% block header-page-title %}{{ page-title }}{% endblock %}
+                            </div>
+                        </div>
+                        <div class="right floated right aligned eight wide column">
+                            <div class="ui basic segment">
+                                {% include "includes/breadcrumbs.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- /.Header -->
+
+        {% block page-inside %}
+        {% endblock %}
+
+    {% endblock below-nav %}
 
     <!-- Footer -->
     <section id="footer-container" class="footer-container">

@@ -20,7 +20,7 @@
     {% if comment.replies|not-empty %}
         <div class="comments">
             {% for c in comment.replies %}
-                {% rec-include "/blog/includes/single-comment.html" with comment=c %}
+                {% rec-include "blog/includes/single-comment.html" with comment=c %}
             {% endfor %}
         </div>
     {% endif %}

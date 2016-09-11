@@ -2,8 +2,7 @@
 	padding: 180px 0 30px 0;
 	background-size: cover;
 	text-transform: uppercase;
-	padding-top: 200px;
-
+	padding-top: 110px;
 
 	.breadcrumb {
 	    float: right;
@@ -64,10 +63,13 @@
 
 .header-inner-m {
     @extend .header-inner-2;
-
+	box-shadow: 0 3px 30px 0px rgba(32, 32, 32, 0.8);
     background-size: cover;
     text-transform: uppercase;
-    padding: 200px 0 30px;
+	padding: 200px 0 30px;
+	@media only screen and (max-width: 991px) {
+		padding: 150px 0 30px;
+	}
 
     h2 {
         color: white;

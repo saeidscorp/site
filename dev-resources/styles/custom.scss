@@ -1,3 +1,13 @@
 //custom css code here
 
 @import 'comments';
+
+.ui.basic.button:focus, .ui.basic.button:hover,
+.ui.basic.buttons .button:focus,
+.ui.basic.buttons .button:hover {
+    background: inherit !important;
+}
+
+.ui .row {
+    margin: 0;
+}

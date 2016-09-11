@@ -1,4 +1,4 @@
-{% extends "/blog/blog-base.html" %}
+{% extends "blog/blog-base.html" %}
 
 {% block add-header %}
     {{ block.super }}
@@ -6,31 +6,40 @@
     {% style "/assets/lib/editormd/dist/editormd.preview.min.css" %}
 {% endblock %}
 
+{% block page-title %}New Post | {{ block.super }}{% endblock %}
+{% block header-page-title %}New Post{% endblock %}
+{% block nav-wrapper-classes %} navbar-solid{% endblock %}
+{% block header-resp-classes %} mild-bg header-inner{% endblock %}
+{% block header-grid-classes-outer %}left aligned{% endblock %}
+{% block header-inside-header-classes %}{% endblock %}
+
 {% block blog-in-row %}
     <!--<div class="col-md-10 col-md-offset-1">-->
     {% if reqmap %}{% debug %}{% endif %}
-    <form method="post" class="ui form">
+    <form method="post" class="ui form left aligned column">
         <input name="__anti-forgery-token" type="hidden" value="{{ af-token }}"/>
-        <div class="field">
-            <label>Title</label>
-            <input name="title" placeholder="Title" type="text">
-        </div>
-        <div class="field">
-            <label>Short Title</label>
-            <input name="short-title" placeholder="Short Title" type="text">
+        <div class="two fields">
+            <div class="twelve wide field">
+                <label>Title</label>
+                <input name="title" placeholder="Title" type="text">
+            </div>
+            <div class="field">
+                <label>Short Title</label>
+                <input name="short-title" placeholder="Short Title" type="text">
+            </div>
         </div>
         <div class="field">
             <label>Short Content</label>
             <textarea name="short-content" rows="3" placeholder="Short content here..."></textarea>
         </div>
         <div class="field">
-            <div id="editormd-area">
+            <div id="editormd-area" style="border-radius: 5px;">
                 <textarea name="post-content">
 ### Welcome
-Here is an image about programming languages:
+Here is an image:
 
-![image](http://i.imgur.com/lFdrH1h.jpg)
-                </textarea>
+![image](/assets/images/others/about_us_video.jpg)
+</textarea>
             </div>
         </div>
     <button class="ui primary button" type="submit">Post</button>
@@ -96,6 +105,12 @@ Here is an image about programming languages:
                         //this.width("100%");
                         //this.height(480);
                         //this.resize("100%", 640);
+                    },
+                    onfullscreen: function () {
+                        _hideNavbar(false);
+                    },
+                    onfullscreenExit: function () {
+                        _hideNavbar(true);
                     },
                     placeholder: "Write your post..."
                 });

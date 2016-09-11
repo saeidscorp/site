@@ -1,25 +1,22 @@
-{% extends "/template-base.html" %}
+{% extends "template-base.html" %}
 
 {% block page-title %}{{ block.super }} Blog{% endblock %}
 
-{% block below-nav %}
+{% block nav-wrapper-classes %}{{ block.super }} header-overlay{% endblock %}
+{% block header-page-title %}Blog{% endblock %}
+{% block header-resp-classes %}{{ block.super }} header-inner-m{% endblock %}
 
-    <header id="header" class="{% block header-resp-classes %}THIS_IS_A_CLASS{% endblock %}">
-        <div class="container">
-            {% include "/includes/breadcrumbs.html" %}
-            <h2>{% block blog-page-title %}Blog{% endblock %}</h2>
-        </div>
-    </header>
+{% block page-inside %}
 
     <section id="blog-standard" class="{% block blog-section-styles %}section{% endblock %}">
-        <div class="container">
+        <div class="ui centered grid container">
             {% block blog-in-container %}
-                <div class="row">
+                <!--<div class="row">-->
                     {% block blog-in-row %}
                     {% endblock %}
-                </div>
+                <!--</div>-->
             {% endblock blog-in-container %}
         </div>
     </section>
 
-{% endblock below-nav %}
+{% endblock %}

@@ -1,6 +1,10 @@
-<div class="breadcrumb">
+<div class="ui breadcrumb">
     {% for b in breadcrumbs-path %}
-        <a href="{% if forloop.last %}#{% else %}{{ b.url }}{% endif %}">{{ b.name }}</a>
-        {% if not forloop.last %}<i class="fa fa-angle-double-right"></i>{% endif %}
+        {% if not forloop.last %}
+            <a href="{{ b.url }}">{{ b.name }}</a>
+            <i class="right chevron icon divider"></i>
+        {% else %}
+            <a class="active">{{ b.name }}</a>
+        {% endif %}
     {% endfor %}
 </div>

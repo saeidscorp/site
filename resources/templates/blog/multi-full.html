@@ -1,18 +1,18 @@
-{% extends "/blog/blog-base.html" %}
+{% extends "blog/blog-base.html" %}
 
-{% block header-resp-classes %}{{ block.super }} header-inner-m text-center bg-24 overlay-01{% endblock %}
+{% block header-resp-classes %}{{ block.super }} header-inner-m bg-24{% endblock %}
 {% block blog-section-styles %}{{ block.super }} section blog-standard multiple-blog{% endblock %}
 
 {% block blog-in-row %}
     <!--blog content-->
-    <div class="col-md-8 col-md-offset-2">
+    <div class="eleven wide left aligned column">
         {% for post in posts %}
-            <div class="different-blog">
-                {% include "/blog/includes/post-short.html" %}
+            <div class="ui stackable grid different-blog">
+                {% include "blog/includes/post-short.html" %}
             </div>
         {% endfor %}
 
-        {% include "/blog/includes/pagination.html" %}
+        {% include "blog/includes/pagination.html" %}
     </div>
     <!--blog content end-->
 

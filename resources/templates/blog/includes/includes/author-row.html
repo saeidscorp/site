@@ -1,35 +1,32 @@
-<div class="row">
-    <div class="col-sm-6 col-xs-12">
-        <div class="post-author">
-            <img src="{{ post.author.profile_picture }}" class="img-responsive img-circle"
-                 alt="Blog Author">
+<div class="two columns row">
+    <div class="post-author column">
+        <img src="{{ post.author.profile_picture }}" class="img-responsive img-circle"
+             alt="Blog Author">
 
-            <span>
-                By <a href="{% url author @post.author.first_name %}">{{ post.author.first_name }}</a>
-            </span>
+        <span>
+            By <a href="{% url author @post.author.first_name %}">{{ post.author.first_name }}</a>
+        </span>
 
-            <span></span>
+        <span></span>
 
-            {% if post.date_time %}
-                <div class="ui left pointing basic label">
-                    <a href="{{ post.date_time.url }}"><i class="calendar icon"></i> {{ post.date_time|pretty-date }}
-                    </a>
-                </div>
-            {% endif %}
-        </div>
+        {% if post.date_time %}
+            <div class="ui left pointing basic label">
+                <a href="{{ post.date_time.url }}">
+                    <i class="calendar icon"></i> {{ post.date_time|pretty-date }}
+                </a>
+            </div>
+        {% endif %}
     </div>
 
-    <div class="col-sm-6 col-xs-12">
-        <div class="tag">
-            {% if post.tag %}
-                {% for tag in post.tag %}
-                    <a class="ui {% cycle red green orange purple %} tiny tag label" href="{% url tag @tag.id %}">
-                        {{ tag.name }}
-                    </a>
-                    {% if not forloop.last %}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        </div>
+    <div class="tag middle aligned column">
+        {% if post.tag %}
+            {% for tag in post.tag %}
+                <a class="ui {% cycle red green orange purple %} tiny tag label" href="{% url tag @tag.id %}">
+                    {{ tag.name }}
+                </a>
+                {% if not forloop.last %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
 </div>

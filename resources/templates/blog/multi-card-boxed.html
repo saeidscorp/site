@@ -1,19 +1,20 @@
-{% extends "/blog/blog-base.html" %}
+{% extends "blog/blog-base.html" %}
 
 {% block page-title %}All Posts | {{ block.super }}{% endblock %}
 
-{% block header-resp-classes %}{{ block.super }} header-inner-m text-center bg-24 overlay-01{% endblock %}
+{% block header-resp-classes %}{{ block.super }} header-inner-m text-center bg-24{% endblock %}
+{% block header-grid-classes-outer %}left aligned{% endblock %}
 {% block blog-section-styles %}{{ block.super }} section blog blog-card-fullwidth mild-bg{% endblock %}
 
 {% block blog-in-container %}
     <!-- label: {{label}} --> {{ label }}
     <!-- blog content -->
     {% for row in posts-card %}
-        <div class="row">
+        <div class="three column row">
             {% for post in row %}
-                <div class="col-md-4 col-sm-4">
+                <div class="left aligned column">
                     <div class="blog-post ">
-                        {% include "/blog/includes/post-card.html" with post=post %}
+                        {% include "blog/includes/post-card.html" with post=post %}
                         <!--{# TODO: try without "with" #}-->
                     </div>
                 </div>
@@ -21,6 +22,6 @@
         </div>
     {% endfor %}
 
-    {% include "/blog/includes/pagination.html" %}
+    {% include "blog/includes/pagination.html" %}
     <!-- end block content -->
 {% endblock blog-in-container %}

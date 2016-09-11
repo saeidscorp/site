@@ -30,10 +30,14 @@
   (response {:ok "fooo" :loaded true}))
 
 (def home-routes
-  ["/" [[:get [["contact" (handler [] (contact-page))]
+  ^{:name "Home"
+    :url :home}
+  ["/" [[:get [^{:name "Contact"
+                 :url :contact}
+               ["contact" (handler :contact [] (contact-page))]
                ["tos" (handler [] (tos-page))]
                ["cookies" (handler [] (cookies-page))]
-               ["" (handler [] (layout/render "under-construction.html"))]
+               ["" (handler :home [] (layout/render "under-construction.html"))]
                ["test" (handler [] (layout/render "test.html"))]
                ["example" (handler [] (example-page))]
                ["posts" (handler [] (post))]

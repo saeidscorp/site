@@ -2,16 +2,31 @@
                     Single blog Post
     ======================================================= -->
 
-{% include "/blog/includes/includes/author-row.html" %}
 
-<h4 class="blog-title">{{ post.title }}</h4>
+<div class="one column row">
+    <div class="column">
 
-{% include "/blog/includes/includes/post-media.html" %}
+        {% include "blog/includes/includes/post-title.html" with link=true %}
 
-<div class="main-description">
-    {{ post.content|safe }}
+        {% include "blog/includes/includes/post-media.html" %}
+
+    </div>
 </div>
 
-{% include "/blog/includes/includes/share.html" %}
+<div class="one column row">
+    <div class="main-description column">
+        {{ post.content|safe }}
+    </div>
+</div>
 
-{% include "/blog/comments.html" %}
+{% include "blog/includes/includes/author-row.html" %}
+
+<div class="one column centered row">
+    {% include "blog/includes/includes/share.html" %}
+</div>
+
+<div class="one column row">
+    <div class="column">
+        {% include "blog/comments.html" %}
+    </div>
+</div>

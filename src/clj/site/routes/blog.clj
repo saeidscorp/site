@@ -12,8 +12,7 @@
         hara.event)
   (:import (java.io IOException)))
 
-(def sample-context-map {:breadcrumb-path  [{:href "/" :name "Home"} {:href "/blog" :name "blog"}]
-                         :popular-tags     [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
+(def sample-context-map {:popular-tags     [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :categories       [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :comments         true
                          :pagination-pages [{:number "&#8544"}
@@ -107,6 +106,8 @@
                                                                (handle-new-post reqmap))]]]
                                              ["upload-image" [[:post (handler :upload-image [:as reqmap]
                                                                        (handle-image-upload reqmap))]]]]]]]
+        ^{:name "Blog"
+          :url :recent-posts}
         [#{"blog" "blog/"} [[:get (handler :recent-posts [:as reqmap]
                                     (layout/render "blog/multi-full.html"
                                                    (if-let [[page items-per-page] (pagination-params (:params reqmap) {:default-ipp 4})]

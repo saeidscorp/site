@@ -1,4 +1,4 @@
-{% extends "/blog/blog-base.html" %}
+{% extends "blog/blog-base.html" %}
 
 {% block page-title %}{{ post.title }} | {{ block.super }}{% endblock %}
 
@@ -7,10 +7,10 @@
 
 {% block blog-in-row %}
     <!--blog content-->
-    <div class="col-md-8 col-md-offset-2">
-
-        {% include "/blog/includes/post-full.html" %}
-
+    <div class="eleven wide left aligned column">
+        <div class="ui stackable grid different-blog">
+            {% include "blog/includes/post-full.html" %}
+        </div>
     </div>
     <!--blog content end-->
 {% endblock blog-in-row %}

@@ -579,12 +579,18 @@
     left: 0;
     z-index: 99;
     transition: background-color 0.2s ease-in-out;
+    &.header-overlay {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0) 100%);
+    }
     &.semi-transparent {
       background: rgba(0, 0, 0, 0.5);
     }
     &.navbar-solid {
       background-color: rgba(0, 0, 0, 0.95);
     }
+  &.navbar-hidden {
+    display: none;
+  }
     &.solid {
       background-color: rgba(0, 0, 0, 0.95);
     }
@@ -845,11 +851,13 @@ FULL SCREEN NAVIGATION
 
 #zwrapper{
   position: relative;
-  z-index: 2;
+  //z-index: 0; // keeping this commented as it causes the box-shadow to be not shown
 
   &.fixed-footer {
-      margin-bottom: 346px;
-      box-shadow: 0 2px 8px rgba(32, 32, 32, 0.8);
+    margin-bottom: 350px;
+    border-bottom: 1px solid rgba(32, 32, 32, 0.8);
+    min-height: 0;
+    box-shadow: 0 6px 22px 5px rgba(32, 32, 32, 0.8);
   }
 
   /* fix bug on iOS */

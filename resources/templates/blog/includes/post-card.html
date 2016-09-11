@@ -1,4 +1,4 @@
-{% include "/blog/includes/includes/post-media.html" %}
+{% include "blog/includes/includes/post-media.html" %}
 
 <span class="center-block" style="width: 100%;"></span>
 
@@ -15,7 +15,7 @@
         {% endif %}
         {% if post.date_time %}
             <span>
-                <div class="ui basic label">
+                <div class="ui up pointing basic label">
                     <a href="{{ post.date_time.url }}"><i class="calendar icon"></i> {{ post.date_time|pretty-date }}
                     </a>
                 </div>

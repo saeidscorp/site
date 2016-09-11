@@ -1,4 +1,4 @@
-{% extends "/blog/blog-base.html" %}
+{% extends "blog/blog-base.html" %}
 
 {% block page-title %}{{ post.title }} | Scorp Blog{% endblock %}
 
@@ -9,12 +9,12 @@
     <!--blog content-->
     <div class="col-md-8 col-md-push-4">
 
-        {% include "/blog/includes/post-full.html" %}
+        {% include "blog/includes/post-full.html" %}
 
     </div>
     <!--blog content end-->
 
-    {% include "/blog/includes/sidebar.html" %}
+    {% include "blog/includes/sidebar.html" %}
 
 {% endblock blog-in-row %}
 

@@ -269,6 +269,7 @@
         Single blog and Multiple blog page
 =============================================*/
 .blog-standard {
+    box-shadow: 0 3px 30px 0px rgba(32, 32, 32, 0.8);
     a {
         color: $gray10;
 
@@ -316,7 +317,8 @@
             margin-left: 20px;
 
             @media only screen and (max-width: 767px) {
-                margin-left: 0px;
+                margin: 0;
+                padding: 10px 0;
             }
         }
     }
@@ -339,8 +341,12 @@
         @extend h4;
         color: $gray19;
         font-weight: 300;
-        margin: 30px 0px;
+        margin: 0;
         text-transform: capitalize;
+    }
+
+    .blog-media {
+        margin-top: 30px;
     }
 
     &.single-blog {
@@ -476,15 +482,19 @@
     &.multiple-blog {
 
         .different-blog {
-            margin-bottom: 120px;
+            margin-bottom: 100px;
+
+            @media only screen and (max-width: 991px) {
+                margin-bottom: 50px;
+            }
 
             .blog-media {
-                margin-bottom: 30px;
+                //margin-bottom: 30px;
             }
 
             .blog-footer {
                 border-bottom: 1px solid $gray5;
-                margin-top: 25px;
+                //margin-top: 25px;
                 padding-bottom: 15px;
 
                 span {
@@ -496,7 +506,7 @@
                 }
 
                 .btn-read-more {
-                    float: right;
+                    //float: right;
                     letter-spacing: 0;
                     padding: 0px 10px;
 
@@ -539,7 +549,7 @@
     text-align: center;
 
     .pagination {
-        border-radius: 0px;
+        border-radius: 0;
 
         a {
             border-radius: 0;
