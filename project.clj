@@ -11,7 +11,7 @@
 
                  ;; clojure/clojurescript
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.227"]
+                 [org.clojure/clojurescript "1.9.229"]
 
                  ;; webserver
                  ;    [http-kit "2.1.19"]
@@ -19,7 +19,7 @@
 
                  ;; core facilities
                  [org.clojure/core.cache "0.6.5"]
-                 [org.clojure/core.async "0.2.385"]
+                 [org.clojure/core.async "0.2.391"]
 
                  ;; ring handler
                  [ring "1.5.0"]
@@ -33,13 +33,13 @@
 
                  ;; routing
                  [compojure "1.5.1"]
-                 [bidi "2.0.10"]
+                 [bidi "2.0.12"]
 
                  ;; templating
-                 [selmer "1.0.7"]
+                 [selmer "1.0.9"]
 
                  ;; error-reporting
-                 [prone "1.1.1"]
+                 [prone "1.1.2"]
                  [noir-exception "0.2.5"]
 
                  ;; logging
@@ -58,7 +58,7 @@
                  ;    [org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in the output
                  [korma "0.4.3"]
                  [com.h2database/h2 "1.4.192"]
-                 [org.xerial/sqlite-jdbc "3.8.11.2"]
+                 [org.xerial/sqlite-jdbc "3.14.2.1"]
 
                  ;; configuration
                  [jarohen/nomad "0.7.2"]
@@ -71,25 +71,25 @@
                  [org.danielsz/system "0.3.1"]
 
                  ;; client-side
-                 [datascript "0.15.2"]
+                 [datascript "0.15.4"]
                  [cljs-ajax "0.5.8"] ;;
-                 [reagent "0.5.1"]
+                 [reagent "0.6.0"]
 
                  ;; utilities
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
                  [environ "1.1.0"]
-                 [funcool/cuerdas "1.0.1"]
+                 [funcool/cuerdas "1.0.2"]
                  [com.draines/postal "2.0.0"]
                  [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
                  [me.raynes/fs "1.4.6"]
 
                  ;; useful libraries
-                 [im.chit/hara.event "2.4.0"]
-                 [im.chit/hara.io.scheduler "2.4.0"]
-                 [im.chit/hara.expression "2.4.0"]
-                 [im.chit/hara.function "2.4.0"]
-                 [im.chit/hara.time "2.4.0"]
+                 [im.chit/hara.event "2.4.5"]
+                 [im.chit/hara.io.scheduler "2.4.5"]
+                 [im.chit/hara.expression "2.4.5"]
+                 [im.chit/hara.function "2.4.5"]
+                 [im.chit/hara.time "2.4.5"]
                  [im.chit/hara.time.joda "2.2.17"]
                  [delimc "0.1.0"]
 
@@ -98,7 +98,7 @@
                  [clojure-humanize "0.2.0"]
 
                  ;; typed
-                 [org.clojure/core.typed "0.3.24"]]
+                 [org.clojure/core.typed "0.3.28"]]
 
   :plugins [[lein-immutant "2.1.0"]
             [de.sveri/closp-crud "0.1.3"]
@@ -156,14 +156,14 @@
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-expectations "0.0.8"]
                                       [lein-autoexpect "1.9.0"]
-                                      [lein-figwheel "0.5.6"]
+                                      [lein-figwheel "0.5.8"]
                                       [lein-immutant "2.1.0"]
                                       [lein-sassy "1.0.7"]
                                       [lein-pdo "0.1.1"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.55"]
 
-                                      [figwheel-sidecar "0.5.6"]
+                                      [figwheel-sidecar "0.5.8"]
                                       [com.cemerick/piggieback "0.2.1"]
 
                                       ; use this for htmlunit or an older firefox version
@@ -197,8 +197,8 @@
                                       [lein-sassy "1.0.7"]
 
                                       ; new version of joplin (backwards incompatible)
-                                      [joplin.jdbc "0.3.7"]
-                                      [joplin.core "0.3.7"]]}
+                                      [joplin.jdbc "0.3.9"]
+                                      [joplin.core "0.3.9"]]}
 
              :uberjar {:dependencies [[org.clojure/tools.nrepl "0.2.12"]]
                        :auto-clean  false                   ; not sure about this one
