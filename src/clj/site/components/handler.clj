@@ -4,9 +4,8 @@
             [bidi.ring :as bdr :refer [make-handler]]
             [ring.middleware.ssl :as ssl]
             [noir.response :refer [redirect]]
-
             [noir.util.middleware]
-
+            (optimus [prime :as optimus] [optimizations] [strategies])
             [ring.middleware.defaults :refer [site-defaults]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.file :refer [wrap-file]]
@@ -80,13 +79,21 @@
       (handler (assoc req :sitemap sitemap)))))
 
 (defn app-handler
-  [app-routes & {:keys [base-url session-options middleware access-rules formats ring-defaults]}]
+  [app-routes & {:keys [base-url session-options middleware access-rules formats ring-defaults env config]}]
   (letfn [(wrap-middleware-format [handler]
             (if formats (ring.middleware.format/wrap-restful-format handler :formats formats) handler))]
     (-> (make-handler app-routes handler-wrapper)
         (wrap-sitemap app-routes)
         (wrap-middleware middleware)
         (noir.util.middleware/wrap-request-map)
+        (optimus/wrap (site.service.media/prepare-assets config)
+                      (if (= :prod env)
+                        optimus.optimizations/all
+                        optimus.optimizations/none)
+                      (if (= :prod env)
+                        optimus.strategies/serve-frozen-assets
+                        optimus.strategies/serve-live-assets-autorefresh)
+                      {:verbose true})
         (ring.middleware.defaults/wrap-defaults (dissoc (or ring-defaults site-defaults) :session))
         (hiccup.middleware/wrap-base-url base-url)
         (wrap-middleware-format)
@@ -115,6 +122,8 @@
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
         :ring-defaults (mk-defaults false)
+        :config config
+        :env (:env config)
         ;; add access rules here
         :access-rules []
         ;; serialize/deserialize the following data formats
@@ -122,7 +131,7 @@
         ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
         :formats [:json-kw :edn :transit-json])
       ; Makes static assets in $PROJECT_DIR/resources/public/ available.
-      (wrap-resource "public")
+      ;(wrap-resource "public")
       (wrap-file (media/data-path))
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)

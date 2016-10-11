@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source ${OPENSHIFT_REPO_DIR}/.openshift/nave
+
+cd ${OPENSHIFT_REPO_DIR}dev-resources/libs
+
+echo Downloading bower dependencies
+
+eval $WITH_NAVE ../../node_modules/.bin/bower install
+
+cd components/semantic
+echo Installing Semantic-UI
+eval $WITH_NAVE npm install
+echo Building Semantic-UI
+eval $WITH_NAVE ./node_modules/.bin/gulp build

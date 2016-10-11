@@ -1,0 +1,4 @@
+[#needed
+    #bundle {"app.js" ["/assets/js/main.js"
+                       "/assets/js/plugins.js"]
+             "app.css" ["/styles/main.scss" "/styles/custom.scss"]}]
