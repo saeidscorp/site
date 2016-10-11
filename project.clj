@@ -36,7 +36,7 @@
                  [bidi "2.0.12"]
 
                  ;; templating
-                 [selmer "1.0.10"]
+                 [selmer "1.10.0"]
 
                  ;; static assets
                  [org.clojars.saeidscorp/optimus "0.19.0-SNAPSHOT"]
