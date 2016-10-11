@@ -36,7 +36,7 @@
                  [bidi "2.0.12"]
 
                  ;; templating
-                 [selmer "1.0.9"]
+                 [selmer "1.0.10"]
 
                  ;; error-reporting
                  [prone "1.1.2"]
@@ -158,7 +158,7 @@
                                       [lein-autoexpect "1.9.0"]
                                       [lein-figwheel "0.5.8"]
                                       [lein-immutant "2.1.0"]
-                                      [lein-sassy "1.0.7"]
+                                      [lein-sassy "1.0.8"]
                                       [lein-pdo "0.1.1"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.55"]
@@ -194,7 +194,7 @@
                                       ;; for vinyasa's (./lein) to work
                                       [leiningen "2.6.1"]
 
-                                      [lein-sassy "1.0.7"]
+                                      [lein-sassy "1.0.8"]
 
                                       ; new version of joplin (backwards incompatible)
                                       [joplin.jdbc "0.3.9"]
