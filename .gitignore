@@ -13,6 +13,7 @@ pom.xml.asc
 /resources/public/media/*
 /dev-resources/html/
 /dev-resources/libs/node_modules
+/dev-resources/libs/components
 /logs/
 /out
 /.repl

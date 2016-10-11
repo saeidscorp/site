@@ -26,7 +26,7 @@
   (.put (javascript-engine)
         (variable-name var-name) val))
 
-(def ^:private script-path "public/assets/lib/editormd/lib/marked.min.js")
+(def ^:private script-path "libs/components/editor.md/lib/marked.min.js")
 
 (defonce ^:private load-marked
   (memoize #(eval-js-file (jio/resource script-path))))

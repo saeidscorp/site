@@ -38,6 +38,12 @@
                  ;; templating
                  [selmer "1.0.7"]
 
+                 ;; static assets
+                 [org.clojars.saeidscorp/optimus "0.19.0-SNAPSHOT"]
+                 ;[org.clojars.saeidscorp/optimus-img-transform "0.2.0-SNAPSHOT"]
+                 [org.clojars.saeidscorp/optimus-sass "0.1.0-SNAPSHOT"]
+                 [one.scorp/bundle-reader "0.1.0-SNAPSHOT"]
+
                  ;; error-reporting
                  [prone "1.1.1"]
                  [noir-exception "0.2.5"]
@@ -151,6 +157,8 @@
 
   :profiles {:dev     {:repl-options {:init-ns site.user}
 
+                       :env {:optimus-js-engine "nashorn"}
+
                        :source-paths ["env" "env/dev/script"]
 
                        :plugins      [[lein-ring "0.9.0"]
@@ -159,7 +167,8 @@
                                       [lein-figwheel "0.5.6"]
                                       [lein-immutant "2.1.0"]
                                       [lein-sassy "1.0.7"]
-                                      [lein-pdo "0.1.1"]]
+                                      [lein-pdo "0.1.1"]
+                                      [lein-environ "1.1.0"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.55"]
 
@@ -219,7 +228,7 @@
   :jvm-opts ["-Dhornetq.data.dir=target/hornetq-data"
              "-Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=target/ObjectStore"]
 
-  :repl-options {:timeout 120000}
+  :repl-options {:timeout 1000000}
 
   :main site.core
 
