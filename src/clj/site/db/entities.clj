@@ -103,7 +103,7 @@
        (map comment-to-map)))
 
 (defn all-comments-count [post]
-  (-> (select comment (aggregate (count :id) :replies-count)
+  (-> (select :comment (aggregate (count :*) :replies-count)
               (where {:target (:id post)}))
       (first)
       (:replies-count)))
@@ -159,7 +159,7 @@
   (first (get-latest-posts 1)))
 
 (defn all-posts-count []
-  (-> (select post (aggregate (count :id) :cnt))
+  (-> (select :post (aggregate (count :*) :cnt))
       (first)
       (:cnt)))
 
