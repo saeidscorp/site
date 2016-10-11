@@ -91,13 +91,13 @@
         (assoc _ :writer (get-author-by-id (:writer _)))))
 
 (defn comments-for [post n]
-  (->> (select comment (where {:target (:id post), :is_reply 0})
+  (->> (select comment (where {:target (:id post), :is_reply false})
                (order :date_time :DESC)
                (limit n))
        (map comment-to-map)))
 
 (defn replies-to [com n]
-  (->> (select comment (where {:is_reply 1, :reply_to (:id com)})
+  (->> (select comment (where {:is_reply true, :reply_to (:id com)})
                (order :date_time :DESC)
                (limit n))
        (map comment-to-map)))
@@ -137,7 +137,8 @@
         (assoc-if replies _ :replies (nested-comments _ replies-num replies-depth))
         (assoc-if replies-count _ :replies-count (all-comments-count _))
         ;; FIXME: I probably fail on a Postgres backend
-        (assoc-if date-time _ :date_time (t/parse (:date_time _) "yyy-MM-dd HH:mm:ss"))
+        (assoc-if date-time _ :date_time (let [t (:date_time _)] (if (string? t) (t/parse t "yyy-MM-dd HH:mm:ss")
+                                                                                 (t/coerce t {:type org.joda.time.DateTime}))))
         (assoc-if category _ :category category)))
 
 (defn get-post-by-id [id]
