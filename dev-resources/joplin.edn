@@ -1,11 +1,14 @@
 {:migrators    {:sqlite-mig "resources/migrators/sqlite"
-                :h2-mig     "resources/migrators/h2"}
+                :h2-mig     "resources/migrators/h2"
+                :postgres-mig "resources/migrators/postgres"}
  :seeds        {:sql-dev-seed "seeds.sql/run"}
  :databases    {:sqlite-dev       {:type :sql, :url "jdbc:sqlite:./db/site.sqlite"}
                 :sqlite-test      {:type :sql, :url "jdbc:sqlite:./db/site-test.sqlite"}
                 :sqlite-integtest {:type :sql, :url "jdbc:sqlite:./db/site-integtest.sqlite"}
-                :h2-dev           {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
+                :h2-dev           {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}
+                :postgres-dev     {:type :sql, :url "jdbc:postgresql://localhost:5432/site?user=***REMOVED***&password=***REMOVED***"}}
  :environments {:sqlite-dev-env       [{:db :sqlite-dev, :migrator :sqlite-mig, :seed :sql-dev-seed}]
                 :sqlite-test-env      [{:db :sqlite-test, :migrator :sqlite-mig}]
                 :sqlite-integtest-env [{:db :sqlite-integtest, :migrator :sqlite-mig}]
-                :h2-dev-env           [{:db :h2-dev, :migrator :h2-mig :seed :jdbc}]}}
+                :h2-dev-env           [{:db :h2-dev, :migrator :h2-mig :seed :jdbc}]
+                :postgres-dev-env     [{:db :postgres-dev, :migrator :postgres-mig}]}}

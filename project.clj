@@ -45,7 +45,7 @@
                  [one.scorp/bundle-reader "0.1.0-SNAPSHOT"]
 
                  ;; error-reporting
-                 [prone "1.1.2"]
+                 [prone "1.1.1"]
                  [noir-exception "0.2.5"]
 
                  ;; logging
@@ -61,9 +61,9 @@
                  [buddy/buddy-auth "1.2.0"]
 
                  ;; database
-                 ;    [org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in the output
                  [korma "0.4.3"]
                  [com.h2database/h2 "1.4.192"]
+                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [org.xerial/sqlite-jdbc "3.14.2.1"]
 
                  ;; configuration
@@ -155,7 +155,9 @@
          :dst   "resources/public/assets/css/"
          :style :expanded}
 
-  :profiles {:dev     {:repl-options {:init-ns site.user}
+  :profiles {:openshift {:env {:optimus-js-engine "clj-v8"}
+                         :jvm-opts ["-Xmx500m"]}
+             :dev     {:repl-options {:init-ns site.user}
 
                        :env {:optimus-js-engine "nashorn"}
 

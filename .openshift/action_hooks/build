@@ -13,3 +13,8 @@ echo Installing Semantic-UI
 eval $WITH_NAVE npm install
 echo Building Semantic-UI
 eval $WITH_NAVE ./node_modules/.bin/gulp build
+
+cd ${OPENSHIFT_REPO_DIR}
+echo "<=== Creatign Symlinks ===>"
+for d in $(ls "${OPENSHIFT_DATA_DIR}public/assets"
+ln -s ${OPENSHIFT_DATA_DIR}public/assets/images ./resources/public/assets/images

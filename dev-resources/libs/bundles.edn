@@ -39,8 +39,9 @@
      #component ["main"
                  #component "modernizr"
                  #component "magnific-popup"
-                 #component "imagesloaded"
-                 #component "bootstrap"
                  #component "animsition"
+                 #component "bootstrap"
+                 #component "semantic"
+                 #component "imagesloaded"
                  #component "ionicons"
                  #component "pictonic"]]

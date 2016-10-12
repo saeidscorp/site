@@ -27,4 +27,5 @@
     :config (c/new-config (c/prod-conf-or-dev))
     :db (component/using (new-db) [:config])
     :handler (component/using (new-handler) [:config :locale])
+    :templating (component/using (new-templating) [:handler :config])
     :web (component/using (new-web-server-prod) [:handler :config])))

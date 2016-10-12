@@ -1,4 +1,5 @@
 [#needed
     #bundle {"app.js" ["/assets/js/main.js"
                        "/assets/js/plugins.js"]
-             "app.css" ["/styles/main.scss" "/styles/custom.scss"]}]
+             "app.css" ["/styles/main.scss" "/styles/custom.scss"]
+             "color.css" ["/styles/colors/youtube.scss"]}]
