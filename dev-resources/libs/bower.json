@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.1.4",
+    "jquery": "~2.1.4",
     "semantic": "saeidscorp/semantic-ui#patched",
     "font-awesome": "fontawesome#^4.6.3",
     "lato-font": "^1.1.1",

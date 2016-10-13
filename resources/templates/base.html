@@ -44,16 +44,8 @@
     {% block before-header %}
     {% endblock %}
 
-    <!-- Twitter Bootstrap -->
-    {% component css bootstrap %}
-    <!-- Semantic UI -->
-    {% component css semantic %}
-
     <!-- Library Stylesheets -->
-    {% component css animsition %}
-    {% component css ionicons %}
-    {% component css magnific-popup %}
-    {% component css pictonic %}
+    {% component css main %}
 
     <!-- Custom Template Styles -->
     {% bundle app.css %}
@@ -94,13 +86,10 @@
 
     {% block scripts %}
 
-        {% component js modernizr %}
-        {% component js bootstrap %}
-        {% component js imagesloaded %}
-        {% component js animsition %}
-        {% component js magnific-popup %}
-        {% component js semantic %}
+        <!-- Library Scripts -->
+        {% component js main %}
 
+        <!-- Application Scripts -->
         {% bundle app.js %}
 
         {% block add-script %}

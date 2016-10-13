@@ -8,7 +8,7 @@
 (defn data-dir [config]
   (reset! data-dir-state (if-let [dir (:data-dir config)]
                            dir
-                           (str (env :openshift-data-dir "resources/") "public")))
+                           (str (env :openshift-data-dir "resources/") "public/")))
   @data-dir-state)
 
 (defn data-path
