@@ -48,8 +48,10 @@
 (defn get-logged-in-user
   "Needs a logged in user to retrieve the user name and role, otherwise returns empty string map"
   []
-  (try {:email (sess/get :identity "")
-        :role (sess/get :role "")}
+  (try {:id    (sess/get :id "")
+        :email (sess/get :identity "")
+        :role (sess/get :role "")
+        :is-author? (sess/get :is-author? false)}
        (catch Exception _ {:email "" :role ""})))
 
 (t/ann ^:no-check get-logged-in-username [-> String])

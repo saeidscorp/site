@@ -20,13 +20,14 @@
     "semantic": "saeidscorp/semantic-ui#patched",
     "font-awesome": "fontawesome#^4.6.3",
     "lato-font": "^1.1.1",
-    "editor.md": "^1.5.0",
+    "editor.md": "saeidscorp/editor.md#patching",
     "animsition": "^4.0.2",
     "magnific-popup": "^1.1.0",
     "ionicons": "ionicons#^2.0.1",
     "pictonic": "saeidscorp/pictonic-free",
     "modernizr": "v2.8.3",
     "imagesloaded": "^4.1.1",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "katex": "katex#^0.6.0"
   }
 }

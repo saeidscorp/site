@@ -22,7 +22,8 @@
 (defn handle-new-post [{{:keys [title short-title short-content post-content]}
                         :params :as reqmap}]
   ;#spy/p reqmap
-  (reset (shift k (e/create-post title short-title short-content post-content) (k :ok))
+  (reset (shift k (e/create-post title short-title short-content post-content
+                                 (:id (site.service.user/get-logged-in-user))) (k :ok))
          (layout/render "blog/redirect-after.html" {:status          :success
                                                     :message         "Post created successfully."
                                                     :detail-message  "Redirecting to post..."

@@ -2,8 +2,7 @@
 
 {% block add-header %}
     {{ block.super }}
-    {% style "/assets/lib/editormd/dist/editormd.min.css" %}
-    {% style "/assets/lib/editormd/dist/editormd.preview.min.css" %}
+    {% component css editor.md %}
 {% endblock %}
 
 {% block page-title %}New Post | {{ block.super }}{% endblock %}
@@ -49,15 +48,14 @@ Here is an image:
 
 {% block add-script %}
 
-    {% script "/assets/lib/editormd/dist/editormd.js" %}
-    {% script "/assets/lib/editormd/languages/en.js" %}
+    {% component js editor.md %}
 
     <script type="text/javascript">
         var testEditor;
 
         editormd.katexURL = {
-            js: "/assets/lib/editormd/cdn/katex.min",
-            css: "/assets/lib/editormd/cdn/katex.min"
+            js: "{% bundle-basepath katex.js %}",
+            css: "{% bundle-basepath katex.css %}"
         };
 
         $(function () {
@@ -67,7 +65,7 @@ Here is an image:
                     width: "100%",
                     //autoHeight: true,
                     height: 740,
-                    path: '/assets/lib/editormd/lib/',
+                    path: '/components/editor.md/lib/',
                     theme: "default",
                     previewTheme: "default",
                     editorTheme: "default",

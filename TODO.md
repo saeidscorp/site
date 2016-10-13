@@ -20,6 +20,7 @@
 
 ### Extra
 - [x] Pretty dates (such as "July 2, 2016")
+- [ ] Profile the handlers (with clojure-mini-profiler)
 - [ ] Add external rewrite rules file (using `ring-rewrite`)
 - [ ] Add CloudFlare CDN support to the project
     - [x] Remove all library files from project 

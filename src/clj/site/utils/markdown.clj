@@ -3,12 +3,12 @@
             [environ.core :refer [env]])
   (:import (javax.script ScriptEngine ScriptEngineManager)))
 
-(defonce ^:private javascript-engine
-         (memoize #(-> (ScriptEngineManager.)
-                       (.getEngineByMimeType "application/javascript"))))
+(def ^:private javascript-engine
+  (delay (-> (ScriptEngineManager.)
+             (.getEngineByName (env :optimus-js-engine "nashorn")))))
 
 (defn- eval-js [^String script]
-  (.eval ^ScriptEngine (javascript-engine)
+  (.eval ^ScriptEngine @javascript-engine
          script))
 
 (defn- eval-js-file [path]
@@ -20,17 +20,17 @@
     :else (str var-name)))
 
 (defn- get-js [var-name]
-  (.get (javascript-engine)
+  (.get @javascript-engine
         (variable-name var-name)))
 
 (defn- set-js [var-name val]
-  (.put (javascript-engine)
+  (.put @javascript-engine
         (variable-name var-name) val))
 
 (def ^:private script-path "libs/components/editor.md/lib/marked.min.js")
 
 (defonce ^:private load-marked
-  (memoize #(eval-js-file (jio/resource script-path))))
+         (memoize #(eval-js-file (jio/resource script-path))))
 
 (defn markdown-to-html [md-string]
   (locking javascript-engine

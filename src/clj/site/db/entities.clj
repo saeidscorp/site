@@ -80,11 +80,14 @@
         (assoc _ :profile_picture
                  (:path (get-media-by-id (:profile_picture _))))))
 
+(defn is-author? [user]
+  (when (seq (select author (where {:user_id (:id user)}))) true))
+
+;; comment functions:
+
 (defn get-author-by-id [id]
   (->> (select user (where {:id id}))
        (author-to-map)))
-
-;; comment functions:
 
 (defn comment-to-map [com]
   (as-> com _
@@ -102,13 +105,13 @@
                (limit n))
        (map comment-to-map)))
 
+;; post functions:
+
 (defn all-comments-count [post]
   (-> (select :comment (aggregate (count :*) :replies-count)
               (where {:target (:id post)}))
       (first)
       (:replies-count)))
-
-;; post functions:
 
 (defn nested-comments
   ([post n max-depth] (mapv #(nested-comments % n max-depth 0)
@@ -164,9 +167,9 @@
       (first)
       (:cnt)))
 
-(defn create-post [title short-title short-content md-content]
+(defn create-post [title short-title short-content md-content author]
   (insert post (values {:title     title,
                         :short     short-content,
                         :url_title short-title,
                         :content   md-content,
-                        :author    1})))
+                        :author    author})))

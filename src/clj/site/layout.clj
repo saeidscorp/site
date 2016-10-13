@@ -79,6 +79,17 @@
                          (.endsWith ^String bundle-name ".js")
                          (html/link-to-js-bundles (:request context-map) [bundle-name]))))
 
+(parser/add-tag! :bundle-path
+                 (fn [[bundle-name] context-map]
+                   (first (optimus.link/bundle-paths (:request context-map) [bundle-name]))))
+
+(defn drop-extension [^String s]
+  (.substring s 0 (.lastIndexOf s (int \.))))
+
+(parser/add-tag! :bundle-basepath
+                 (fn [[bundle-name] context-map]
+                   (drop-extension (first (optimus.link/bundle-paths (:request context-map) [bundle-name])))))
+
 ;; and a single resource file
 (parser/add-tag! :resource
                  (fn [[filename] context-map]
@@ -100,6 +111,7 @@
 
 (selmer.filters/add-filter! :pretty-date-span hmz/datetime)
 (selmer.filters/add-filter! :pretty-date humanize-date)
+(selmer.filters/add-filter! :drop-extension drop-extension)
 
 (defn breadcrumbs [sitemap page]
   (->> (get sitemap page)

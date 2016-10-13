@@ -36,6 +36,19 @@
                  :js ["/components/semantic/dist/semantic.min.js"]]
 
  #needed
+     #component ["editor.md"
+                 :css ["/components/editor.md/css/editormd.min.css"
+                       "/components/editor.md/css/editormd.preview.min.css"]
+                 :js ["/components/editor.md/editormd.min.js"
+                      "/components/editor.md/languages/en.js"]]
+
+ #resources [#x"^/components/editor\\.md/(lib|plugins)/.*"]
+
+ #needed
+     #bundle {"katex.css" ["/components/katex/dist/katex.min.css"]
+              "katex.js" ["/components/katex/dist/katex.min.js"]}
+
+ #needed
      #component ["main"
                  #component "modernizr"
                  #component "magnific-popup"
