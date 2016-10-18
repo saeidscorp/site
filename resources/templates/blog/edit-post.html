@@ -1,0 +1,21 @@
+{% extends "blog/write-post.html" %}
+
+{% block page-title %}Edit Post | {{ post-title }} | Scorp Blog{% endblock %}
+{% block header-page-title %}Edit Post{% endblock %}
+
+{% block initial-title-attr %} value="{{ post-title }}"{% endblock %}
+{% block initial-short-title-attr %} value="{{ post-short-title }}"{% endblock %}
+{% block initial-short-content %}{{ post-short-content }}{% endblock %}
+{% block initial-content %}{{ post-content }}{% endblock %}
+
+{% block actions-inner %}
+    <div class="right aligned field">
+        <button class="ui negative button" style="float: right;" onclick="$('#deleteForm').submit();">Delete</button>
+    </div>
+{% endblock %}
+
+{% block extra-forms %}
+    <form id="deleteForm" method="post" action="/blog/admin/delete/{{ post.id }}">
+        <input name="__anti-forgery-token" type="hidden" value="{{ af-token }}"/>
+    </form>
+{% endblock %}

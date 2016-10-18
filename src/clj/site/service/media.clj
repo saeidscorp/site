@@ -15,9 +15,17 @@
   ([request] (data-path))
   ([] @data-dir-state))
 
+(defonce ^:private media-url-state (atom nil))
+(defn media-url [config]
+  (reset! media-url-state (env :media-url (:media-url config "/media/uploads/"))))
+
+(defn media-url-path
+  ([request] (media-url-path))
+  ([] @media-url-state))
+
 (defonce ^:private media-dir-state (atom nil))
 (defn media-dir [config]
-  (reset! media-dir-state (env :media-dir (:media-dir config (str (data-dir config) "media/uploads/")))))
+  (reset! media-dir-state (env :media-dir (:media-dir config (str (data-dir config) (subs @media-url-state 1))))))
 
 (defn media-path
   ([request] (media-path))

@@ -116,6 +116,7 @@
 (defn get-handler [routes {config :config} locale]
   (timbre/info (str "USING CONSTRUCTION PROFILE: " (:under-construction config)))
   (media/data-dir config)
+  (media/media-url config)
   (media/media-dir config)
   (-> (app-handler
         routes

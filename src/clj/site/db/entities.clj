@@ -173,3 +173,9 @@
                         :url_title short-title,
                         :content   md-content,
                         :author    author})))
+
+(defn update-post [id fields]
+  (update post (set-fields fields) (where {:id id})))
+
+(defn delete-post-by-id [id]
+  (delete post (where {:id id})))
