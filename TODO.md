@@ -1,9 +1,9 @@
 ## Project TODOs
 
 ### Important
-- [ ] Blog admin section needs authentication
+- [x] Blog admin section needs authentication
 - [ ] Make comments available via Ajax
-- [ ] Users need registration and login
+- [ ] Users need registration and login to comment
 - [ ] Port the entire template to Semantic-UI (removing bootstrap and changing predefined styles accordingly)
     - [x] Customize template to better match my usage
     - [ ] Redesign the layout
@@ -17,6 +17,7 @@
     - [x] Strip down all assets and eliminate redundancy
     - [x] Remove previous big files from git repo
 - [ ] Post edit/delete capability
+- [ ] Post un-publish
 
 ### Extra
 - [x] Pretty dates (such as "July 2, 2016")
