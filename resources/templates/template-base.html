@@ -3,8 +3,6 @@
 {% block page-title %}Scorp{% endblock %}
 
 {% block add-header %}
-    <link rel="stylesheet" type="text/css" href="/assets/lib/semantic-ui/dist/semantic.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/assets/fonts/lato/lato-multi.css"/>
 {% endblock %}
 
 {% block wrapper-classes %}{{ block.super }} fixed-footer{% endblock %}
@@ -115,12 +113,12 @@
             <div class="ui centered stackable grid container">
                 <div class="{% block header-grid-classes-outer %}eleven wide left aligned {% block header-grid-classes %}{% endblock %}{% endblock %} column">
                     <div class="ui middle aligned grid">
-                        <div class="eight wide column">
+                        <div class="eleven wide column">
                             <div class="ui huge {% block header-inside-header-classes %}inverted{% endblock %} header">
                                 {% block header-page-title %}{{ page-title }}{% endblock %}
                             </div>
                         </div>
-                        <div class="right floated right aligned eight wide column">
+                        <div class="right floated right aligned five wide column">
                             <div class="ui basic segment">
                                 {% include "includes/breadcrumbs.html" %}
                             </div>

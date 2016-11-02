@@ -1,13 +1,15 @@
 (ns site.utils.markdown
-  (:require [clojure.java.io :as jio])
+  (:require [clojure.java.io :as jio]
+            [environ.core :refer [env]]
+            [clojure.string :as str])
   (:import (javax.script ScriptEngine ScriptEngineManager)))
 
 (defonce ^:private javascript-engine
-         (memoize #(-> (ScriptEngineManager.)
-                       (.getEngineByMimeType "application/javascript"))))
+  (delay (-> (ScriptEngineManager.)
+             (.getEngineByName (env :optimus-js-engine "nashorn")))))
 
 (defn- eval-js [^String script]
-  (.eval ^ScriptEngine (javascript-engine)
+  (.eval ^ScriptEngine @javascript-engine
          script))
 
 (defn- eval-js-file [path]
@@ -19,22 +21,34 @@
     :else (str var-name)))
 
 (defn- get-js [var-name]
-  (.get (javascript-engine)
+  (.get @javascript-engine
         (variable-name var-name)))
 
-(defn- set-js [var-name val]
-  (.put (javascript-engine)
-        (variable-name var-name) val))
+(def js-escape
+  {\'       "\\'"
+   \"       "\\\""
+   \\       "\\\\"
+   \newline "\\n"
+   \return  "\\r"
+   \u2028   "\\u2028"
+   \u2029   "\\u2029"})
 
-(def ^:private script-path "public/assets/lib/editormd/lib/marked.min.js")
+(defn- escape-val [str]
+  (str/escape str js-escape))
+
+(defn- set-js-str [var-name val]
+  (.eval @javascript-engine
+         (str "var " (variable-name var-name) " = \"" (escape-val val) "\";")))
+
+(def ^:private script-path "libs/components/editor.md/lib/marked.min.js")
 
 (defonce ^:private load-marked
-  (memoize #(eval-js-file (jio/resource script-path))))
+         (memoize #(eval-js-file (jio/resource script-path))))
 
 (defn markdown-to-html [md-string]
   (locking javascript-engine
     (load-marked)
-    (set-js :input md-string)
+    (set-js-str :input md-string)
     (let [output (eval-js "marked(input)")]
       (eval-js "input = undefined;")
       output)))

@@ -1,5 +1,15 @@
 language: clojure
 
+env:
+  - TRAVIS_NODE_VERSION="6.5.0"
+
+before_install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install && echo Node Version... && node -v
+  - npm install -g bower
+  - cd dev-resources/libs && bower install
+  - cd components/semantic && npm install && gulp build
+
 jdk:
   - oraclejdk8
 
@@ -7,4 +17,5 @@ script: lein expectations
 
 cache:
   directories:
-    - $HOME/.m2
+    - "$HOME/.m2"
+    - "dev-resources/libs/components"

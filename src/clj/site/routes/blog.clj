@@ -10,7 +10,8 @@
             [me.raynes.fs :as fs])
   (:use delimc.core
         hara.event)
-  (:import (java.io IOException)))
+  (:import (java.io IOException)
+           (java.sql SQLException)))
 
 (def sample-context-map {:popular-tags     [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
                          :categories       [{:href "/tag/clojure" :name "Clojure"} {:href "/tag/java" :name "Java"}]
@@ -22,26 +23,41 @@
 (defn handle-new-post [{{:keys [title short-title short-content post-content]}
                         :params :as reqmap}]
   ;#spy/p reqmap
-  (reset (shift k (e/create-post title short-title short-content post-content) (k :ok))
+  (reset (shift k (e/create-post title short-title short-content post-content
+                                 (:id (site.service.user/get-logged-in-user))) (k :ok))
          (layout/render "blog/redirect-after.html" {:status          :success
                                                     :message         "Post created successfully."
                                                     :detail-message  "Redirecting to post..."
                                                     :redirect-target (bd/path-for site.layout/routes :post :url-title short-title)})))
 
+(defn handle-edit-post [id {{:keys [title short-title short-content post-content]}
+                            :params :as reqmap}]
+  (let [post (e/get-post-by-id id)]
+    (reset (shift k (when (= (:id (site.service.user/get-logged-in-user)) id) (k :ok)))
+           (shift k (e/update-post id {:title     title
+                                       :url_title short-title
+                                       :short     short-content
+                                       :content   post-content}) (k :ok))
+           (layout/render "blog/redirect-after.html" {:status          :success
+                                                      :message         "Post changed successfully."
+                                                      :detail-message  "Redirecting to post..."
+                                                      :redirect-target (bd/path-for site.layout/routes :post :url-title short-title)}))))
+
 (defn handle-image-upload [{{{:keys [filename tempfile content-type] :as file-props} :editormd-image-file} :params :as reqmap}]
   (cheshire.core/encode
-    (reset (let [path (str (media/media-path reqmap) filename)]
-             (shift k (try (fs/copy+ tempfile path)
+    (reset (let [file-path (str (media/media-path reqmap) filename)
+                 url-path  (str (media/media-url-path reqmap) filename)]
+             (shift k (try (fs/copy+ tempfile file-path)
                            (k :ok)
                            (catch IOException e
                              (signal [:upload-image-error {:exception  e
                                                            :file-props file-props}])
                              {:success 0})))
              ;; FIXME: relying on content-type sent from client is dangerous.
-             (shift k (e/create-media path content-type)
+             (shift k (e/create-media url-path content-type)
                     (k {:success 1
                         :message "successfully uploaded."
-                        :url     (str "/media/uploads/" filename)}))))))
+                        :url     (str (media/media-url-path reqmap) filename)}))))))
 
 (defn make-cards [posts n]
   (into [] (map vec (partition-all n posts))))
@@ -49,7 +65,7 @@
 (defn pagination-params [{:keys [page items-per-page]}
                          & [{:keys [default-ipp default-page]
                              :or   {default-ipp 6 default-page 1}}]]
-  (let [page (if page (Long. ^String page) default-page)
+  (let [page           (if page (Long. ^String page) default-page)
         items-per-page (if items-per-page (Long. ^String items-per-page) default-ipp)]
     [page items-per-page]))
 
@@ -104,10 +120,23 @@
                                                               (layout/render "blog/write-post.html" {:image-upload-url (bd/path-for site.layout/routes :upload-image)}))]
                                                       [:post (handler :post-do [:as reqmap]
                                                                (handle-new-post reqmap))]]]
+                                             [["edit/" :id] [[:get (handler :post-edit [id]
+                                                                     (let [post (e/get-post-by-id (Integer/parseInt id))]
+                                                                       (layout/render "blog/edit-post.html" {:image-upload-url   (bd/path-for site.layout/routes :upload-image)
+                                                                                                             :post-title         (:title post)
+                                                                                                             :post-short-title   (:url_title post)
+                                                                                                             :post-short-content (:short post)
+                                                                                                             :post-content       (:content post)
+                                                                                                             :post               post})))]
+                                                             [:post (handler [id :as reqmap]
+                                                                      (let [post-id (Integer/parseInt id)]
+                                                                        (handle-edit-post post-id reqmap)))]]
+                                              ["delete/" :id] [[:post (handler :post-delete [id]
+                                                                        (e/delete-post-by-id (Integer/parseInt id)))]]]
                                              ["upload-image" [[:post (handler :upload-image [:as reqmap]
                                                                        (handle-image-upload reqmap))]]]]]]]
         ^{:name "Blog"
-          :url :recent-posts}
+          :url  :recent-posts}
         [#{"blog" "blog/"} [[:get (handler :recent-posts [:as reqmap]
                                     (layout/render "blog/multi-full.html"
                                                    (if-let [[page items-per-page] (pagination-params (:params reqmap) {:default-ipp 4})]

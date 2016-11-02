@@ -4,6 +4,8 @@
             [ring.util.response :refer [content-type response]]
             [ring.middleware.anti-forgery :as af]
             [bidi.bidi :as bd]
+            (optimus [link] [html :as html])
+            [bundle-reader.core :as br]
             [compojure.response :refer [Renderable]]
             [noir.session :as sess]
             [cuerdas.core :as str]
@@ -61,6 +63,38 @@
                              new-cmap (reduce #(apply assoc %1 %2) context-map bs)]
                          (parser/render-file (str/unsurround filename "\"") new-cmap))))))
 
+;; full component's assets available
+(parser/add-tag! :component
+                 (fn [[type component-name] context-map]
+                   (case type
+                     "css" (html/link-to-css-bundles (:request context-map) [(br/component-handle component-name :css)])
+                     "js" (html/link-to-js-bundles (:request context-map) [(br/component-handle component-name :js)]))))
+
+;; a single bundle
+(parser/add-tag! :bundle
+                 (fn [[bundle-name] context-map]
+                   (cond (.endsWith ^String bundle-name ".css")
+                         (html/link-to-css-bundles (:request context-map) [bundle-name])
+
+                         (.endsWith ^String bundle-name ".js")
+                         (html/link-to-js-bundles (:request context-map) [bundle-name]))))
+
+(parser/add-tag! :bundle-path
+                 (fn [[bundle-name] context-map]
+                   (first (optimus.link/bundle-paths (:request context-map) [bundle-name]))))
+
+(defn drop-extension [^String s]
+  (.substring s 0 (.lastIndexOf s (int \.))))
+
+(parser/add-tag! :bundle-basepath
+                 (fn [[bundle-name] context-map]
+                   (drop-extension (first (optimus.link/bundle-paths (:request context-map) [bundle-name])))))
+
+;; and a single resource file
+(parser/add-tag! :resource
+                 (fn [[filename] context-map]
+                   (optimus.link/file-path (:request context-map) filename)))
+
 (t/default-type org.joda.time.DateTime)
 
 (def month-name
@@ -77,6 +111,7 @@
 
 (selmer.filters/add-filter! :pretty-date-span hmz/datetime)
 (selmer.filters/add-filter! :pretty-date humanize-date)
+(selmer.filters/add-filter! :drop-extension drop-extension)
 
 (defn breadcrumbs [sitemap page]
   (->> (get sitemap page)
@@ -98,6 +133,7 @@
                ;; .getContextPath might not exist
                (try (.getContextPath context)
                     (catch IllegalArgumentException _ context)))
+             :request request
              :identity (sess/get :identity)
              :role (sess/get :role)
              :af-token af/*anti-forgery-token*

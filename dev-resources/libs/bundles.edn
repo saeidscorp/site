@@ -1,0 +1,60 @@
+[#needed #component ["jquery" :js ["/components/jquery/dist/jquery.min.js"]]
+ #needed
+     #component ["bootstrap"
+                 ;#component "jquery"
+                 :js ["/components/bootstrap/dist/js/bootstrap.min.js"]
+                 :css ["/components/bootstrap/dist/css/bootstrap.min.css"]]
+ #needed
+     #component ["animsition"
+                 ;#component "jquery"
+                 :js ["/components/animsition/dist/js/animsition.min.js"]
+                 :css ["/components/animsition/dist/css/animsition.min.css"]]
+ #needed
+     #component ["magnific-popup"
+                 :js ["/components/magnific-popup/dist/jquery.magnific-popup.js"]
+                 :css ["/components/magnific-popup/dist/magnific-popup.css"]]
+ #needed
+     #component ["ionicons"
+                 :css ["/components/ionicons/css/ionicons.min.css"]]
+ #needed
+     #component ["pictonic"
+                 :css ["/components/pictonic/css/pictonic.css"]]
+ #needed
+     #component ["modernizr"
+                 :js ["/components/modernizr/modernizr.js"]]
+ #needed
+     #component ["imagesloaded"
+                 :js ["/components/imagesloaded/imagesloaded.pkgd.min.js"]]
+ #bundle {"fonts.css"
+          ["/components/font-awesome/css/font-awesome.min.css"
+           "/components/lato-font/css/lato-font.min.css"]}
+ #needed
+     #component ["semantic"
+                 ;#component "jquery"
+                 :css ["/components/semantic/dist/semantic.min.css"
+                       #bundle "fonts.css"]
+                 :js ["/components/semantic/dist/semantic.min.js"]]
+
+ #needed
+     #component ["editor.md"
+                 :css ["/components/editor.md/css/editormd.min.css"
+                       "/components/editor.md/css/editormd.preview.min.css"]
+                 :js ["/components/editor.md/editormd.min.js"
+                      "/components/editor.md/languages/en.js"]]
+
+ #resources [#x"^/components/editor\\.md/(lib|plugins)/.*"]
+
+ #needed
+     #bundle {"katex.css" ["/components/katex/dist/katex.min.css"]
+              "katex.js" ["/components/katex/dist/katex.min.js"]}
+
+ #needed
+     #component ["main"
+                 #component "modernizr"
+                 #component "magnific-popup"
+                 #component "animsition"
+                 #component "bootstrap"
+                 #component "semantic"
+                 #component "imagesloaded"
+                 #component "ionicons"
+                 #component "pictonic"]]

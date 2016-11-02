@@ -1,0 +1,17 @@
+//custom css code here
+
+@import 'comments';
+
+.ui.basic.button:focus, .ui.basic.button:hover,
+.ui.basic.buttons .button:focus,
+.ui.basic.buttons .button:hover {
+    background: inherit !important;
+}
+
+.ui .row {
+    margin: 0;
+}
+
+.editormd-form input:not([type]), .editormd-form input[type="text"], .editormd-form input[type="email"], .editormd-form input[type="search"], .editormd-form input[type="password"], .editormd-form input[type="date"], .editormd-form input[type="datetime-local"], .editormd-form input[type="tel"], .editormd-form input[type="time"], .editormd-form input[type="file"], .editormd-form input[type="url"], .editormd-form input[type="number"], .editormd-form textarea {
+    width: 264px !important;
+}

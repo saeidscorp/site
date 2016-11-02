@@ -35,7 +35,7 @@
     {% endblock %}
 
     {% block header-headers %}
-        <script type="text/javascript" src="/assets/lib/jquery/dist/jquery.min.js"></script>
+        {% component js jquery %}
     {% endblock %}
 
     <!-- StyleSheets
@@ -44,25 +44,16 @@
     {% block before-header %}
     {% endblock %}
 
-    <!-- Twitter Bootstrap -->
-    {% style "/assets/lib/bootstrap/dist/css/bootstrap.min.css" %}
-
     <!-- Library Stylesheets -->
-    {% style "/assets/lib/animsition/dist/css/animsition.min.css" %}
-    {% style "/assets/lib/fontawesome/css/font-awesome.min.css" %}
-    {% style "/assets/lib/ionicons/css/ionicons.css" %}
-    {% style "/assets/lib/magnific-popup/dist/magnific-popup.css" %}
-    {% style "/assets/fonts/pictonic/pictonic.css" %}
-
+    {% component css main %}
 
     <!-- Custom Template Styles -->
-    {% style "/assets/css/main.css" %}
-    {% style "/assets/css/colors/youtube.css" %}
+    {% bundle app.css %}
+    {% bundle color.css %}
 
     {% block add-header %}
     {% endblock %}
 
-    {% style "/assets/css/custom.css" %}
 </head>
 
 <body data-spy="scroll" data-target="#main-nav-collapse" data-offset="100">
@@ -95,15 +86,11 @@
 
     {% block scripts %}
 
-        {% script "/assets/lib/components-modernizr/modernizr.js" %}
-        {% script "/assets/lib/bootstrap/dist/js/bootstrap.min.js" %}
-        {% script "/assets/lib/semantic-ui/dist/semantic.min.js" %}
-        {% script "/assets/lib/imagesloaded/imagesloaded.pkgd.min.js" %}
-        {% script "/assets/lib/animsition/dist/js/animsition.min.js" %}
-        {% script "/assets/lib/magnific-popup/dist/jquery.magnific-popup.js" %}
+        <!-- Library Scripts -->
+        {% component js main %}
 
-        {% script "/assets/js/plugins.js" %}
-        {% script "/assets/js/main.js" %}
+        <!-- Application Scripts -->
+        {% bundle app.js %}
 
         {% block add-script %}
         {% endblock %}

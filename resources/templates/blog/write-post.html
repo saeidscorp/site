@@ -2,8 +2,7 @@
 
 {% block add-header %}
     {{ block.super }}
-    {% style "/assets/lib/editormd/dist/editormd.min.css" %}
-    {% style "/assets/lib/editormd/dist/editormd.preview.min.css" %}
+    {% component css editor.md %}
 {% endblock %}
 
 {% block page-title %}New Post | {{ block.super }}{% endblock %}
@@ -15,49 +14,61 @@
 
 {% block blog-in-row %}
     <!--<div class="col-md-10 col-md-offset-1">-->
-    {% if reqmap %}{% debug %}{% endif %}
+    <div class="one column row">
     <form method="post" class="ui form left aligned column">
         <input name="__anti-forgery-token" type="hidden" value="{{ af-token }}"/>
         <div class="two fields">
             <div class="twelve wide field">
                 <label>Title</label>
-                <input name="title" placeholder="Title" type="text">
+                <input name="title" placeholder="Title" type="text" {% block initial-title-attr %}{% endblock %}>
             </div>
             <div class="field">
                 <label>Short Title</label>
-                <input name="short-title" placeholder="Short Title" type="text">
+                <input name="short-title" placeholder="Short Title" type="text" {% block initial-short-title-attr %}{% endblock %}>
             </div>
         </div>
         <div class="field">
             <label>Short Content</label>
-            <textarea name="short-content" rows="3" placeholder="Short content here..."></textarea>
+            <textarea name="short-content" rows="3" placeholder="Short content here...">{% block initial-short-content %}{% endblock %}</textarea>
         </div>
         <div class="field">
             <div id="editormd-area" style="border-radius: 5px;">
-                <textarea name="post-content">
+                <textarea name="post-content">{% block initial-content %}
 ### Welcome
 Here is an image:
 
 ![image](/assets/images/others/about_us_video.jpg)
-</textarea>
+{% endblock %}</textarea>
             </div>
         </div>
-    <button class="ui primary button" type="submit">Post</button>
+        <div class="two fields">
+            {% block actions %}
+                <div class="left aligned field">
+                    <button class="ui primary button" type="submit">Publish</button>
+                </div>
+                {% block actions-inner %}
+                {% endblock %}
+            {% endblock %}
+        </div>
     </form>
+    </div>
+
+    {% block extra-forms %}
+    {% endblock %}
+
     <!--</div>-->
 {% endblock %}
 
 {% block add-script %}
 
-    {% script "/assets/lib/editormd/dist/editormd.js" %}
-    {% script "/assets/lib/editormd/languages/en.js" %}
+    {% component js editor.md %}
 
     <script type="text/javascript">
         var testEditor;
 
         editormd.katexURL = {
-            js: "/assets/lib/editormd/cdn/katex.min",
-            css: "/assets/lib/editormd/cdn/katex.min"
+            js: "{% bundle-basepath katex.js %}",
+            css: "{% bundle-basepath katex.css %}"
         };
 
         $(function () {
@@ -67,7 +78,7 @@ Here is an image:
                     width: "100%",
                     //autoHeight: true,
                     height: 740,
-                    path: '/assets/lib/editormd/lib/',
+                    path: '/components/editor.md/lib/',
                     theme: "default",
                     previewTheme: "default",
                     editorTheme: "default",

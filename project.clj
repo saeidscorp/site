@@ -36,7 +36,13 @@
                  [bidi "2.0.13"]
 
                  ;; templating
-                 [selmer "1.0.10"]
+                 [selmer "1.10.0"]
+
+                 ;; static assets
+                 [org.clojars.saeidscorp/optimus "0.19.0-SNAPSHOT"]
+                 ;[org.clojars.saeidscorp/optimus-img-transform "0.2.0-SNAPSHOT"]
+                 [org.clojars.saeidscorp/optimus-sass "0.1.0-SNAPSHOT"]
+                 [one.scorp/bundle-reader "0.1.0-SNAPSHOT"]
 
                  ;; error-reporting
                  [prone "1.1.2"]
@@ -57,6 +63,7 @@
                  ;; database
                  [korma "0.4.3"]
                  ;[com.h2database/h2 "1.4.192"]
+                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [org.xerial/sqlite-jdbc "3.14.2.1"]
 
                  ;; configuration

@@ -7,12 +7,15 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 /resources/public/js/
+/resources/public/assets/css/
+/resoruces/public/assets/fonts/
 /resources/public/assets/images/
 /resources/public/assets/videos/
 /resources/public/assets/lib/semantic-ui/
 /resources/public/media/*
 /dev-resources/html/
 /dev-resources/libs/node_modules
+/dev-resources/libs/components
 /logs/
 /out
 /.repl

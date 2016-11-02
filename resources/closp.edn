@@ -7,12 +7,12 @@ Best Regards,
 
 Your Team"
  :activation-placeholder  "{{activationlink}}"
- :jdbc-url                "jdbc:sqlite:./db/site.sqlite"
+ :jdbc-url                "jdbc:postgresql://localhost:5432/site?user=site&password=site"
  :env                     :dev                              ; set this to :prod for production mode
  :under-construction      false
  ; set this to true to enable self registration
  :registration-allowed?   true
- :captcha-enabled?        false
+ :captcha-enabled?        true
  :captcha-public-key      "your public captcha key"
  :private-recaptcha-key   "your private captcha key"
  :recaptcha-domain        "yourdomain"

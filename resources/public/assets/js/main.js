@@ -1390,3 +1390,7 @@ $(document).ready(function() {
         transitionStyle:"fade"
     });
 });
+
+$(function () {
+    $(".blog-standard .main-description img").addClass("img-responsive");
+});

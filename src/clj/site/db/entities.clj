@@ -80,35 +80,38 @@
         (assoc _ :profile_picture
                  (:path (get-media-by-id (:profile_picture _))))))
 
+(defn is-author? [user]
+  (when (seq (select author (where {:user_id (:id user)}))) true))
+
+;; comment functions:
+
 (defn get-author-by-id [id]
   (->> (select user (where {:id id}))
        (author-to-map)))
-
-;; comment functions:
 
 (defn comment-to-map [com]
   (as-> com _
         (assoc _ :writer (get-author-by-id (:writer _)))))
 
 (defn comments-for [post n]
-  (->> (select comment (where {:target (:id post), :is_reply 0})
+  (->> (select comment (where {:target (:id post), :is_reply false})
                (order :date_time :DESC)
                (limit n))
        (map comment-to-map)))
 
 (defn replies-to [com n]
-  (->> (select comment (where {:is_reply 1, :reply_to (:id com)})
+  (->> (select comment (where {:is_reply true, :reply_to (:id com)})
                (order :date_time :DESC)
                (limit n))
        (map comment-to-map)))
 
+;; post functions:
+
 (defn all-comments-count [post]
-  (-> (select comment (aggregate (count :id) :replies-count)
+  (-> (select :comment (aggregate (count :*) :replies-count)
               (where {:target (:id post)}))
       (first)
       (:replies-count)))
-
-;; post functions:
 
 (defn nested-comments
   ([post n max-depth] (mapv #(nested-comments % n max-depth 0)
@@ -137,7 +140,8 @@
         (assoc-if replies _ :replies (nested-comments _ replies-num replies-depth))
         (assoc-if replies-count _ :replies-count (all-comments-count _))
         ;; FIXME: I probably fail on a Postgres backend
-        (assoc-if date-time _ :date_time (t/parse (:date_time _) "yyy-MM-dd HH:mm:ss"))
+        (assoc-if date-time _ :date_time (let [t (:date_time _)] (if (string? t) (t/parse t "yyy-MM-dd HH:mm:ss")
+                                                                                 (t/coerce t {:type org.joda.time.DateTime}))))
         (assoc-if category _ :category category)))
 
 (defn get-post-by-id [id]
@@ -159,13 +163,19 @@
   (first (get-latest-posts 1)))
 
 (defn all-posts-count []
-  (-> (select post (aggregate (count :id) :cnt))
+  (-> (select :post (aggregate (count :*) :cnt))
       (first)
       (:cnt)))
 
-(defn create-post [title short-title short-content md-content]
+(defn create-post [title short-title short-content md-content author]
   (insert post (values {:title     title,
                         :short     short-content,
                         :url_title short-title,
                         :content   md-content,
-                        :author    1})))
+                        :author    author})))
+
+(defn update-post [id fields]
+  (update post (set-fields fields) (where {:id id})))
+
+(defn delete-post-by-id [id]
+  (delete post (where {:id id})))

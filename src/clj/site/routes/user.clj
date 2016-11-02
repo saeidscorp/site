@@ -87,7 +87,7 @@
           (false? (:is_active user)) (login-page {:error :user/activate_account})
           (false? (hashers/check password (get user :pass ""))) (login-page
                                                                    {:error (t locale tconfig :user/pass_correct)})
-          :else (do (sess/put! :role (:role user)) (sess/put! :identity username)
+          :else (do (sess/put! :id (:id user)) (sess/put! :role (:role user)) (sess/put! :identity username) (sess/put! :is-author? (db/is-author? user))
                     (resp/redirect (or nexturl "/"))))
         (catch Exception e (timb/error e "Something messed up while logging in user: " username " with error: " e)
                            (login-page {:error (t locale tconfig :generic/some_error)})))
