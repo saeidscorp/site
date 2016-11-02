@@ -155,7 +155,9 @@
          :dst   "resources/public/assets/css/"
          :style :expanded}
 
-  :profiles {:dev     {:repl-options {:init-ns site.user}
+  :profiles {:openshift {:env      {:optimus-js-engine "clj-v8"}
+                         :jvm-opts ["-Xmx500m"]}
+             :dev     {:repl-options {:init-ns site.user}
 
                        :source-paths ["env" "env/dev/script"]
 
