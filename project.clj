@@ -11,7 +11,7 @@
 
                  ;; clojure/clojurescript
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.229"]
+                 [org.clojure/clojurescript "1.9.293"]
 
                  ;; webserver
                  ;    [http-kit "2.1.19"]
@@ -19,7 +19,7 @@
 
                  ;; core facilities
                  [org.clojure/core.cache "0.6.5"]
-                 [org.clojure/core.async "0.2.391"]
+                 [org.clojure/core.async "0.2.395"]
 
                  ;; ring handler
                  [ring "1.5.0"]
@@ -33,7 +33,7 @@
 
                  ;; routing
                  [compojure "1.5.1"]
-                 [bidi "2.0.12"]
+                 [bidi "2.0.13"]
 
                  ;; templating
                  [selmer "1.0.10"]
@@ -55,9 +55,8 @@
                  [buddy/buddy-auth "1.2.0"]
 
                  ;; database
-                 ;    [org.clojure/java.jdbc "0.3.7"] ;; use this if you got sick of deprecated warnings in the output
                  [korma "0.4.3"]
-                 [com.h2database/h2 "1.4.192"]
+                 ;[com.h2database/h2 "1.4.192"]
                  [org.xerial/sqlite-jdbc "3.14.2.1"]
 
                  ;; configuration
@@ -79,23 +78,23 @@
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
                  [environ "1.1.0"]
-                 [funcool/cuerdas "1.0.2"]
+                 [funcool/cuerdas "2.0.0"]
                  [com.draines/postal "2.0.0"]
                  [de.sveri/clojure-commons "0.2.0"] ; do not touch :_
                  [me.raynes/fs "1.4.6"]
 
                  ;; useful libraries
-                 [im.chit/hara.event "2.4.5"]
-                 [im.chit/hara.io.scheduler "2.4.5"]
-                 [im.chit/hara.expression "2.4.5"]
-                 [im.chit/hara.function "2.4.5"]
-                 [im.chit/hara.time "2.4.5"]
+                 [im.chit/hara.event "2.4.7"]
+                 [im.chit/hara.io.scheduler "2.4.7"]
+                 [im.chit/hara.expression "2.4.7"]
+                 [im.chit/hara.function "2.4.7"]
+                 [im.chit/hara.time "2.4.7"]
                  [im.chit/hara.time.joda "2.2.17"]
                  [delimc "0.1.0"]
 
                  ;; localization
                  [com.taoensso/tower "3.0.2"]
-                 [clojure-humanize "0.2.0"]
+                 [clojure-humanize "0.2.2"]
 
                  ;; typed
                  [org.clojure/core.typed "0.3.28"]]
@@ -183,10 +182,10 @@
 
                                       ;; integration testing
                                       ;[org.seleniumhq.selenium/selenium-server "2.46.0"]
-                                      [org.seleniumhq.selenium/selenium-server "2.53.1"]
+                                      [org.seleniumhq.selenium/selenium-server "3.0.1"]
                                       [org.seleniumhq.selenium/selenium-htmlunit-driver "2.52.0" :exclusions [org.apache.httpcomponents/httpclient]]
                                       [org.seleniumhq.selenium/selenium-remote-driver "2.53.1" :exclusions [org.apache.httpcomponents/httpclient]]
-                                      [org.seleniumhq.selenium/selenium-java "2.53.1" :exclusions [org.apache.httpcomponents/httpclient]]
+                                      [org.seleniumhq.selenium/selenium-java "3.0.1" :exclusions [org.apache.httpcomponents/httpclient]]
 
                                       [ring/ring-mock "0.3.0"]
                                       [ring/ring-devel "1.5.0"]
