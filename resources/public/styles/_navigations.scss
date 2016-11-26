@@ -76,13 +76,26 @@
   font-size: $fs4;
   line-height: 1.3;
   cursor: pointer;
-  img{
+  .logo, img {
     transition: all 0.25 ease-in-out;
-    opacity: 0.9;
+    opacity: 0.75;
   }
   &:hover, &:focus, &:active{
-      img{opacity: 1;}
+      .logo, img {opacity: 1;}
     }
+  .logo-container .logo {
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    margin: 0 auto;
+    left: 50%;
+  }
+  .logo-container {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+  }
 }
 
 /* 3 - MENU

@@ -28,6 +28,8 @@
     "modernizr": "v2.8.3",
     "imagesloaded": "^4.1.1",
     "bootstrap": "^3.3.7",
-    "katex": "katex#^0.6.0"
+    "katex": "katex#^0.6.0",
+    "flexslider": "FlexSlider#2.5.0",
+    "montserrat-webfont-family": "^0.0.2"
   }
 }

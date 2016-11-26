@@ -3,10 +3,13 @@
             [site.utils :refer [handler]]
             [site.layout :as layout]
             [site.db.entities :as post]
-            [ring.util.response :refer [response]]))
+            [ring.util.response :refer [response]]
+
+            [site.db.entities :as e]))
 
 (defn home-page []
-  (layout/render "home/index.html"))
+  (let [recent-posts (e/get-latest-posts 3)]
+    (layout/render "home/index.html" {:recent-posts recent-posts})))
 
 (defn contact-page []
   (layout/render "home/contact.html"))
@@ -37,7 +40,8 @@
                ["contact" (handler :contact [] (contact-page))]
                ["tos" (handler [] (tos-page))]
                ["cookies" (handler [] (cookies-page))]
-               ["" (handler :home [] (layout/render "under-construction.html"))]
+               ["" (handler :home [] (home-page))]
+               ["home" (handler :home [] (home-page))]
                ["test" (handler [] (layout/render "test.html"))]
                ["example" (handler [] (example-page))]
                ["posts" (handler [] (post))]

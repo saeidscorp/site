@@ -123,6 +123,9 @@ $sectionPadding : 80px;
     right: 0;
 }
 
+.parallax-back {
+    z-index: -100000 !important;
+}
 
 .section {
     padding: $sectionPadding 0;

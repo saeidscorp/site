@@ -1,58 +1,339 @@
-{% extends "base.html" %}
+{% extends "template-base.html" %}
 
-{% block add-css %}
-    {% style "/css/home.css" %}
+{% block add-header %}
+    {% component css flexslider %}
+    <!--
+    <link rel="stylesheet" type="text/css" href="assets/lib/owlcarousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="assets/lib/owlcarousel/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="assets/lib/owlcarousel/owl-carousel/owl.transitions.css">-->
 {% endblock %}
 
-{% block content %}
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                     alt="First slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>First</h1>
-                    </div>
+{% block below-nav %}
+
+
+    <header id="site-header" class="site-header header-fullscreen wrapper-table">
+        <div class="overlay-01 parallax-hero bg-26 bg" data-top="transform: translate3d(0px, 0px, 0px)"
+             data-top-bottom="transform: translate3d(0px, -200px, 0px)" data-anchor-target="#site-header"></div>
+        <div id="polygonalHeader" class="parallax-hero bg-35"
+             data-top="transform: translate3d(0px, 0px, 0px)" data-top-bottom="transform: translate3d(0px, -200px, 0px)"
+             data-anchor-target="#site-header">
+            <canvas id="demo-canvas"></canvas>
+        </div>
+        <div class="valign-center">
+            <div class="container">
+                <div class="intro text-center op-static-intro">
+                    <p class="subtitle">My Mottos</p>
+                    <h1 class="cd-headline clip hs-text-11">
+                    <span class="cd-words-wrapper">
+                        <b class="is-visible">Never Rest</b>
+                        <b>Never Give Up</b>
+                        <b>Always Learn</b>
+                        <b>Be An Adventurer</b>
+                    </span>
+                    </h1>
+
+                    <a target="_blank" href="https://www.youtube.com/watch?v=68bs1ccB9oc"
+                       class="btn btn-cal-default-o popup-video hidden-xs">
+                        View R&eacute;sum&eacute; <i class="ion-play"></i></a>
                 </div>
             </div>
-            <div class="item">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                     alt="Second slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Second</h1>
-                    </div>
+        </div>
+
+        <a href="#about" class="btn-arrow-down-round btn-o onPageNav">
+            <i class="ion-ios-arrow-down"></i>
+        </a>
+    </header>
+
+    <!-- ==================================
+		             About Us
+    =================================== -->
+
+    <section id="about" class="section about-us bg white-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <img src="assets/images/special/startup/about_us.jpg" class="img-responsive center-block"
+                         alt="about-us image">
                 </div>
-            </div>
-            <div class="item">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                     alt="Third slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Third</h1>
+                <div class="col-md-6 col-sm-12">
+                    <div class="section-content">
+                        <header class="section-heading mt-0">
+                            <!--<h6>Mr.</h6>-->
+                            <h4>Saeid Akbari</h4>
+                        </header>
+                        <div class="section-content-desc">
+                            <p>
+                                I'm a passionate computer programmer/hacker & research enthusiast. Worked with different
+                                technologies and softwares in various fields; including but not limited to: programming,
+                                artificial intelligence, machine learning, data mining, algorithms, low-level
+                                programming, functional/symbolic programming and distributed computing.
+                            </p>
+                        </div>
+                        <br/>
+                        <a target="_blank" href="https://www.youtube.com/watch?v=aBYWGjIzvyw"
+                           class="btn btn-cal-default popup-video">
+                            View R&eacute;sum&eacute; <i class="ion-play"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span
-                class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span
-                class="glyphicon glyphicon-chevron-right"></span></a>
+    </section>
+
+    <!-- =======================================
+                    My Skills
+    ========================================= -->
+
+    <section id="services" class="section white-bg">
+        <header>
+            <h6>My Specialties &amp;</h6>
+            <h4>Skills</h4>
+        </header>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="icon-basic_smartphone"></i>
+                        </div>
+                        <div class="service-desc">
+                            <h5>Programming</h5>
+                            <p>
+                                Experience with Object-Oriented software programming and functional programming using
+                                various programming languages:
+                                C/C++, Python, Java, C#, Mathematica, <a href="http://clojure.org">Clojure</a>, ...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="icon-strategy"></i>
+                        </div>
+                        <div class="service-desc">
+                            <h5>Machine Learning</h5>
+                            <p>
+                                Worked with various different ML packages and implemented some of the algorithms; <a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a>,
+                                <a href="http://www.numpy.org/">NumPy</a>, <a href="http://spark.apache.org/mllib/">Spark ML</a>, <a href="http://incanter.org">Clojure/Incanter</a>,
+                                <a href="http://www.heatonresearch.com/encog/">Encog</a>, <a href="http://deeplearning4j.org">DeepLearning4J</a> ...
+                                Also have done research on ML algorithms.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="icon-basic_joypad"></i>
+                        </div>
+                        <div class="service-desc">
+                            <h5>Linux</h5>
+                            <p>
+                                Using <a href="https://gentoo.org">Gentoo</a> distribution for two years. I love open-source projects
+                                and I believe in the power of community.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="icon-software_layout_header_sideleft"></i>
+                        </div>
+                        <div class="service-desc">
+                            <h5>Software Engineering</h5>
+                            <p>
+                                Familiarity with software engineering concepts, coding best practices, design patterns
+                                and VCS (Git).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="icon-ecommerce_graph_increase"></i>
+                        </div>
+                        <div class="service-desc">
+                            <h5>Data Mining</h5>
+                            <p>
+                                Participated in world-wide data mining contests, used both graphical and code-based
+                                approaches.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="icon-lightbulb"></i>
+                        </div>
+                        <div class="service-desc">
+                            <h5>Distributed Computing</h5>
+                            <p>
+                                Familiarity with <a href="http://spark.apache.org/mllib/">Apache Spark</a>,<a href="http://storm.apache.org">Apache Storm</a>,
+                                Hadoop HDFS and <a href="http://www.onyxplatform.org/">Onyx</a> master-less
+                                distributed computing platform.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- container -->
+
+    </section> <!-- /#skills -->
+
+    <!-- ============================================
+                Call to action - 2
+    ============================================== -->
+
+    <section id="cta-8" class="section cta cta-8 base-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="cta-content" style="font-size: 1.2em;">
+                        <h4>View my full <a href="#team" class="onPageNav">About Page</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div><!-- container -->
+    </section>
+
+    <!-- ============================================
+                        Projects
+    ============================================== -->
+
+    <section class="section white-bg b-b-0" id="process">
+        <header>
+            <h6>My Personal</h6>
+            <h4>Projects</h4>
+        </header>
+
+        <div class="section-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card-process">
+                            <header class="first">
+                                <span class="icon-basic_pencil_ruler_pen"></span>
+                            </header>
+                            <div class="card-block">
+                                <h5>This Website</h5>
+                                <p>Quisque tellus ris, adipisci viverra bibendum urna.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-process">
+                            <header>
+                                <span class="icon-software_paintroller"></span>
+                            </header>
+                            <div class="card-block">
+                                <h5>Playing</h5>
+                                <p>Quisque tellus ris, adipisci viverra bibendum urna.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-process">
+                            <header>
+                                <span class="icon-basic_keyboard"></span>
+                            </header>
+                            <div class="card-block">
+                                <h5>Coding</h5>
+                                <p>Quisque tellus ris, adipisci viverra bibendum urna.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-process">
+                            <header class="last">
+                                <span class="icon-printer"></span>
+                            </header>
+                            <div class="card-block">
+                                <h5>Partying</h5>
+                                <p>Quisque tellus ris, adipisci viverra bibendum urna.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- /#process -->
+
+    <div class="cta6">
+        <a href="#">
+            <div class="container-fluid">
+                <h5>Check Out All <span>Projects</span></h5>
+            </div>
+        </a>
     </div>
 
-    <hr class="featurette-divider">
+    <!-- ========================================
+                Blog (3 Column)
+    ========================================== -->
 
-    <div class="jumbotron">
-        <h1>Foo!</h1>
-        <p>Bar
-        <p><a href="/user/signup" class="btn btn-primary btn-lg" role="button">Sign up »</a></p>
-    </div>
+
+    <section id="blog" class="section blog mild-bg">
+        <header>
+            <h6>Check Out My</h6>
+            <h4>Blog</h4>
+        </header>
+
+        <div class="ui centered stackable three column grid container">
+            {% for post in recent-posts %}
+                <div class="left aligned column">
+                    <div class="blog-post ">
+                        {% include "blog/includes/post-card.html" %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <section id="cta-1" class="section cta-big">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="cta-content">
+                            <a href="{% url page recent-posts %}" class="btn btn-cal-default onPageNav">View Blog</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- container -->
+        </section>
+    </section> <!-- /.blog -->
+
+    {% include "includes/contact-form.html" %}
+
+{% endblock %}
+
+<!-- Javascripts
+============================================= -->
+
+
+
+
+{% block add-script %}
+    {% component js flexslider %}
+    <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
+    <!--<script src="assets/lib/jquery.mb.YTPlayer/dist/jquery.mb.YTPlayer.min.js"></script>
+
+    <script src="assets/lib/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="assets/lib/waypoints/lib/shortcuts/inview.min.js"></script>
+
+    <script src="assets/lib/isotope/dist/isotope.pkgd.min.js"></script>
+
+    <script src="assets/lib/owlcarousel/owl-carousel/owl.carousel.js"></script>
+    <script src="assets/lib/countdown/dest/jquery.countdown.min.js"></script>
+    <script src="assets/lib/vide/dist/jquery.vide.js"></script>-->
+
 {% endblock %}

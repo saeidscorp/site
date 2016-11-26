@@ -153,6 +153,36 @@ $(function () {
     })
 });
 
+(function () {
+
+    var classname = 'parallax-back';
+    var $parallax = $('.parallax-hero');
+    if ($parallax.hasClass(classname)) $parallax.addClass('parallax-disabled');
+    var disabled = function () {
+        return $parallax.hasClass('parallax-disabled');
+    };
+
+    function parallaxAnimation() {
+        if (disabled()) {
+            return;
+        }
+        if ($(window).scrollTop() > 1000) {
+            $parallax.addClass(classname);
+            return;
+        }
+
+        $parallax.removeClass(classname);
+    }
+
+    parallaxAnimation();
+
+    if (!disabled())
+        $(window).scroll(function () {
+            parallaxAnimation();
+        });
+
+})();
+
 
 
 /*===================================
