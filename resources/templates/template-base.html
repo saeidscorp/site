@@ -14,17 +14,17 @@
                  class="{% block nav-wrapper-classes-outer %}nav-wrapper {% block nav-wrapper-classes %}{% endblock %}{% endblock %}">
             <div class="container-fluid">
                 <div id="menuzord" class="menuzord red">
-                    <a href="{% url page home %}" class="menuzord-brand">
+                    <div class="menuzord-brand">
                         <!--<img style="height: 50px; margin-left: 15px;" src="/assets/images/logos/larry-the-cow.svg"
                              alt="Larry the Cow" title="Larry the Cow">-->
                         <div class="logo-container">
-                            <object type="image/svg+xml"
-                                    data="/assets/images/logos/logo.svg"
-                                    class="logo">
-                                Scorp Logo
-                            </object>
+                            <a href="{% url page home %}" class="svg logo"">
+                                <object type="image/svg+xml"
+                                        data="/assets/images/logos/logo.svg">
+                                </object>
+                            </a>
                         </div>
-                    </a>
+                    </div>
                     <ul class="menuzord-menu">
                         <li {% ifequal page ":home" %}class="active"{% endifequal %}>
                             <a href="{% url page home %}"><i class="home icon"></i>Home</a>
@@ -156,9 +156,9 @@
                                     <h4>
                                         <!--<img class="img-responsive footer-logo" src="/assets/images/logos/larry-the-cow.svg"
                                              alt="Larry the Cow" title="Larry the Cow">-->
-                                        <object class="img-responsive footer-logo" type="image/svg+xml"
-                                                data="/assets/images/logos/logo.svg" class="logo">
-                                            Scorp Logo
+                                        <object class="img-responsive footer-logo logo" type="image/svg+xml"
+                                                data="/assets/images/logos/logo.svg">
+                                            Logo
                                         </object>
                                     </h4>
                                 </div>
