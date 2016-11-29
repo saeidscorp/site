@@ -19,7 +19,7 @@
                               :activation-mail-body    (:activation-mail-body config)
                               :activation-placeholder  (:activation-placeholder config)
                               :smtp-data               (:smtp-data config) ; passed directly to postmap like {:host "postfix"}
-                              :jdbc-url                (:jdbc-url config)
+                              :database-spec           (:database-spec config)
                               :env                     (:env config)
                               :under-construction      (:under-construction config)
                               :registration-allowed?   (:registration-allowed? config)

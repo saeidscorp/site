@@ -5,8 +5,8 @@
 (defrecord Db [config]
   component/Lifecycle
   (start [component]
-    (let [db-url (get-in config [:config :jdbc-url])]
-      (defdb db db-url))
+    (let [db-spec (get-in config [:config :database-spec])]
+      (defdb db db-spec))
     component)
   (stop [component] component))
 

@@ -7,7 +7,13 @@ Best Regards,
 
 Your Team"
  :activation-placeholder  "{{activationlink}}"
- :jdbc-url                "jdbc:postgresql://localhost:5432/site?user=site&password=site"
+
+ :database-spec           {:subprotocol "postgresql",
+                           :subname     "//localhost:5432/site"
+                           :make-pool?  true,                               ; use connection pool
+                           :user        "site",
+                           :password    "site"}
+
  :env                     :dev                              ; set this to :prod for production mode
  :under-construction      false
  ; set this to true to enable self registration
