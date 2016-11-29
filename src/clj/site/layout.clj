@@ -11,7 +11,8 @@
             [cuerdas.core :as str]
             [clojure.contrib.humanize :as hmz]
             [hara.time :as t]
-            [hara.time.joda])
+            [hara.time.joda]
+            [clojure-miniprofiler :refer [trace]])
   (:use delimc.core
         hara.event))
 
@@ -120,6 +121,8 @@
                                (bd/path-for routes %)
                                %))))))
 
+(def sample-ctxmap (atom nil))
+
 (deftype RenderableTemplate [template params]
   Renderable
   (render [this request]
@@ -146,7 +149,10 @@
              :captcha-enabled? (sess/get :captcha-enabled?)
              :flash-message (sess/flash-get :flash-message)
              :flash-alert-type (sess/flash-get :flash-alert-type))
-           (parser/render-file (str template))
+           ;; TODO: this is ugly.
+           (#(trace "render-template"
+                    (parser/render-file (str template)
+                                        (reset! sample-ctxmap %))))
            response)
       "text/html; charset=utf-8")))
 

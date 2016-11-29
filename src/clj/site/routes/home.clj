@@ -5,10 +5,11 @@
             [site.db.entities :as post]
             [ring.util.response :refer [response]]
 
-            [site.db.entities :as e]))
+            [site.db.entities :as e]
+            [clojure-miniprofiler :refer [trace]]))
 
 (defn home-page []
-  (let [recent-posts (e/get-latest-posts 3)]
+  (let [recent-posts (trace "latest-posts" (e/get-latest-posts 3))]
     (layout/render "home/index.html" {:recent-posts recent-posts})))
 
 (defn contact-page []
@@ -27,7 +28,7 @@
   (layout/render "home/ajax-example.html"))
 
 (defn post []
-  (layout/render "home/post.html" (first (post/get-latest-posts 1))))
+  (layout/render "home/post.html" (post/get-latest-post)))
 
 (defn ajax-initial-data []
   (response {:ok "fooo" :loaded true}))
