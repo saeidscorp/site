@@ -87,13 +87,11 @@
       left: 0;
     }
     &:hover, &:focus, &:active {
-      .logo, img {
-        opacity: 1;
-      }
+      opacity: 1;
     }
   }
 
-  .logo, * {
+  .logo {
     display: block;
     transition: all 0.25 ease-in-out;
     opacity: 0.75;
