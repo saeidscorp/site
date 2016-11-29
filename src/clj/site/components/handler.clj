@@ -57,7 +57,7 @@
 (defn make-sitemap [routes]
   (-> ((fn rec [generated current-routes current-path]
          (cond (vector? current-routes)
-               (let [mt (meta current-routes)
+               (let [mt       (meta current-routes)
                      new-path (if mt (conj current-path mt) current-path)]
                  (reduce #(rec %1 %2 new-path) generated current-routes))
 

@@ -45,7 +45,7 @@
                  [one.scorp/bundle-reader "0.1.0-SNAPSHOT"]
 
                  ;; error-reporting
-                 [prone "1.1.2"]
+                 [prone "1.1.1"]
                  [noir-exception "0.2.5"]
 
                  ;; logging
@@ -225,7 +225,9 @@
   :test2junit-output-dir "test-results"
 
   :jvm-opts ["-Dhornetq.data.dir=target/hornetq-data"
-             "-Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=target/ObjectStore"]
+             "-Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=target/ObjectStore"
+             ;; TODO: make sure this doesn't break in OpenShift:
+             "-Xmx1g"]
 
   :repl-options {:timeout 120000}
 
